@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2021 at 11:11 AM
+-- Generation Time: Nov 29, 2021 at 03:50 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `id_detail` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `total_harga` int(100) NOT NULL,
+  `total_bayar` int(100) NOT NULL,
+  `total_kembalian` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `obat`
 --
 
@@ -31,16 +45,17 @@ CREATE TABLE `obat` (
   `id_obat` int(11) NOT NULL,
   `nama_obat` varchar(200) NOT NULL,
   `stok_obat` int(30) NOT NULL,
-  `tgl_kadaluwarsa` date NOT NULL
+  `tgl_kadaluwarsa` date NOT NULL,
+  `harga_obat` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `obat`
 --
 
-INSERT INTO `obat` (`id_obat`, `nama_obat`, `stok_obat`, `tgl_kadaluwarsa`) VALUES
-(1, 'Paracetamol', 200, '2021-12-31'),
-(2, 'Panadol', 150, '2022-02-17');
+INSERT INTO `obat` (`id_obat`, `nama_obat`, `stok_obat`, `tgl_kadaluwarsa`, `harga_obat`) VALUES
+(1, 'Paracetamol', 200, '2021-12-31', 0),
+(2, 'Panadol', 150, '2022-02-17', 0);
 
 -- --------------------------------------------------------
 
@@ -88,6 +103,13 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_obat`, `id_pembeli`, `tgl_transaksi
 --
 
 --
+-- Indexes for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id_detail`),
+  ADD KEY `id_transaksi` (`id_transaksi`);
+
+--
 -- Indexes for table `obat`
 --
 ALTER TABLE `obat`
@@ -103,12 +125,19 @@ ALTER TABLE `pembeli`
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`),
   ADD KEY `fk_obat` (`id_obat`),
   ADD KEY `fk_pembeli` (`id_pembeli`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `obat`
@@ -123,8 +152,20 @@ ALTER TABLE `pembeli`
   MODIFY `id_pembeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD CONSTRAINT `detail` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`);
 
 --
 -- Constraints for table `transaksi`
