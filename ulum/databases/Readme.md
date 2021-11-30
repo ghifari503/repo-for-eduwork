@@ -86,3 +86,13 @@ beberapa obat bisa dibeli oleh beberapa pembeli
 ![Alt text](images/10.png?raw=true "10")
 
 <br/><br/><br/><br/>
+
+# 5 Query SQL with update and delete
+
+```sql
+1. DELETE FROM obat WHERE id_obat = 1;
+2. DELETE FROM pembeli WHERE nama_pembeli LIKE '%an%';
+3. DELETE FROM transaksi WHERE jumlah_transaksi < 10
+4. UPDATE pembeli SET nama_pembeli = 'Suki' WHERE id_pembeli = 2;
+5. UPDATE obat SET stok_obat = 200 WHERE nama_obat = 'Panadol';
+```
