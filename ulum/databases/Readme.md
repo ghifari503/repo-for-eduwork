@@ -96,3 +96,41 @@ beberapa obat bisa dibeli oleh beberapa pembeli
 4. UPDATE pembeli SET nama_pembeli = 'Suki' WHERE id_pembeli = 2;
 5. UPDATE obat SET stok_obat = 200 WHERE nama_obat = 'Panadol';
 ```
+
+<br/><br/><br/><br/>
+
+# 5 Query Join SQL
+
+```sql
+    SELECT * FROM detail_transaksi JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi WHERE transaksi.jumlah_transaksi <= 5
+```
+
+![Alt text](images/11.png?raw=true "11")
+<br/><br/>
+
+```sql
+    SELECT * FROM obat LEFT JOIN transaksi ON obat.id_obat = transaksi.id_obat WHERE transaksi.jumlah_transaksi IS NULL;
+```
+
+![Alt text](images/12.png?raw=true "12")
+<br/><br/>
+
+```sql
+    SELECT * FROM pembeli RIGHT JOIN transaksi ON pembeli.id_pembeli = transaksi.id_transaksi ORDER BY transaksi.jumlah_transaksi ASC;
+```
+
+![Alt text](images/13.png?raw=true "13")
+<br/><br/>
+
+```sql
+    SELECT obat.nama_obat , obat.stok_obat, obat.harga_obat, transaksi.tgl_transaksi, transaksi.jumlah_transaksi, (obat.harga_obat*transaksi.jumlah_transaksi) as total_harga FROM obat LEFT JOIN transaksi ON obat.id_obat = transaksi.id_obat WHERE transaksi.jumlah_transaksi IS NOT NULL;
+```
+
+![Alt text](images/14.png?raw=true "14")
+<br/><br/>
+
+```sql
+    SELECT obat.nama_obat , obat.harga_obat, transaksi.tgl_transaksi, transaksi.jumlah_transaksi, (obat.harga_obat*transaksi.jumlah_transaksi) as total_harga FROM obat LEFT JOIN transaksi ON obat.id_obat = transaksi.id_obat WHERE (obat.harga_obat*transaksi.jumlah_transaksi) < 100000;
+```
+
+![Alt text](images/15.png?raw=true "15")
