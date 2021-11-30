@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2021 at 03:50 PM
+-- Generation Time: Nov 30, 2021 at 09:58 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -35,6 +35,22 @@ CREATE TABLE `detail_transaksi` (
   `total_kembalian` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id_detail`, `id_transaksi`, `total_harga`, `total_bayar`, `total_kembalian`) VALUES
+(1, 1, 80000, 100000, 20000),
+(2, 2, 500000, 1000000, 500000),
+(3, 3, 50000, 50000, 0),
+(4, 4, 50000, 50000, 0),
+(5, 5, 15000, 20000, 5000),
+(6, 6, 150000, 150000, 0),
+(7, 7, 30000, 50000, 20000),
+(8, 8, 2500, 5000, 2500),
+(9, 9, 250000, 250000, 0),
+(10, 10, 18000, 20000, 2000);
+
 -- --------------------------------------------------------
 
 --
@@ -54,8 +70,16 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`id_obat`, `nama_obat`, `stok_obat`, `tgl_kadaluwarsa`, `harga_obat`) VALUES
-(1, 'Paracetamol', 200, '2021-12-31', 0),
-(2, 'Panadol', 150, '2022-02-17', 0);
+(1, 'Paracetamol', 200, '2021-12-31', 20000),
+(2, 'Panadol', 150, '2022-02-17', 50000),
+(3, 'Paramex', 10, '2021-12-31', 10000),
+(4, 'Bodrex', 40, '2022-01-21', 5000),
+(5, 'Tolak angin', 300, '2022-02-11', 3000),
+(6, 'Bodrexin', 500, '2022-02-24', 1000),
+(7, 'Promag', 70, '2021-12-11', 500),
+(8, 'Betadin', 30, '2022-03-18', 5000),
+(9, 'Amoxicillin', 500, '2022-06-23', 10000),
+(10, 'Ambroxol', 150, '2022-05-27', 10000);
 
 -- --------------------------------------------------------
 
@@ -74,7 +98,15 @@ CREATE TABLE `pembeli` (
 
 INSERT INTO `pembeli` (`id_pembeli`, `nama_pembeli`) VALUES
 (1, 'Syahrul'),
-(2, 'Ulum');
+(2, 'Ulum'),
+(3, 'Suki'),
+(4, 'Yanti'),
+(5, 'Ilah'),
+(6, 'Rani'),
+(7, 'Amin'),
+(8, 'Robi'),
+(9, 'Daerobi'),
+(10, 'Ahmad');
 
 -- --------------------------------------------------------
 
@@ -96,7 +128,15 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_obat`, `id_pembeli`, `tgl_transaksi`, `jumlah_transaksi`) VALUES
 (1, 1, 1, '2021-11-29', 4),
-(2, 2, 2, '2021-11-29', 10);
+(2, 2, 2, '2021-11-29', 10),
+(3, 4, 6, '2021-11-30', 10),
+(4, 9, 1, '2021-11-30', 5),
+(5, 6, 5, '2021-11-29', 15),
+(6, 8, 4, '2021-11-27', 30),
+(7, 9, 3, '2021-11-29', 3),
+(8, 7, 1, '2021-11-30', 5),
+(9, 2, 6, '2021-11-30', 5),
+(10, 5, 8, '2021-11-29', 6);
 
 --
 -- Indexes for dumped tables
@@ -137,25 +177,25 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pembeli`
 --
 ALTER TABLE `pembeli`
-  MODIFY `id_pembeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pembeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
