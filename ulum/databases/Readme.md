@@ -16,8 +16,6 @@ beberapa obat bisa dibeli oleh beberapa pembeli
 
 # 10 Query SQL
 
-##
-
 ```sql
 1. SELECT * FROM obat ORDER BY stok_obat ASC;
 2. SELECT * FROM obat WHERE harga_obat < 30000;
