@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 05:07 AM
+-- Generation Time: Nov 30, 2021 at 08:47 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -24,23 +24,64 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `komputer`
+--
+
+CREATE TABLE `komputer` (
+  `id_komputer` int(11) NOT NULL,
+  `nama_komputer` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `komputer`
+--
+
+INSERT INTO `komputer` (`id_komputer`, `nama_komputer`) VALUES
+(1, 'Komputer-1'),
+(2, 'Komputer-2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `obat`
 --
 
 CREATE TABLE `obat` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(32) NOT NULL,
-  `jenis` varchar(16) NOT NULL,
-  `bentuk` varchar(16) NOT NULL
+  `id_obat` int(11) NOT NULL,
+  `nama_obat` varchar(32) NOT NULL,
+  `banyak_stok` int(11) NOT NULL,
+  `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `obat`
 --
 
-INSERT INTO `obat` (`id`, `nama`, `jenis`, `bentuk`) VALUES
-(1, 'Amoxicillin', 'antibiotik', 'kaplet'),
-(2, 'Vitamin C IPI', 'vitamin', 'tablet');
+INSERT INTO `obat` (`id_obat`, `nama_obat`, `banyak_stok`, `harga`) VALUES
+(1, 'Amoxicillin', 100, 5000),
+(2, 'Vitamin C IPI', 100, 7500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operator`
+--
+
+CREATE TABLE `operator` (
+  `id_operator` int(11) NOT NULL,
+  `nama_operator` varchar(32) NOT NULL,
+  `alamat` text NOT NULL,
+  `no_hp` varchar(16) NOT NULL,
+  `id_komputer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `operator`
+--
+
+INSERT INTO `operator` (`id_operator`, `nama_operator`, `alamat`, `no_hp`, `id_komputer`) VALUES
+(1, 'Baharudin', 'Jombang', '082233344441', 1),
+(2, 'Pratama', 'Surabaya', '081223334444', 2);
 
 -- --------------------------------------------------------
 
@@ -49,62 +90,97 @@ INSERT INTO `obat` (`id`, `nama`, `jenis`, `bentuk`) VALUES
 --
 
 CREATE TABLE `transaksi` (
-  `id` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
   `tgl_transaksi` date NOT NULL,
+  `id_operator` int(11) NOT NULL,
   `id_obat` int(11) NOT NULL,
-  `kuantitas` int(11) NOT NULL
+  `kuantitas` int(11) NOT NULL,
+  `total_harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `tgl_transaksi`, `id_obat`, `kuantitas`) VALUES
-(1, '2021-11-29', 1, 10),
-(2, '2021-11-30', 2, 45);
+INSERT INTO `transaksi` (`id_transaksi`, `tgl_transaksi`, `id_operator`, `id_obat`, `kuantitas`, `total_harga`) VALUES
+(1, '2021-11-29', 1, 1, 10, 0),
+(2, '2021-11-30', 2, 2, 45, 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `komputer`
+--
+ALTER TABLE `komputer`
+  ADD PRIMARY KEY (`id_komputer`);
+
+--
 -- Indexes for table `obat`
 --
 ALTER TABLE `obat`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_obat`);
+
+--
+-- Indexes for table `operator`
+--
+ALTER TABLE `operator`
+  ADD PRIMARY KEY (`id_operator`),
+  ADD KEY `fk_komputer` (`id_komputer`);
 
 --
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_obat` (`id_obat`);
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `fk_obat` (`id_obat`),
+  ADD KEY `fk_operator` (`id_operator`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `komputer`
+--
+ALTER TABLE `komputer`
+  MODIFY `id_komputer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `operator`
+--
+ALTER TABLE `operator`
+  MODIFY `id_operator` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `operator`
+--
+ALTER TABLE `operator`
+  ADD CONSTRAINT `fk_komputer` FOREIGN KEY (`id_komputer`) REFERENCES `komputer` (`id_komputer`);
+
+--
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `fk_obat` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id`);
+  ADD CONSTRAINT `fk_obat` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`),
+  ADD CONSTRAINT `fk_operator` FOREIGN KEY (`id_operator`) REFERENCES `operator` (`id_operator`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
