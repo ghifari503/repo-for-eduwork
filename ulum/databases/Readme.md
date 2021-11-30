@@ -134,3 +134,27 @@ beberapa obat bisa dibeli oleh beberapa pembeli
 ```
 
 ![Alt text](images/15.png?raw=true "15")
+<br/><br/><br/><br/>
+
+# Query Join Multiple Table SQL
+
+```sql
+    SELECT * FROM transaksi JOIN pembeli ON transaksi.id_pembeli = pembeli.id_pembeli JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi;
+```
+
+![Alt text](images/16.png?raw=true "16")
+<br/><br/>
+
+```sql
+    SELECT obat.nama_obat,obat.stok_obat,obat.harga_obat,transaksi.tgl_transaksi, transaksi.jumlah_transaksi, detail_transaksi.total_harga, detail_transaksi.total_bayar, detail_transaksi.total_kembalian FROM transaksi JOIN obat ON transaksi.id_obat = obat.id_obat JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi;
+
+```
+
+![Alt text](images/17.png?raw=true "17")
+<br/><br/>
+
+```sql
+    SELECT obat.nama_obat,obat.stok_obat,obat.harga_obat,transaksi.tgl_transaksi, transaksi.jumlah_transaksi, detail_transaksi.total_harga, detail_transaksi.total_bayar, detail_transaksi.total_kembalian, pembeli.nama_pembeli FROM transaksi JOIN obat ON transaksi.id_obat = obat.id_obat JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi JOIN pembeli ON transaksi.id_pembeli = pembeli.id_pembeli;
+```
+
+![Alt text](images/18.png?raw=true "18")
