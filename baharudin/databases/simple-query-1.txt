@@ -1,0 +1,19 @@
+SELECT * FROM obat
+
+SELECT nama_obat, banyak_stok FROM obat
+
+SELECT nama_obat, banyak_stok FROM obat WHERE banyak_stok <= 30
+
+SELECT nama_obat, id_kategori FROM obat WHERE id_kategori = 2
+
+SELECT * FROM obat WHERE harga > 50000
+
+SELECT id_obat, nama_obat, id_kategori, banyak_stok, harga FROM obat
+
+SELECT nama_obat, id_bentuk FROM obat WHERE id_bentuk = 3
+
+SELECT id_transaksi, id_operator FROM transaksi WHERE id_operator = 1
+
+SELECT id_transaksi, id_obat, total_harga FROM transaksi WHERE total_harga >= 100000
+
+SELECT tgl_transaksi, id_operator FROM transaksi WHERE id_operator = 2
