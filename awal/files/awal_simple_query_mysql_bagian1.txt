@@ -1,0 +1,12 @@
+Simple query mysql ( Bagian 1 )	
+
+1. SELECT * FROM kustomer;
+2. SELECT * FROM kustomer WHERE id_kustomer = 1;
+3. SELECT * FROM kasir;
+4. SELECT username, email FROM kasir WHERE username = 'CaesarVance';
+5. SELECT * FROM jenis_obat;
+6. SELECT * FROM jenis_obat WHERE nama_jenis_obat LIKE '%Tablet%';
+7. SELECT * FROM obat;
+8. SELECT * FROM obat WHERE harga_obat > 10000;
+9. SELECT * FROM obat WHERE stok_obat < 10;
+10. SELECT * FROM transaksi;
