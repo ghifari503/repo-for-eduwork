@@ -1,0 +1,12 @@
+Daftar Query SQL
+
+1. SELECT * FROM apoteker;
+2. SELECT id, nama FROM pembeli;
+3. SELECT nama, bio, umur FROM apoteker;
+4. SELECT * FROM obat WHERE id = 3;
+5. SELECT * FROM apoteker WHERE nama = "Agni";
+6. SELECT * FROM transaksi WHERE id > 5;
+7. SELECT * FROM transaksi WHERE total <= 25000;
+8. SELECT id, nama FROM apoteker WHERE id <= 6;
+9. SELECT id, nama, alamat FROM pembeli WHERE id > 7;
+10. SELECT id, nama, alamat FROM pembeli WHERE  umur <=30;
