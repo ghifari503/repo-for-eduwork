@@ -123,7 +123,7 @@ beberapa obat bisa dibeli oleh beberapa pembeli
 <br/><br/>
 
 ```sql
-    SELECT obat.nama_obat , obat.stok_obat, obat.harga_obat, transaksi.tgl_transaksi, transaksi.jumlah_transaksi, (obat.harga_obat*transaksi.jumlah_transaksi) as total_harga FROM obat LEFT JOIN transaksi ON obat.id_obat = transaksi.id_obat WHERE transaksi.jumlah_transaksi IS NOT NULL;
+    SELECT obat.nama_obat , obat.stok_obat, obat.harga_obat, transaksi.tgl_transaksi, transaksi.jumlah_transaksi, (obat.harga_obat*transaksi.jumlah_transaksi) as total_harga FROM obat LEFT JOIN transaksi ON obat.id_obat = transaksi.id_obat WHERE nama_obat LIKE '%an%';
 ```
 
 ![Alt text](images/14.png?raw=true "14")
