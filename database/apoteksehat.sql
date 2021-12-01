@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Nov 2021 pada 15.34
+-- Waktu pembuatan: 01 Des 2021 pada 02.34
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.7
 
@@ -40,13 +40,12 @@ CREATE TABLE `apoteker` (
 
 INSERT INTO `apoteker` (`id`, `nama`, `umur`, `bio`) VALUES
 (1, 'Lintang', 23, 'Seorang Apoteker Muda.'),
-(3, 'Bening', 22, 'Apoteker paling Muda'),
+(3, 'Bening', 23, 'Apoteker paling muda dan cantik'),
 (4, 'Nugroho', 25, 'Apoteker Ganteng'),
 (5, 'Naily', 21, 'Apoteker junior'),
-(6, 'Agni', 26, 'Banyak Pengalaman'),
+(6, 'Hawa', 25, 'Banyak Pengalaman'),
 (7, 'Aditya', 24, 'Maskulin, Periang dan Murah Senyum'),
 (8, 'Yoga', 29, 'Paling senior dibanding yang lain'),
-(9, 'Putri', 28, 'Manis, Cantik, Sholehah'),
 (10, 'Elfiana', 27, 'Banyak Pengalaman, sedikit jutek'),
 (11, 'Shela', 20, 'Baru Magang');
 
@@ -96,14 +95,15 @@ CREATE TABLE `obat` (
 INSERT INTO `obat` (`id`, `nama`, `stok`, `harga`, `kategori_id`, `detail`) VALUES
 (1, 'Betametason', 15, 20000, 2, 'Obat gatal karena jamur'),
 (2, 'Ibuprofen', 5, 200000, 1, 'Untuk meredakan sakit kepala.'),
-(3, 'Antangin Cair', 10, 2500, 5, 'Antangin Cair obat masuk angin'),
+(3, 'Antangin Tablet', 10, 2500, 5, 'Antangin Cair obat masuk angin'),
 (4, 'Bodrex Tablet', 30, 1500, 1, 'Bodrex obat sakit kepala'),
 (5, 'GPU', 11, 15000, 5, 'GPU untuk pijat urut'),
 (6, 'Komix', 9, 2000, 3, 'Komix untuk meredakan batuk'),
 (7, 'Promag', 12, 2500, 4, 'Promag meredakan sakit maag'),
-(8, 'Extrajoss', 7, 9000, 6, 'Untuk menaikkan stamina'),
+(8, 'Extrajoss', 15, 9000, 6, 'Untuk menaikkan stamina'),
 (9, 'Puyer Bintang 7', 5, 2500, 1, 'Untuk sakit kepala'),
-(10, 'Balsem Geliga', 2, 15000, 5, 'Untuk mengatasi pegal-pegal, masuk angin dan keseleo');
+(10, 'Balsem Geliga', 2, 15000, 5, 'Untuk mengatasi pegal-pegal, masuk angin dan keseleo'),
+(11, 'Inza', 10, 2500, 5, 'Inza mengatasi masuk angin dan flu');
 
 -- --------------------------------------------------------
 
@@ -223,7 +223,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembeli`

@@ -1,0 +1,7 @@
+Query Update & Delete
+
+1. UPDATE obat SET nama = 'Antangin Tablet' WHERE id = 3;
+2. UPDATE obat SET stok = 15 WHERE nama = 'Extrajoss';
+3. UPDATE apoteker SET nama = 'Hawa', umur = 25 WHERE id = 6;
+4. UPDATE apoteker SET bio = 'Apoteker paling muda dan cantik', umur = 23 WHERE nama = 'Bening';
+5. DELETE FROM apoteker WHERE id = 9;
