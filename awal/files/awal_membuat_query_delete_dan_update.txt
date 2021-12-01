@@ -1,0 +1,7 @@
+Tugas Membuat Query Delete dan Update
+
+1. UPDATE kustomer SET nama_kustomer = 'Dai Rios' WHERE id_kustomer = 3;
+2. DELETE FROM kustomer WHERE id_kustomer = 4;
+3. UPDATE obat SET nama_obat = 'Rohto' WHERE id_obat = 2;
+3. UPDATE obat SET harga_obat = 11000 WHERE nama_obat = 'Bodrex Extra';
+5. DELETE FROM obat WHERE id_obat = 2;
