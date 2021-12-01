@@ -7,6 +7,6 @@
     <title>Ahmad Widodo</title>
 </head>
 <body>
-    ini adalah folder widodo
+    ini adalah folder widodo.
 </body>
 </html>
