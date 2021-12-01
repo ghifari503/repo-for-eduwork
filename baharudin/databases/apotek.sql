@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 11:27 AM
+-- Generation Time: Dec 01, 2021 at 03:33 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -111,9 +111,8 @@ INSERT INTO `obat` (`id_obat`, `nama_obat`, `id_bentuk`, `id_kategori`, `banyak_
 (3, 'Tremenza', 3, 3, 21, 25000),
 (4, 'Nourish Beauty', 6, 4, 42, 20000),
 (5, 'Enervon-C', 2, 2, 81, 2500),
-(6, 'Diva Collagen', 3, 4, 5, 50000),
 (7, 'Bodrexin Drops', 5, 5, 44, 15000),
-(8, 'Imunped', 3, 2, 12, 70000),
+(8, 'Imunped Drops', 5, 2, 12, 70000),
 (9, 'Tetracycline', 4, 1, 50, 10000),
 (10, 'Insto Reguler', 5, 6, 27, 17000);
 
@@ -161,11 +160,10 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`id_transaksi`, `tgl_transaksi`, `id_operator`, `id_obat`, `kuantitas`, `total_harga`) VALUES
 (1, '2021-11-28', 1, 1, 2, 10000),
 (2, '2021-11-28', 2, 7, 1, 15000),
-(3, '2021-11-28', 1, 6, 2, 100000),
 (4, '2021-11-28', 1, 5, 10, 25000),
 (5, '2021-11-29', 2, 8, 2, 140000),
 (6, '2021-11-29', 2, 10, 3, 51000),
-(7, '2021-11-29', 1, 4, 3, 60000),
+(7, '2021-11-29', 2, 4, 3, 60000),
 (8, '2021-11-29', 1, 9, 3, 30000),
 (9, '2021-11-30', 1, 3, 1, 25000),
 (10, '2021-11-30', 2, 2, 2, 15000);
