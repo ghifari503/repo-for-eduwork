@@ -1,0 +1,9 @@
+UPDATE obat SET nama_obat='Imunped Drops' WHERE id_obat = 8
+
+UPDATE obat SET id_bentuk = 5 WHERE id_obat = 8
+
+DELETE FROM obat WHERE id_obat = 6
+
+UPDATE transaksi SET id_operator = 2 WHERE id_transaksi = 7
+
+DELETE FROM transaksi WHERE id_obat = 6
