@@ -17,18 +17,18 @@ function query($query)
     return $rows;
 }
 
-$data_buku = query("SELECT * FROM bukus");
-$no = 1;
-echo "<h1>Data Buku</h1>";
-foreach ($data_buku as $buku) {
-    echo $no++;
-    echo ". Buku : {$buku['isbn']} {$buku['judul']} - {$buku['tahun']} <br/>";
-}
+// $data_buku = query("SELECT * FROM bukus");
+// $no = 1;
+// echo "<h1>Data Buku</h1>";
+// foreach ($data_buku as $buku) {
+//     echo $no++;
+//     echo ". Buku : {$buku['isbn']} {$buku['judul']} - {$buku['tahun']} <br/>";
+// }
 
-$data_anggotas = query("SELECT * FROM anggotas");
-$angka = 1;
-echo "<h1>Data Anggota</h1>";
-foreach ($data_anggotas as $anggota) {
-    echo $angka++;
-    echo ". Anggota : {$anggota['name']} - {$anggota['alamat']} <br/>";
-}
+// $data_anggotas = query("SELECT * FROM anggotas");
+// $angka = 1;
+// echo "<h1>Data Anggota</h1>";
+// foreach ($data_anggotas as $anggota) {
+//     echo $angka++;
+//     echo ". Anggota : {$anggota['name']} - {$anggota['alamat']} <br/>";
+// }
