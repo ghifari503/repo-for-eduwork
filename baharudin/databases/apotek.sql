@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 03:33 AM
+-- Generation Time: Dec 01, 2021 at 04:20 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -96,7 +96,7 @@ CREATE TABLE `obat` (
   `id_obat` int(11) NOT NULL,
   `nama_obat` varchar(32) NOT NULL,
   `id_bentuk` int(11) NOT NULL,
-  `id_kategori` int(11) NOT NULL,
+  `id_kategori` int(11) DEFAULT NULL,
   `banyak_stok` int(11) NOT NULL,
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -108,7 +108,7 @@ CREATE TABLE `obat` (
 INSERT INTO `obat` (`id_obat`, `nama_obat`, `id_bentuk`, `id_kategori`, `banyak_stok`, `harga`) VALUES
 (1, 'Amoxicillin', 1, 1, 21, 5000),
 (2, 'Vitamin C IPI', 2, 2, 30, 7500),
-(3, 'Tremenza', 3, 3, 21, 25000),
+(3, 'Tremenza', 3, NULL, 21, 25000),
 (4, 'Nourish Beauty', 6, 4, 42, 20000),
 (5, 'Enervon-C', 2, 2, 81, 2500),
 (7, 'Bodrexin Drops', 5, 5, 44, 15000),
