@@ -9,18 +9,17 @@
     	$nama = $katalog_data['nama'];
     }
 ?>
-	<a href="katalog.php">Go to Katalog</a>
-	<br/><br/>
+	<a href="katalog.php" class="btn btn-warning mb-3">Cancel</a>
  
 	<form action="edit_katalog.php?id=<?php echo $id; ?>" method="post">
 		<table width="25%" border="0">
 			<tr> 
 				<td>Nama</td>
-				<td><input type="text" name="nama" value="<?php echo $nama; ?>" required></td>
+				<td><input type="text" name="nama" class="form-control" value="<?php echo $nama; ?>" required></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="update" value="Update" required></td>
+				<td><input type="submit" name="update" class="btn btn-primary mt-2" value="Update"></td>
 			</tr>
 		</table>
 	</form>

@@ -2,19 +2,17 @@
 	$title = 'Add Katalog';
 	include_once 'shared/header.php';
 ?>
-	<a href="katalog.php">Go to Katalog</a>
-	<br/>
-	<br/>
+	<a href="katalog.php" class="btn btn-warning mb-3">Cancel</a>
 
 	<form action="add_katalog.php" method="post" name="form1">
 		<table width="25%" border="0">
 			<tr> 
 				<td>Nama Katalog</td>
-				<td><input type="text" name="nama" required></td>
+				<td><input type="text" name="nama" class="form-control" required></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add" required></td>
+				<td><input type="submit" name="Submit" class="btn btn-primary" value="Add"></td>
 			</tr>
 		</table>
 	</form>

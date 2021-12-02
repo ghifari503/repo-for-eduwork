@@ -12,30 +12,29 @@
     	$alamat = $penerbit_data['alamat'];
     }
 ?>
-	<a href="penerbit.php">Go to Penerbit</a>
-	<br/><br/>
+	<a href="penerbit.php" class="btn btn-warning mb-3">Cancel</a>
  
 	<form action="edit_penerbit.php?id=<?php echo $id; ?>" method="post" name="form1">
 		<table width="25%" border="0">
 			<tr> 
 				<td>Nama Penerbit</td>
-				<td><input type="text" name="nama_penerbit" value="<?php echo $nama_penerbit; ?>" required></td>
+				<td><input type="text" name="nama_penerbit" class="form-control" value="<?php echo $nama_penerbit; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="email" name="email" value="<?php echo $email; ?>" required></td>
+				<td><input type="email" name="email" class="form-control" value="<?php echo $email; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>No. Telepon</td>
-				<td><input type="text" name="telp" value="<?php echo $telp; ?>" required></td>
+				<td><input type="text" name="telp" class="form-control" value="<?php echo $telp; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Alamat</td>
-				<td><input type="text" name="alamat" value="<?php echo $alamat; ?>" required></td>
+				<td><input type="text" name="alamat" class="form-control" value="<?php echo $alamat; ?>" required></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Edit"></td>
+				<td><input type="submit" name="Submit" class="btn btn-primary mt-3" value="Update"></td>
 			</tr>
 		</table>
 	</form>

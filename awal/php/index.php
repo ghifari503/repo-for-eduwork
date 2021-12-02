@@ -15,22 +15,24 @@
                                         bukus.judul ASC");
 ?>
 
-<a href="add.php">Add New Buku</a><br/><br/>
+<a href="add.php" class="btn btn-primary mb-3">Add New Buku</a>
  
-    <table class="table" width='80%' border=1>
- 
-    <tr>
-        <th>ISBN</th> 
-        <th>Judul</th> 
-        <th>Tahun</th> 
-        <th>Pengarang</th>
-        <th>Penerbit</th>
-        <th>Katalog</th>
-        <th>Stok</th>
-        <th>Harga Pinjam</th>
-        <th>Aksi</th>
-    </tr>
-    <?php  
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ISBN</th> 
+                <th>Judul</th> 
+                <th>Tahun</th> 
+                <th>Pengarang</th>
+                <th>Penerbit</th>
+                <th>Katalog</th>
+                <th>Stok</th>
+                <th>Harga Pinjam</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody> 
+    <?php 
         while ($buku_data = mysqli_fetch_array($buku)) {         
             echo "<tr>";
             echo "<td>".$buku_data['isbn']."</td>";
@@ -41,8 +43,9 @@
             echo "<td>".$buku_data['nama_katalog']."</td>";    
             echo "<td>".$buku_data['qty_stok']."</td>";    
             echo "<td>".$buku_data['harga_pinjam']."</td>";    
-            echo "<td><a class='btn btn-primary' href='edit.php?isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-danger' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td></tr>";        
+            echo "<td><a class='btn btn-success' href='edit.php?isbn=$buku_data[isbn]'>Edit</a> <a class='btn btn-danger' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td></tr>";        
         }
     ?>
+        <tbody> 
     </table>
 <?php include_once 'shared/footer.php'; ?>

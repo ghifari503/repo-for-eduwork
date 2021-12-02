@@ -21,8 +21,7 @@
     	$harga_pinjam = $buku_data['harga_pinjam'];
     }
 ?>
-	<a href="index.php">Go to Home</a>
-	<br/><br/>
+	<a href="index.php" class="btn btn-warning mb-3">Cancel</a>
  
 	<form action="edit.php?isbn=<?php echo $isbn; ?>" method="post">
 		<table width="25%" border="0">
@@ -32,16 +31,16 @@
 			</tr>
 			<tr> 
 				<td>Judul</td>
-				<td><input type="text" name="judul" value="<?php echo $judul; ?>" required></td>
+				<td><input type="text" name="judul" class="form-control" value="<?php echo $judul; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Tahun</td>
-				<td><input type="number" name="tahun" value="<?php echo $tahun; ?>" required></td>
+				<td><input type="number" name="tahun" class="form-control" value="<?php echo $tahun; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Penerbit</td>
 				<td>
-					<select name="id_penerbit" required>
+					<select name="id_penerbit" class="form-control" required>
 						<?php 
 						    while($penerbit_data = mysqli_fetch_array($penerbit)) {         
 						    	echo "<option ".($penerbit_data['id'] == $id_penerbit ? 'selected' : '')." value='".$penerbit_data['id']."'>".$penerbit_data['nama_penerbit']."</option>";
@@ -53,7 +52,7 @@
 			<tr> 
 				<td>Pengarang</td>
 				<td>
-					<select name="id_pengarang" required>
+					<select name="id_pengarang" class="form-control" required>
 						<?php 
 						    while($pengarang_data = mysqli_fetch_array($pengarang)) {         
 						    	echo "<option ".($pengarang_data['id'] == $id_pengarang ? 'selected' : '')." value='".$pengarang_data['id']."'>".$pengarang_data['nama_pengarang']."</option>";
@@ -65,7 +64,7 @@
 			<tr> 
 				<td>Katalog</td>
 				<td>
-					<select name="id_katalog" required>
+					<select name="id_katalog" class="form-control" required>
 						<?php 
 						    while($katalog_data = mysqli_fetch_array($katalog)) {         
 						    	echo "<option ".($katalog_data['id'] == $id_katalog ? 'selected' : '')." value='".$katalog_data['id']."'>".$katalog_data['nama']."</option>";
@@ -76,15 +75,15 @@
 			</tr>
 			<tr> 
 				<td>Qty Stok</td>
-				<td><input type="number" name="qty_stok" value="<?php echo $qty_stok; ?>" required></td>
+				<td><input type="number" name="qty_stok" class="form-control" value="<?php echo $qty_stok; ?>" required></td>
 			</tr>
 			<tr> 
 				<td>Harga Pinjam</td>
-				<td><input type="number" name="harga_pinjam" value="<?php echo $harga_pinjam; ?>" required></td>
+				<td><input type="number" name="harga_pinjam" class="form-control" value="<?php echo $harga_pinjam; ?>" required></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="update" value="Update"></td>
+				<td><input type="submit" name="update" value="Update" class="btn btn-primary"></td>
 			</tr>
 		</table>
 	</form>

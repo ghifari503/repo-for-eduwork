@@ -2,30 +2,29 @@
 	$title = 'Add Penerbit';
 	include_once 'shared/header.php';
 ?>
-	<a href="penerbit.php">Go to Penerbit</a>
-	<br/><br/>
+	<a href="penerbit.php" class="btn btn-warning mb-3">Cancel</a>
  
 	<form action="add_penerbit.php" method="post" name="form1">
 		<table width="25%" border="0">
 			<tr> 
 				<td>Nama Penerbit</td>
-				<td><input type="text" name="nama_penerbit" required></td>
+				<td><input type="text" name="nama_penerbit" class="form-control" required></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="email" name="email" required></td>
+				<td><input type="email" name="email" class="form-control" required></td>
 			</tr>
 			<tr> 
 				<td>No. Telepon</td>
-				<td><input type="text" name="telp" required></td>
+				<td><input type="text" name="telp" class="form-control" required></td>
 			</tr>
 			<tr> 
 				<td>Alamat</td>
-				<td><input type="text" name="alamat" required></td>
+				<td><input type="text" name="alamat" class="form-control" required></td>
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
+				<td><input type="submit" name="Submit" class="btn btn-primary mt-3" value="Add"></td>
 			</tr>
 		</table>
 	</form>
