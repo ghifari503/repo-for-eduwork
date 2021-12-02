@@ -1,0 +1,12 @@
+SELECT * FROM `obat`;
+SELECT nama_obat,stok_obat FROM `obat`;
+SELECT * FROM `obat` WHERE stok_obat > 10;
+SELECT * FROM `obat` WHERE stok_obat >= 10;
+SELECT * FROM `pasien` WHERE alamat = 'jl konoha'; 
+SELECT * FROM `pasien` WHERE id_pasien = 1;
+SELECT * FROM `transaksi` ;
+SELECT * FROM `transaksi` WHERE jumlah_transaksi >= 20000;
+SELECT * FROM `transaksi` WHERE id_pasien = 3;
+SELECT * FROM `transaksi` WHERE jumlah_transaksi > 5000;
+
+
