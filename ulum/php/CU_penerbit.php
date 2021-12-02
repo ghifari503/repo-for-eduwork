@@ -34,66 +34,71 @@ if (isset($_POST['perbarui'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create & Update Data Penerbit</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <a href="penerbit.php">Back to penerbit</a><br /><br />
-    <!-- Update DATA -->
-    <?php if (isset($_GET['id_penerbit'])) : ?>
-        <?php
-        $id = $_GET['id_penerbit'];
-        $data = query("SELECT * FROM penerbits WHERE id = $id")[0];
-        ?>
-        <form action="" method="POST">
-            <input type="hidden" name="id_penerbit" value="<?= $data['id'] ?>" />
-            <table width="25%">
-                <tr>
-                    <td>Nama Penerbit</td>
-                    <td><input type="text" name="nama_penerbit" value="<?= $data['nama_penerbit'] ?>" /></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><input type="email" name="email" value="<?= $data['email'] ?>" /></td>
-                </tr>
-                <tr>
-                    <td>No Telp.</td>
-                    <td><input type="number" name="no_telp" value="<?= $data['telp'] ?>" /></td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td><textarea name="alamat" cols="17" rows="5"><?= $data['alamat'] ?></textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" name="perbarui" value="Update" /></td>
-                </tr>
-            </table>
-        </form>
-    <?php else : ?>
-        <!-- ADD DATA -->
-        <form action="" method="POST">
-            <table width="25%">
-                <tr>
-                    <td>Nama Penerbit</td>
-                    <td><input type="text" name="nama_penerbit" /></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><input type="email" name="email" /></td>
-                </tr>
-                <tr>
-                    <td>No Telp.</td>
-                    <td><input type="number" name="no_telp" /></td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td><textarea name="alamat" cols="17" rows="5"></textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" name="tambah" value="Add" /></td>
-                </tr>
-            </table>
-        </form>
-    <?php endif; ?>
+    <div class="container">
+        <a href="penerbit.php" class="btn btn-primary mt-2">Back to penerbit</a><br /><br />
+        <!-- Update DATA -->
+        <?php if (isset($_GET['id_penerbit'])) : ?>
+            <?php
+            $id = $_GET['id_penerbit'];
+            $data = query("SELECT * FROM penerbits WHERE id = $id")[0];
+            ?>
+            <form action="" method="POST">
+                <input type="hidden" name="id_penerbit" value="<?= $data['id'] ?>" />
+                <table class="table table-borderless">
+                    <tr>
+                        <td width="20%">Nama Penerbit</td>
+                        <td><input type="text" name="nama_penerbit" value="<?= $data['nama_penerbit'] ?>" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" value="<?= $data['email'] ?>" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>No Telp.</td>
+                        <td><input type="number" name="no_telp" value="<?= $data['telp'] ?>" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td><textarea name="alamat" cols="17" rows="5" class="form-control"><?= $data['alamat'] ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><input type="submit" name="perbarui" value="Update" class="btn btn-primary" /></td>
+                    </tr>
+                </table>
+            </form>
+        <?php else : ?>
+            <!-- ADD DATA -->
+            <form action="" method="POST">
+                <table class="table table-borderless">
+                    <tr>
+                        <td width="20%">Nama Penerbit</td>
+                        <td><input type="text" name="nama_penerbit" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>No Telp.</td>
+                        <td><input type="number" name="no_telp" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td><textarea name="alamat" cols="17" rows="5" class="form-control"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><input type="submit" name="tambah" value="Add" class="btn btn-primary" /></td>
+                    </tr>
+                </table>
+            </form>
+        <?php endif; ?>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

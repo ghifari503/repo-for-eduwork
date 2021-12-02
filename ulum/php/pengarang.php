@@ -11,35 +11,57 @@ $pengarang = query("SELECT * FROM pengarangs ORDER BY nama_pengarang ASC");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pengarang</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <center>
-        <a href="index.php">Buku</a> |
-        <a href="penerbit.php">Penerbit</a> |
-        <a href="pengarang.php">Pengarang</a> |
-        <a href="katalog.php">Katalog</a> |
-    </center>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Buku</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="penerbit.php">Penerbit</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="pengarang.php">Pengarang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="katalog.php">Katalog</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <a href="CU_pengarang.php">Add New Pengarang</a>
-    <table width="80%" border="1">
-        <tr>
-            <th>Nama Pengarang</th>
-            <th>Email</th>
-            <th>No Telp.</th>
-            <th>Alamat</th>
-            <th>Aksi</th>
-        </tr>
-        <?php foreach ($pengarang as $p) : ?>
-            <tr>
-                <td><?= $p['nama_pengarang'] ?></td>
-                <td><?= $p['email'] ?></td>
-                <td><?= $p['telp'] ?></td>
-                <td><?= $p['alamat'] ?></td>
-                <td><a href="CU_pengarang.php?id_pengarang=<?= $p['id'] ?>">Edit</a> | <a href="delete.php?id_pengarang=<?= $p['id'] ?>" onclick="confirm('Yakin dihapus ?')">Delete</a></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+        <a href="CU_pengarang.php" class="btn btn-primary mt-2">Add New Pengarang</a>
+        <table class="table table-hover mt-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nama Pengarang</th>
+                    <th>Email</th>
+                    <th>No Telp.</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <?php foreach ($pengarang as $p) : ?>
+                <tr>
+                    <td><?= $p['nama_pengarang'] ?></td>
+                    <td><?= $p['email'] ?></td>
+                    <td><?= $p['telp'] ?></td>
+                    <td><?= $p['alamat'] ?></td>
+                    <td><a href="CU_pengarang.php?id_pengarang=<?= $p['id'] ?>" class="btn btn-primary">Edit</a> | <a href="delete.php?id_pengarang=<?= $p['id'] ?>" onclick="confirm('Yakin dihapus ?')" class="btn btn-danger">Delete</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
