@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Component</title>
+</head>
+<body>
+    <div id="app" v-if="status">
+        {{ message }}
+        <hr>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Age</th>
+            </thead>
+            <tbody>
+                <tr v-for="(user, index) in users" :key="index">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.age }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!',
+        status: true,
+        users: [
+            {
+                name: 'Charde Marshall',
+                age: 36
+            },
+            {
+                name: 'Colleen Hurst',
+                age: 39
+            },
+            {
+                name: 'Dai Rios',
+                age: 35
+            },
+            {
+                name: 'Donna Snider',
+                age: 27
+            },
+            {
+                name: 'Doris Wilder',
+                age: 23
+            }
+        ]
+    }
+})
+</script>
+</body>
+</html>
