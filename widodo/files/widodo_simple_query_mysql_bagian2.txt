@@ -1,0 +1,11 @@
+1. SELECT * FROM `obat` ORDER by nama_obat DESC;
+2. SELECT * FROM `obat` ORDER by stok_obat ASC;
+3. SELECT * FROM `obat` WHERE nama_obat LIKE '%entrostop%';
+4. SELECT * FROM `obat` WHERE nama_obat LIKE '%panadol%';
+5. SELECT id_pasien, SUM(jumlah_transaksi) as total FROM `transaksi`GROUP BY id_pasien;
+6. SELECT id_pasien, SUM(jumlah_transaksi) as total FROM `transaksi`GROUP BY id_pasien DESC;
+7. SELECT id_obat, SUM(jumlah_transaksi) as total FROM `transaksi`GROUP BY id_obat DESC;
+8. SELECT tahun_produksi, SUM(stok_obat) as stok FROM `obat` GROUP BY tahun_produksi;
+9. SELECT tanggal_kadaluwarsa, SUM(stok_obat) as total FROM `obat` WHERE stok_obat >=10 GROUP BY stok_obat ORDER BY stok_obat DESC;
+10. SELECT tahun_produksi, SUM(stok_obat) as stok FROM `obat` WHERE tahun_produksi >=2020 GROUP BY tahun_produksi ORDER BY tahun_produksi DESC;
+11. SELECT YEAR(tanggal_kadaluwarsa), SUM(stok_obat) as total FROM `obat` WHERE YEAR(tanggal_kadaluwarsa) >=2023 GROUP BY tanggal_kadaluwarsa ORDER BY tanggal_kadaluwarsa DESC;
