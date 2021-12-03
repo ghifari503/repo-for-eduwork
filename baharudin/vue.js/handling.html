@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<title>Event Handling</title>
+</head>
+<body>
+	<div class="container-fluid pt-3">
+		<div class="col" id="example-1">
+	  		<button v-on:click="counter += 1">Add 1 on click</button>
+	  		<button v-on:click.middle="counter += 1">Add 1 with middle button</button>
+	  		<button v-on:click.alt="counter += 1">Add 1 on click + Alt</button>
+	  		<!-- the click event will be triggered at most once -->
+	  		<button v-on:click.once="counter += 1">Add once</button>
+	  		<button v-on:keyup.enter="counter += 1">Click then press Enter to add 1</button>
+	  		<!-- the click event's propagation will be stopped -->
+	  		<button v-on:click.stop.prevent="counter += 1">Add 1 when button released</button>
+	  		<p>The button above has been clicked {{ counter }} times.</p>
+		</div>
+
+		<div class="col mb-3" id="example-2">
+		  <!-- `greet` is the name of a method defined below -->
+		  <button v-on:click="greet">Greet</button>
+		</div>
+
+		<div class="col mb-3" id="example-3">
+		  <button v-on:click="say('hi')">Say hi</button>
+		  <button v-on:click="say('what')">Say what</button>
+		</div>
+
+		<div class="col mb-3" id="example-4">
+			<button v-on:click="warn('Form cannot be submitted yet.', $event)">
+			  Submit
+			</button>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+	var example1 = new Vue({
+  		el: '#example-1',
+  		data: {
+    		counter: 0
+  		}
+	})
+
+	var example2 = new Vue({
+	  el: '#example-2',
+	  data: {
+	    name: 'Vue.js'
+	  },
+	  // define methods under the `methods` object
+	  methods: {
+	    greet: function (event) {
+	      // `this` inside methods points to the Vue instance
+	      alert('Hello ' + this.name + '!')
+	      // `event` is the native DOM event
+	      if (event) {
+	        alert(event.target.tagName)
+	      }
+	    }
+	  }
+	})
+
+	new Vue({
+	  el: '#example-3',
+	  methods: {
+	    say: function (message) {
+	      alert(message)
+	    }
+	  }
+	})
+
+	var example4 = new Vue({
+		el: '#example-4',
+		methods: {
+		  warn: function (message, event) {
+		    // now we have access to the native event
+		    if (event) {
+		      event.preventDefault()
+		    }
+		    alert(message)
+		  }
+		}
+	})
+</script>
