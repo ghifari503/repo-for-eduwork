@@ -1,10 +1,6 @@
-<html>
-<head>
-	<title>Edit Penerbit</title>
-</head>
-
 <?php
 	include_once("../config.php");
+	include_once("../master/master.php");
 	$id = $_GET['id'];
 
     $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbits WHERE id='$id'");
@@ -19,10 +15,9 @@
     }
 ?>
  
-<body>
-	<a href="index.php">Go to Home</a>
-	<br/><br/>
- 
+<div class="container-fluid mt-3">
+	<a class="btn btn-primary mb-3" href="index.php">Go to Home</a>
+	
 	<form action="edit.php?id=<?php echo $id; ?>" method="post">
 		<table width="25%" border="0">
 			<tr> 
@@ -47,7 +42,7 @@
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="update" value="Update"></td>
+				<td><input class="btn btn-info mt-2" type="submit" name="update" value="Update"></td>
 			</tr>
 		</table>
 	</form>
@@ -72,5 +67,4 @@
 			header("Location:index.php");;
 		}
 	?>
-</body>
-</html>
+</div>

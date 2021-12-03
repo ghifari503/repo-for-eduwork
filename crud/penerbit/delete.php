@@ -1,5 +1,6 @@
 <?php
 include_once("../config.php");
+include_once("../master/master.php");
  
 $id = $_GET['id'];
  

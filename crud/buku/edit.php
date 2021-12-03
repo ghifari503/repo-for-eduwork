@@ -1,10 +1,6 @@
-<html>
-<head>
-	<title>Edit Buku</title>
-</head>
-
 <?php
 	include_once("../config.php");
+	include_once("../master/master.php");
 	$isbn = $_GET['isbn'];
 
 	$buku = mysqli_query($mysqli, "SELECT * FROM bukus WHERE isbn='$isbn'");
@@ -25,8 +21,8 @@
     }
 ?>
  
-<body>
-	<a href="index.php">Go to Home</a>
+<div class="container-fluid mt-3">
+	<a class="btn btn-primary" href="index.php">Go to Home</a>
 	<br/><br/>
  
 	<form action="edit.php?isbn=<?php echo $isbn; ?>" method="post">
@@ -89,7 +85,7 @@
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="update" value="Update"></td>
+				<td><input class="btn btn-info mt-2" type="submit" name="update" value="Update"></td>
 			</tr>
 		</table>
 	</form>
@@ -117,5 +113,4 @@
 			header("Location:index.php");
 		}
 	?>
-</body>
-</html>
+</div>

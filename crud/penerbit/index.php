@@ -1,29 +1,16 @@
 <?php
 // Create database connection using config file
 include_once("../config.php");
+include_once("../master/master.php");
  
 // Fetch all users data from database
 $result = mysqli_query($mysqli, "SELECT * FROM penerbits
                                  ORDER BY penerbits.id ASC");
 ?>
+<div class="container mt-3">
+<a class="btn btn-primary mb-2" href="add.php">Add New Penerbit</a>
  
-<html>
-<head>    
-    <title>Penerbit</title>
-</head>
- 
-<body>
-<center>
-    <a href="../buku/index.php">Buku</a> |
-    <a href="index.php">Penerbit</a> |
-    <a href="../pengarang/index.php">Pengarang</a> |
-    <a href="../katalog/index.php">Katalog</a>
-    <hr>
-</center>
-
-<a href="add.php">Add New Penerbit</a><br/><br/>
- 
-    <table width='80%' border=1>
+    <table class="table table-striped">
  
     <tr>
         <th>ID</th>
@@ -41,9 +28,8 @@ $result = mysqli_query($mysqli, "SELECT * FROM penerbits
         echo "<td>".$penerbits_data['email']."</td>";
         echo "<td>".$penerbits_data['telp']."</td>";    
         echo "<td>".$penerbits_data['alamat']."</td>";    
-        echo "<td><a href='edit.php?id=$penerbits_data[id]'>Edit</a> | <a href='delete.php?id=$penerbits_data[id]'>Delete</a></td></tr>";        
+        echo "<td><a class='btn btn-info mr-1' href='edit.php?id=$penerbits_data[id]'>Edit</a>  <a class='btn btn-danger ml-1' href='delete.php?id=$penerbits_data[id]'>Delete</a></td></tr>";        
     }
     ?>
     </table>
-</body>
-</html>
+</div>

@@ -1,15 +1,12 @@
-<html>
-<head>
-    <title>Add Buku</title>
-</head>
 <?php
 	include_once("../config.php");
+	include_once("../master/master.php");
     $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbits");
     $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarangs");
     $katalog = mysqli_query($mysqli, "SELECT * FROM katalogs");
 ?>
-<body>
-    <a href="index.php">Go to Home</a>
+<div class="container-fluid mt-3">
+    <a class="btn btn-primary mb-2" href="index.php">Go to Home</a>
     <br/><br/>
  
     <form action="add.php" method="post" name="form1">
@@ -72,7 +69,7 @@
 			</tr>
 			<tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
+				<td><input class="btn btn-info mt-2" type="submit" name="Submit" value="Add"></td>
 			</tr>
         </table>
     </form>
@@ -100,5 +97,4 @@
         echo "User added successfully. <a href='index.php'>View Users</a>";
     }
     ?>
-</body>
-</html>
+</div>

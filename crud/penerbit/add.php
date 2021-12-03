@@ -1,12 +1,9 @@
-<html>
-<head>
-    <title>Add Penerbit</title>
-</head>
 <?php
 	include_once("../config.php");
+	include_once("../master/master.php");
 ?>
-<body>
-    <a href="index.php">Go to Home</a>
+<div class="container-fluid mt-3">
+    <a class="btn btn-primary" href="index.php">Go to Home</a>
     <br/><br/>
  
     <form action="add.php" method="post" name="form1">
@@ -29,7 +26,7 @@
 			</tr>
             <tr> 
 				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
+				<td><input class="btn btn-info mt-2" type="submit" name="Submit" value="Add"></td>
 			</tr>
         </table>
     </form>
@@ -53,5 +50,4 @@
         echo "Penerbit added successfully. <a href='index.php'>View Penerbit</a>";
     }
     ?>
-</body>
-</html>
+</div>
