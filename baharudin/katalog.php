@@ -15,30 +15,56 @@
 </head>
 
 <body>
-    <center>
-        <a href="index.php">Buku</a> |
-        <a href="penerbit.php">Penerbit</a> |
-        <a href="pengarang.php">Pengarang</a> |
-        <a href="katalog.php">Katalog</a>
-        <hr>
-    </center>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.php">Perpustakaan</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <a href="crud/add_katalog.php">Add New Katalog</a><br/><br/>
- 
-    <table class="table" width='80%' border=1>
- 
-    <tr>
-        <th>Nama</th>
-    </tr>
-    <?php  
-        while($data_katalog = mysqli_fetch_array($katalog)) {         
-            echo "<tr>";
-            echo "<td>".$data_katalog['nama']."</td>";  
-            echo "<td><a class='btn btn-primary' href='crud/edit_katalog.php?id=$data_katalog[id]'>Edit</a> | 
-            <a class='btn btn-danger' href='crud/delete.php?id_katalog=$data_katalog[id]' onclick='return confirm(\"Delete?\")'>Delete</a>
-            </td></tr>";        
-        }
-    ?>
-    </table>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">Buku</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="penerbit.php">Penerbit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pengarang.php">Pengarang</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="katalog.php">Katalog</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col pt-4">
+                <a class="btn btn-success" href="crud/add_katalog.php">Add New Katalog</a><br/>
+
+                <table class="table table-striped table-bordered mt-3" width='80%' border=1>
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th>Nama</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <?php  
+                        while($data_katalog = mysqli_fetch_array($katalog)) {         
+                            echo "<tr>";
+                            echo "<td>".$data_katalog['nama']."</td>";  
+                            echo "<td><a class='btn btn-info' href='crud/edit_katalog.php?id=$data_katalog[id]'>Edit</a> | 
+                            <a class='btn btn-danger' href='crud/delete.php?id_katalog=$data_katalog[id]' onclick='return confirm(\"Delete?\")'>Delete</a>
+                            </td></tr>";        
+                        }
+                    ?>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

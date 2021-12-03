@@ -15,36 +15,62 @@
 </head>
 
 <body>
-    <center>
-        <a href="index.php">Buku</a> |
-        <a href="penerbit.php">Penerbit</a> |
-        <a href="pengarang.php">Pengarang</a> |
-        <a href="katalog.php">Katalog</a>
-        <hr>
-    </center>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.php">Perpustakaan</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <a href="crud/add_pengarang.php">Add New Pengarang</a><br/><br/>
- 
-    <table class="table" width='80%' border=1>
- 
-    <tr>
-        <th>Nama Pengarang</th> 
-        <th>Email</th> 
-        <th>Telepon</th> 
-        <th>Alamat</th>
-    </tr>
-    <?php  
-        while($data_pengarang = mysqli_fetch_array($pengarang)) {         
-            echo "<tr>";
-            echo "<td>".$data_pengarang['nama_pengarang']."</td>";
-            echo "<td>".$data_pengarang['email']."</td>";
-            echo "<td>".$data_pengarang['telp']."</td>";    
-            echo "<td>".$data_pengarang['alamat']."</td>";
-            echo "<td><a class='btn btn-primary' href='crud/edit_pengarang.php?id=$data_pengarang[id]'>Edit</a> | 
-            <a class='btn btn-danger' href='crud/delete.php?id_pengarang=$data_pengarang[id]' onclick='return confirm(\"Delete?\")'>Delete</a>
-            </td></tr>";        
-        }
-    ?>
-    </table>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">Buku</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="penerbit.php">Penerbit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pengarang.php">Pengarang</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="katalog.php">Katalog</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col pt-4">
+                <a class="btn btn-success" href="crud/add_pengarang.php">Add New Pengarang</a><br/>
+
+                <table class="table table-striped table-bordered mt-3" width='80%' border=1>
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th>Nama Pengarang</th> 
+                            <th>Email</th> 
+                            <th>Telepon</th> 
+                            <th>Alamat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <?php  
+                        while($data_pengarang = mysqli_fetch_array($pengarang)) {         
+                            echo "<tr>";
+                            echo "<td>".$data_pengarang['nama_pengarang']."</td>";
+                            echo "<td>".$data_pengarang['email']."</td>";
+                            echo "<td>".$data_pengarang['telp']."</td>";    
+                            echo "<td>".$data_pengarang['alamat']."</td>";
+                            echo "<td><a class='btn btn-info' href='crud/edit_pengarang.php?id=$data_pengarang[id]'>Edit</a> | 
+                            <a class='btn btn-danger' href='crud/delete.php?id_pengarang=$data_pengarang[id]' onclick='return confirm(\"Delete?\")'>Delete</a>
+                            </td></tr>";        
+                        }
+                    ?>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
