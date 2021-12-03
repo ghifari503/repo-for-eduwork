@@ -1,0 +1,5 @@
+1. UPDATE `obat` SET `nama_obat` = 'pikangsuang dewasa' WHERE `id_obat` = '2';
+2. DELETE FROM `transaksi` WHERE id_transaksi = '1';
+3. UPDATE `transaksi` SET jumlah_transaksi = '20000' WHERE `id_obat` = '10';
+4. DELETE FROM `transaksi` WHERE `id_transaksi` = '2';
+5. UPDATE `pasien` SET `nama_pasien` = 'widodo cahyono putro' WHERE `id_pasien` = '1';
