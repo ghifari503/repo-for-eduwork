@@ -1,0 +1,5 @@
+1. SELECT nama_pasien, tgl_lahir, alamat, pasien.id_pasien FROM `pasien` JOIN transaksi ON pasien.id_pasien = transaksi.id_pasien ORDER BY nama_pasien ASC;
+2. SELECT nama_pasien, tgl_lahir, alamat, pasien.id_pasien FROM `pasien` JOIN transaksi ON pasien.id_pasien = transaksi.id_pasien WHERE alamat LIKE '%salak%' ORDER BY nama_pasien ASC;
+3. SELECT nama_pasien, tgl_lahir, alamat, pasien.id_pasien FROM `pasien` LEFT JOIN transaksi ON pasien.id_pasien = transaksi.id_pasien WHERE alamat LIKE '%kono%' ORDER BY nama_pasien ASC;
+4. SELECT nama_pasien, tgl_lahir, alamat, pasien.id_pasien FROM `pasien` RIGHT JOIN transaksi ON pasien.id_pasien = transaksi.id_pasien WHERE alamat LIKE '%kono%' ORDER BY nama_pasien ASC;
+5. SELECT nama_pasien, tgl_lahir, alamat, pasien.id_pasien FROM `pasien` LEFT JOIN transaksi ON pasien.id_pasien = transaksi.id_pasien ORDER BY id_pasien ASC;
