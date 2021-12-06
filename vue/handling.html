@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+</head>
+<body>
+    <h3>Contoh 1</h3>
+    <div id="example-1">
+        <button v-on:click="counter += 2">Tambah 2</button>
+        <p>Tombol diatas telah diklik {{ counter }} kali.</p>
+    </div>
+    <br>
+    <h3>Contoh 2</h3>
+    <div id="example-2">
+        <button v-on:click="greet">Greet</button>
+    </div>
+    <br>
+    <h3>Contoh 3</h3>
+    <div id="example-3">
+        <button v-on:click="say('hi')">Say hi</button>
+        <button v-on:click="say('what')">Say what</button>
+    </div>
+    <br>
+    <h3>Contoh 4</h3>
+    <div id="example-4">
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+        </button> 
+    </div>
+    <br>
+    
+    <div id="example-5">
+    <h3>Contoh 5</h3>
+    <p v-on:click="peringatan('Yang anda klik adalah contoh kalimat!', $event)">
+        Ini adalah contoh kalimat, karena yang buat tidak bisa buat kalimat!
+    </p>
+    <p v-on:click.once="gabut('Gabut ya anda, klik-klik!!!', $event)">
+        Daripada anda gabut mending klik tombol dibawah ini! karena kalimat ini cuma bisa di klik sekali.
+    </p>
+    <button v-on:click.stop="kliked"> Klik </button>
+    </div>
+    <br>
+
+    <div id="example-6">
+        <h3>Contoh 6</h3>
+        <p>
+            Input apa aja didalam form, kalau sudah ENTER aja, karena nggak ada tombol submit. 
+        </p>
+        <input type="text" id="masuk" v-on:keyup.enter="submit">
+    </div>
+    <br><br>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var example1 = new Vue({
+    el: '#example-1',
+    data: {
+        counter: 0
+    }
+    });
+
+    var example2 = new Vue({
+    el: '#example-2',
+    data: {
+        name: 'Vue.js'
+    },
+    // define methods under the `methods` object
+    methods: {
+        greet: function (event) {
+        // `this` inside methods points to the Vue instance
+        alert('Hello ' + this.name + '!')
+        // `event` is the native DOM event
+        if (event) {
+            alert(event.target.tagName)
+        }
+        }
+    }
+    });
+
+    new Vue({
+    el: '#example-3',
+    methods: {
+        say: function (message) {
+        alert(message)
+        }
+    }
+    });
+
+    new Vue({
+    el: '#example-4',
+    methods: {
+    warn: function (message, event) {
+        // now we have access to the native event
+        if (event) {
+        event.preventDefault()
+        }
+        alert(message)
+    }
+    }
+    });
+
+    new Vue({
+        el: '#example-5',
+        methods: {
+        peringatan: function (message, event) {
+            // now we have access to the native event
+            if (event) {
+            event.preventDefault()
+            }
+            alert(message)
+        },
+        gabut: function (message, event) {
+            // now we have access to the native event
+            if (event) {
+            event.preventDefault()
+            }
+            alert(message)
+        },
+        kliked() {
+            alert("anda telah mengklik tombol!")
+        }
+        }
+    });
+
+    new Vue({
+    el: '#example-6',
+    methods: {
+    submit: function () {
+        alert("Anda telah berhasil menginput!");
+    }
+    }
+    });
+</script>
+</body>
+</html>
