@@ -45,11 +45,61 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <!-- Nav Item - Home -->
+            <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Home</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Catalog -->
+            <li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('catalog') }}">
+                    <i class="fas fa-fw fa-book-open"></i>
+                    <span>Catalog</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Publisher -->
+            <li class="nav-item {{ request()->is('publisher') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('publisher') }}">
+                    <i class="fas fa-fw fa-building"></i>
+                    <span>Publisher</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Author -->
+            <li class="nav-item {{ request()->is('author') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('author') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Author</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Book -->
+            <li class="nav-item {{ request()->is('book') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('book') }}">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Book</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Member -->
+            <li class="nav-item {{ request()->is('member') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('member') }}">
+                    <i class="fas fa-fw fa-user-friends"></i>
+                    <span>Member</span></a>
             </li>
 
             <!-- Divider -->
@@ -131,8 +181,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@yield('page-heading')</h1>
+                    </div>
 
-                   @yield('content')      
+                    @yield('content')
 
                 </div>
                 <!-- /.container-fluid -->

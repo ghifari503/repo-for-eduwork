@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PublisherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +25,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/catalog', [CatalogController::class, 'index']);
+Route::get('/publisher', [PublisherController::class, 'index']);
+Route::get('/author', [AuthorController::class, 'index']);
+Route::get('/book', [BookController::class, 'index']);
+Route::get('/member', [MemberController::class, 'index']);
