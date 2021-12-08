@@ -10,6 +10,8 @@ class Catalog extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     /**
      * Get all of the books for the Catalog
      *
