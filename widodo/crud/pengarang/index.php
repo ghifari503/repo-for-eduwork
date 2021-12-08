@@ -1,29 +1,14 @@
 <?php
 include_once("../connect.php");
+include_once("../layout/header.php");
 $pengarang = mysqli_query($conn, "SELECT * FROM pengarangs")
 
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Homa Page</title>
-</head>
-<body>
-    <center>
-        <a href="../buku/index.php">Buku</a>
-        <a href="../penerbit/index.php">Penerbit</a>
-        <a href="../pengarang/index.php">Pengarang</a>
-        <a href="../katalog/index.php">Katalog</a>
-        <hr>
-    </center>
-
-    <a href="add.php">Add New Penerbit</a>
-
-    <table width="80%" border="1">
+    <a href="add.php" class="btn btn-info">Add New Penerbit</a>
+    <br>
+    <table width="80%" class="table table-striped">
+        <br>
         <tr>
             <th>Id</th>
             <th>Nama Pengarang</th>
@@ -41,11 +26,12 @@ $pengarang = mysqli_query($conn, "SELECT * FROM pengarangs")
                 echo "<td>".$karang['email']."</td>";
                 echo "<td>".$karang['telp']."</td>";
                 echo "<td>".$karang['alamat']."</td>";
-                echo "<td><a href='edit.php?id=$karang[id]'>Edit</a> 
-                | <a href='delete.php?id=$karang[id]'>Delete</a></td></tr>";
+                echo "<td><a href='edit.php?id=$karang[id]' class='badge badge-warning'>Edit</a> 
+                <a href='delete.php?id=$karang[id]' class='badge badge-danger'>Delete</a></td></tr>";
             }
 
         ?>
     </table>
+    </div>
 </body>
 </html>

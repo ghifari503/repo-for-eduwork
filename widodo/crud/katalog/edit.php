@@ -1,5 +1,6 @@
 <?php
 	include_once("../connect.php");
+    include_once("../layout/header.php");
 	$id = $_GET['id'];
     $katalog = mysqli_query($conn, "SELECT * FROM katalogs WHERE id ='$id'");
 
@@ -17,11 +18,11 @@
         <table width="25%" border="0">
 			<tr> 
 				<td>ID</td>
-				<td><input type="text" name="nama_penerbit" value="<?php echo $id; ?>" readonly></td>
+				<td><input type="text" name="nama_penerbit" class="form-control" value="<?php echo $id; ?>" readonly></td>
 			</tr>
 			<tr> 
 				<td>Nama Katalog</td>
-				<td><input type="text" name="nama" value="<?php echo $nama_katalog; ?>"></td>
+				<td><input type="text" name="nama" class="form-control" value="<?php echo $nama_katalog; ?>"></td>
 			</tr>
 			<tr> 
 				<td></td>

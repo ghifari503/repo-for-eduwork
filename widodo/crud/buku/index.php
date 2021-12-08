@@ -1,5 +1,6 @@
 <?php
 include_once("../connect.php");
+include_once("../layout/header.php");
 $buku = mysqli_query($conn, "SELECT bukus.*, pengarangs.nama_pengarang, penerbits.nama_penerbit, katalogs.nama AS katalog FROM bukus 
 JOIN pengarangs ON bukus.id_pengarang = pengarangs.id
 JOIN penerbits on bukus.id_penerbit = penerbits.id 
@@ -9,25 +10,10 @@ ORDER BY bukus.id ASC ")
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Homa Page</title>
-</head>
-<body>
-    <center>
-        <a href="../buku/index.php">Buku</a>
-        <a href="../penerbit/index.php">Penerbit</a>
-        <a href="../pengarang/index.php">Pengarang</a>
-        <a href="../katalog/index.php">Katalog</a>  
-        <hr>
-    </center>
-
-    <a href="add.php">Add new book</a>
-
-    <table width="80%" border="1">
+    <a href="add.php" class="btn btn-info">Add new book</a>
+    <br>
+    <table class="table table-striped" width="80%">
+        <br>
         <tr>
             <th>ISBN</th>
             <th>Judul</th>
@@ -51,11 +37,12 @@ ORDER BY bukus.id ASC ")
                 echo "<td>".$buku_data['katalog']."</td>";
                 echo "<td>".$buku_data['qty_stok']."</td>";
                 echo "<td>".$buku_data['harga_pinjam']."</td>";
-                echo "<td><a href='edit.php?isbn=$buku_data[isbn]'>Edit</a> 
-                | <a href='delete.php?isbn=$buku_data[isbn]' onclick='return confirm('Are you sure want to delete this record?');'>Delete</a></td></tr>";
+                echo "<td><a href='edit.php?isbn=$buku_data[isbn]' class='badge badge-warning'>Edit</a> 
+                 <a href='delete.php?isbn=$buku_data[isbn]' class='badge badge-danger'>Delete</a></td></tr>";
             }
 
         ?>
     </table>
+    </div>
 </body>
 </html>

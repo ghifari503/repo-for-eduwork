@@ -1,29 +1,13 @@
 <?php
 include_once("../connect.php");
+include_once("../layout/header.php");
 $katalog = mysqli_query($conn, "SELECT * FROM katalogs")
 
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Homa Page</title>
-</head>
-<body>
-    <center>
-        <a href="../buku/index.php">Buku</a>
-        <a href="../penerbit/index.php">Penerbit</a>
-        <a href="../pengarang/index.php">Pengarang</a>
-        <a href="../katalog/index.php">Katalog</a>
-        <hr>
-    </center>
-
-    <a href="add.php">Add New Penerbit</a>
-
-    <table width="80%" border="1">
+    <a href="add.php" class="btn btn-info">Add New Penerbit</a>
+    <br>
+    <table width="80%" class="table table-striped">
+        <br>
         <tr>
             <th>Id</th>
             <th>Katalog</th>
@@ -35,11 +19,12 @@ $katalog = mysqli_query($conn, "SELECT * FROM katalogs")
                 echo "<tr>";
                 echo "<td>".$katalog_data['id']."</td>";
                 echo "<td>".$katalog_data['nama']."</td>";
-                echo "<td><a href='edit.php?id=$katalog_data[id]'>Edit</a> 
-                | <a href='delete.php?id=$katalog_data[id]'>Delete</a></td></tr>";
+                echo "<td><a href='edit.php?id=$katalog_data[id]' class='btn btn-warning'>Edit</a> 
+                 <a href='delete.php?id=$katalog_data[id]' class='btn btn-danger'>Delete</a></td></tr>";
             }
 
         ?>
     </table>
+    </div>
 </body>
 </html>

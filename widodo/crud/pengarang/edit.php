@@ -1,5 +1,6 @@
 <?php
 	include_once("../connect.php");
+	include_once("../layout/header.php");
 	$id = $_GET['id'];
     $pengarang = mysqli_query($conn, "SELECT * FROM pengarangs WHERE id ='$id'");
 
@@ -19,23 +20,23 @@
         <table width="25%" border="0">
 			<tr> 
 				<td>ID</td>
-				<td><input type="text" name="id" value="<?php echo $id; ?>" readonly></td>
+				<td><input type="text" name="id" value="<?php echo $id; ?>" class="form-control" readonly></td>
 			</tr>
 			<tr> 
 				<td>Nama Pengarang</td>
-				<td><input type="text" name="nama_pengarang" value="<?php echo $nama_pengarang; ?>"></td>
+				<td><input type="text" name="nama_pengarang" class="form-control" value="<?php echo $nama_pengarang; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="text" name="email" value="<?php echo $email; ?>"></td>
+				<td><input type="text" name="email" class="form-control" value="<?php echo $email; ?>"></td>
 			</tr>
 			<tr> 
 				<td>telp</td>
-				<td><input type="text" name="telp" value="<?php echo $telp; ?>"></td>
+				<td><input type="text" name="telp" class="form-control" value="<?php echo $telp; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Alamat</td>
-				<td><input type="text" name="alamat" value="<?php echo $alamat; ?>"></td>
+				<td><input type="text" name="alamat" class="form-control" value="<?php echo $alamat; ?>"></td>
 			</tr>
 			<tr> 
 				<td></td>

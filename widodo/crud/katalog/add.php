@@ -1,7 +1,9 @@
 <?php
 	include_once("../connect.php");
+    include_once("../layout/header.php");
     $katalog = mysqli_query($conn, "SELECT * FROM pengarangs");
 ?>
+
 <div class="container-fluid mt-3">
     <a class="btn btn-primary mb-2" href="index.php">Go to Home</a>
     <br/><br/>
@@ -10,7 +12,7 @@
         <table width="25%" border="0">
 			<tr> 
 				<td>Nama Katalog</td>
-				<td><input type="text" name="nama"></td>
+				<td><input type="text" class="form-control" name="nama"></td>
 			</tr>
 			<tr> 
 				<td></td>

@@ -1,5 +1,6 @@
 <?php
 	include_once("../connect.php");
+	include_once("../layout/header.php");
     $penerbit = mysqli_query($conn, "SELECT * FROM pengarangs");
 ?>
 <div class="container-fluid mt-3">
@@ -10,19 +11,19 @@
         <table width="25%" border="0">
 			<tr> 
 				<td>Nama Pengarang</td>
-				<td><input type="text" name="nama_pengarang"></td>
+				<td><input type="text" class="form-control" name="nama_pengarang"></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
-				<td><input type="text" name="email"></td>
+				<td><input type="text" class="form-control" name="email"></td>
 			</tr>
 			<tr> 
 				<td>telp</td>
-				<td><input type="text" name="telp"></td>
+				<td><input type="text" class="form-control" name="telp"></td>
 			</tr>
 			<tr> 
 				<td>Alamat</td>
-				<td><input type="text" name="alamat"></td>
+				<td><input type="text" class="form-control" name="alamat"></td>
 			</tr>
 			<tr> 
 				<td></td>

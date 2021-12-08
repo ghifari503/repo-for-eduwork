@@ -1,5 +1,6 @@
 <?php
 	include_once("../connect.php");
+	include_once("../layout/header.php");
     $penerbit = mysqli_query($conn, "SELECT * FROM penerbits");
     $pengarang = mysqli_query($conn, "SELECT * FROM pengarangs");
     $katalog = mysqli_query($conn, "SELECT * FROM katalogs");
@@ -12,15 +13,15 @@
         <table width="25%" border="0">
         <tr> 
 				<td>ISBN</td>
-				<td><input type="text" name="isbn"></td>
+				<td><input type="text" class="form-control" name="isbn"></td>
 			</tr>
 			<tr> 
 				<td>Judul</td>
-				<td><input type="text" name="judul"></td>
+				<td><input type="text" class="form-control" name="judul"></td>
 			</tr>
 			<tr> 
 				<td>Tahun</td>
-				<td><input type="text" name="tahun"></td>
+				<td><input type="text" class="form-control" name="tahun"></td>
 			</tr>
 			<tr> 
 				<td>Penerbit</td>
@@ -60,11 +61,11 @@
 			</tr>
 			<tr> 
 				<td>Qty Stok</td>
-				<td><input type="text" name="qty_stok"></td>
+				<td><input type="text" class="form-control" name="qty_stok"></td>
 			</tr>
 			<tr> 
 				<td>Harga Pinjam</td>
-				<td><input type="text" name="harga_pinjam"></td>
+				<td><input type="text" class="form-control" name="harga_pinjam"></td>
 			</tr>
 			<tr> 
 				<td></td>

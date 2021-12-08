@@ -1,5 +1,6 @@
 <?php
 	include_once("../connect.php");
+	include_once("../layout/header.php");
 	$isbn = $_GET['isbn'];
 
 	$buku = mysqli_query($conn, "SELECT * FROM bukus WHERE isbn='$isbn'");
@@ -28,15 +29,15 @@
 		<table width="25%" border="0">
 			<tr> 
 				<td>ISBN</td>
-				<td style="font-size: 11pt;"><?php echo $isbn; ?> </td>
+				<td style="font-size: 11pt;" class="form-control"><?php echo $isbn; ?> </td>
 			</tr>
 			<tr> 
 				<td>Judul</td>
-				<td><input type="text" name="judul" value="<?php echo $judul; ?>"></td>
+				<td><input type="text" name="judul" class="form-control" value="<?php echo $judul; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Tahun</td>
-				<td><input type="text" name="tahun" value="<?php echo $tahun; ?>"></td>
+				<td><input type="text" name="tahun" class="form-control" value="<?php echo $tahun; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Penerbit</td>
@@ -76,11 +77,11 @@
 			</tr>
 			<tr> 
 				<td>Qty Stok</td>
-				<td><input type="text" name="qty_stok" value="<?php echo $qty_stok; ?>"></td>
+				<td><input type="text" name="qty_stok" class="form-control" value="<?php echo $qty_stok; ?>"></td>
 			</tr>
 			<tr> 
 				<td>Harga Pinjam</td>
-				<td><input type="text" name="harga_pinjam" value="<?php echo $harga_pinjam; ?>"></td>
+				<td><input type="text" name="harga_pinjam" class="form-control" value="<?php echo $harga_pinjam; ?>"></td>
 			</tr>
 			<tr> 
 				<td></td>
