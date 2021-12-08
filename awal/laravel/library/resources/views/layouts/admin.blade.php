@@ -55,39 +55,9 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Catalog -->
-            <li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('catalog') }}">
-                    <i class="fas fa-fw fa-book-open"></i>
-                    <span>Catalog</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Publisher -->
-            <li class="nav-item {{ request()->is('publisher') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('publisher') }}">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>Publisher</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Author -->
-            <li class="nav-item {{ request()->is('author') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('author') }}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Author</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Nav Item - Book -->
-            <li class="nav-item {{ request()->is('book') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('book') }}">
+            <li class="nav-item {{ request()->is('books') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('books') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Book</span></a>
             </li>
@@ -96,10 +66,40 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Member -->
-            <li class="nav-item {{ request()->is('member') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('member') }}">
+            <li class="nav-item {{ request()->is('members') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('members') }}">
                     <i class="fas fa-fw fa-user-friends"></i>
                     <span>Member</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Publisher -->
+            <li class="nav-item {{ request()->is('publishers') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('publishers') }}">
+                    <i class="fas fa-fw fa-building"></i>
+                    <span>Publisher</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+             <!-- Nav Item - Author -->
+            <li class="nav-item {{ request()->is('authors') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('authors') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Author</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+             <!-- Nav Item - Catalog -->
+            <li class="nav-item {{ request()->is('catalogs') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('catalogs') }}">
+                    <i class="fas fa-fw fa-book-open"></i>
+                    <span>Catalog</span></a>
             </li>
 
             <!-- Divider -->
@@ -183,7 +183,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">@yield('page-heading')</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data @yield('page-heading')</h1>
                     </div>
 
                     @yield('content')
