@@ -36,3 +36,5 @@ Route::post('/catalogs', [CatalogController::class, 'store']);
 Route::get('/catalogs/{catalog}/edit', [CatalogController::class, 'edit']);
 Route::put('/catalogs/{catalog}', [CatalogController::class, 'update']);
 Route::delete('/catalogs/{catalog}', [CatalogController::class, 'destroy']);
+
+Route::resource('publishers', PublisherController::class);

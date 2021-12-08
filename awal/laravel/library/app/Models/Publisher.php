@@ -10,6 +10,8 @@ class Publisher extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'email', 'phone_number', 'address'];
+
     /**
      * Get all of the books for the Publisher
      *
