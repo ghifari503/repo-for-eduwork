@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('header', 'Dashboard')
+@section('header', 'Member')
 
 @section('content')
-
+    ini halaman Member
 @endsection
