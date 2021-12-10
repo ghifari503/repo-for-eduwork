@@ -152,6 +152,30 @@
             </a>
           </li>
           <li class="nav-item menu-open">
+            <a href="{{ url('transaction') }}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-handshake"></i>
+              <p>
+                Transaction
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Book
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Member
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
             <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
               <i class="nav-icon fas fa-newspaper"></i>
               <p>
@@ -172,22 +196,6 @@
               <i class="nav-icon fas fa-address-card"></i>
               <p>
                 Author
-              </p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Book
-              </p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Member
               </p>
             </a>
           </li>
