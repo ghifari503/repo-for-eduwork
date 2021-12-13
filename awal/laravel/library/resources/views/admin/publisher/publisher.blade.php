@@ -3,6 +3,11 @@
 @section('title', 'Publisher')
 @section('page-heading', 'Data Publisher')
 
+@section('css')
+<!-- Custom styles for this page -->
+<link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div id="publisher">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -11,7 +16,7 @@
 
     @if ($publishers->isNotEmpty())
         <div class="table-responsive">
-            <table class="table text-left">
+            <table class="table text-left" id="dataTable">
                 <thead class="bg-primary text-white">
                     <tr>
                         <th scope="col" width="5%">#</th>
@@ -89,6 +94,15 @@
 @endsection
 
 @section('js')
+<!-- Page level plugins -->
+<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    // Call the dataTables jQuery plugin
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
 <script>
     var app = new Vue({
         el: '#publisher',
