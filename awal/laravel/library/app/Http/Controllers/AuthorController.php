@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AuthorController extends Controller
 {
@@ -24,7 +25,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('admin.author.index', ['authors' => Author::with('books')->get()]);
+        return view('admin.author.author', ['authors' => Author::with('books')->get()]);
     }
 
     /**
@@ -45,7 +46,16 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|max:64',
+            'email' => 'required|email|unique:authors,email|max:64',
+            'phone_number' => 'required|max:14',
+            'address' => 'required',
+        ]);
+
+        Author::create($attributes);
+
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -79,7 +89,16 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|max:64',
+            'email' => ['required', 'max:64', Rule::unique('authors', 'email')->ignore($author)],
+            'phone_number' => 'required|max:14',
+            'address' => 'required',
+        ]);
+
+        $author->update($attributes);
+
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -90,6 +109,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+
+        return redirect()->route('authors.index');
     }
 }
