@@ -5,7 +5,6 @@
 
 @section('content')
 <div id="author">
-    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <button @click.prevent="addAuthor" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Author</button>
     </div>
