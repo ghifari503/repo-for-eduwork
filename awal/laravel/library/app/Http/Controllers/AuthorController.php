@@ -18,6 +18,11 @@ class AuthorController extends Controller
         $this->middleware('auth');
     }
 
+    public function api()
+    {
+        return datatables()->of(Author::all())->addIndexColumn()->make(true);
+    }
+
     /**
      * Display a listing of the resource.
      *

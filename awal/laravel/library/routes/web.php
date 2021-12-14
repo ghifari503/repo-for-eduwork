@@ -37,4 +37,6 @@ Route::put('/catalogs/{catalog}', [CatalogController::class, 'update']);
 Route::delete('/catalogs/{catalog}', [CatalogController::class, 'destroy']);
 
 Route::resource('authors', AuthorController::class);
+Route::get('/api/authors', [AuthorController::class, 'api']);
+
 Route::resource('publishers', PublisherController::class);
