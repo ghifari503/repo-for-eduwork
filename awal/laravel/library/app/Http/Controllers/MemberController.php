@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
@@ -24,7 +25,19 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
+        return view('admin.member.member', ['members' => Member::all()]);
+    }
+
+    public function api()
+    {
+        return datatables()->of(Member::all())->addIndexColumn()
+            ->addColumn('showGenderName', function($data) {
+                if($data->gender == 'M'){
+                    return 'Male';
+                }else{
+                    return 'Female';
+                }
+            })->make(true);
     }
 
     /**
@@ -45,7 +58,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|max:64',
+            'gender' => 'required',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+            'email' => 'required|email|unique:members,email|max:64',
+        ]);
+
+        Member::create($attributes);
+
+        return redirect()->route('members.index');
     }
 
     /**
@@ -79,7 +102,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|max:64',
+            'gender' => 'required',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+            'email' => ['required', 'max:64', Rule::unique('members', 'email')->ignore($member)],
+        ]);
+
+        $member->update($attributes);
+
+        return redirect()->route('members.index');
     }
 
     /**
@@ -90,6 +123,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect()->route('members.index');
     }
 }
