@@ -28,8 +28,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
-Route::get('/publisher', [PublisherController::class, 'index'])->name('publisher');
-Route::get('/author', [AuthorController::class, 'index'])->name('author');
-Route::get('/book', [BookController::class, 'index'])->name('book');
-Route::get('/member', [MemberController::class, 'index'])->name('member');
+Route::get('/catalogs', [CatalogController::class, 'index'])->name('catalogs');
+Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers');
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+Route::get('/books', [BookController::class, 'index'])->name('books');
+Route::get('/members', [MemberController::class, 'index'])->name('members');
