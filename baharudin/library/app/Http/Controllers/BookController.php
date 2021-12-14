@@ -15,12 +15,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        
-        $books = Book::with('publisher', 'transactionDetails')->get();
-
-        return $books;
         return view('admin.book.index');
-        
+
+        // $books = Book::with('publisher', 'transactionDetails')->get();
+
+        // return $books;
     }
 
     /**

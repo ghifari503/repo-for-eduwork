@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return view('home');
+        return view('home');
 
         // Query builder task
         // Query 1

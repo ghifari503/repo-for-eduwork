@@ -3,24 +3,11 @@
 @section('header', 'Catalog')
 
 @section('content')
-	<?php
-		$servername = "localhost";
-		$database = "library";
-		$username = "root";
-		$password = "";
-
-		// Create connection
-		$conn = mysqli_connect($servername, $username, $password, $database);
-
-		// Catalog
-		$catalog = mysqli_query($conn, "SELECT * FROM catalogs");
-	?>
-
 	<div class="row">
-    	<div class="col-12">
+    	<div class="col-md-6">
            	<div class="card">
               	<div class="card-header">
-                	<h3 class="card-title">Responsive Hover Table</h3>
+                	<h3 class="card-title">Data Catalog</h3>
 
 	                <div class="card-tools">
 	                  	<div class="input-group input-group-sm" style="width: 150px;">
@@ -39,19 +26,22 @@
 	                <table class="table table-hover text-nowrap">
 		                <thead>
 		                    <tr>
-		                    	<th width="5%">ID</th>
-		                    	<th>Name</th>
+		                    	<th width="5%">#</th>
+		                    	<th class="text-center">Name</th>
+		                    	<th class="text-center">Total Books</th>
+		                    	<th class="text-center">Created At</th>
 		                    </tr>
 		                </thead>
-	                  	
-						<?php  
-					        while($catalog_data = mysqli_fetch_array($catalog)) {         
-					            echo "<tr>";
-					            echo "<td>".$catalog_data['id']."</td>";
-					            echo "<td>".$catalog_data['name']."</td>";  
-					            echo "</tr>";        
-					        }
-						?>
+		                <tbody>
+		                	@foreach($catalogs as $key => $catalog)
+		                	<tr>
+		                		<td>{{ $key + 1}}</td>
+		                		<td>{{ $catalog->name }}</td>
+		                		<td class="text-center">{{ count($catalog->books)}}</td>
+		                		<td class="text-center">{{ date('H:i:s - d M y', strtotime($catalog->created_at)) }}</td>
+		                	</tr>
+		                	@endforeach
+		                </tbody>
 	                </table>
               	</div>
           	<!-- /.card-body -->

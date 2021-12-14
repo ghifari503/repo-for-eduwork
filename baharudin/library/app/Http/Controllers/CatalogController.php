@@ -16,8 +16,8 @@ class CatalogController extends Controller
     {
         $catalogs = Catalog::with('books')->get();
 
-        return $catalogs;
-        return view('admin.catalog.index');
+        // return $catalogs;
+        return view('admin.catalog.index', compact('catalogs'));
     }
 
     /**
