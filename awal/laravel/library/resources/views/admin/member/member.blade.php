@@ -51,32 +51,32 @@
             </template>
             <div class="form-group">
                 <label for="name" class="col-form-label">Name:</label>
-                <input type="text" name="name" :value="member.name" class="form-control" id="name" required>
+                <input type="text" name="name" :value="member.name" class="form-control" id="name" required v-model="member.name">
             </div>
             <label>Gender:</label>
             <div class="form-check">
-               <input class="form-check-input" type="radio" name="gender" id="M" value="M" :checked="member.gender == 'M'">
+               <input class="form-check-input" type="radio" name="gender" id="M" value="M" :checked="member.gender == 'M'" required v-model="member.gender">
                <label class="form-check-label" for="M">
                   Male
                </label>
                </div>
                <div class="form-check">
-               <input class="form-check-input" type="radio" name="gender" id="F" value="F" :checked="member.gender == 'F'">
+               <input class="form-check-input" type="radio" name="gender" id="F" value="F" :checked="member.gender == 'F'" required v-model="member.gender">
                <label class="form-check-label" for="F">
                   Female
                </label>
             </div>
             <div class="form-group">
                 <label for="phone_number" class="col-form-label">Phone Number:</label>
-                <input type="text" name="phone_number" :value="member.phone_number" class="form-control" id="phone_number" required>
+                <input type="text" name="phone_number" :value="member.phone_number" class="form-control" id="phone_number" required v-model="member.phone_number">
             </div>
             <div class="form-group">
                 <label for="address" class="col-form-label">Address:</label>
-                <textarea class="form-control" name="address" :value="member.address" id="address" required></textarea>
+                <textarea class="form-control" name="address" :value="member.address" id="address" required v-model="member.address"></textarea>
             </div>
             <div class="form-group">
                <label for="email" class="col-form-label">Email:</label>
-               <input type="email" name="email" :value="member.email" class="form-control" id="email" required>
+               <input type="email" name="email" :value="member.email" class="form-control" id="email" required v-model="member.email">
            </div>
         </div>
         <div class="modal-footer">
@@ -144,6 +144,7 @@
                 })
             },
             addMember() {
+                $('input[name="gender"').prop('checked', false)
                 this.member = {}
                 this.editing = false
                 $('#memberModal').modal('show')
