@@ -28,6 +28,11 @@ class PublisherController extends Controller
         return view('admin.publisher.publisher', ['publishers' => Publisher::with('books')->get()]);
     }
 
+    public function api()
+    {
+        return datatables()->of(Publisher::all())->addIndexColumn()->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

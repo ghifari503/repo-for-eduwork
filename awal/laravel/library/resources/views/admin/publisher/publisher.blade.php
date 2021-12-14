@@ -9,42 +9,25 @@
 @endsection
 
 @section('content')
-<div id="publisher">
+<div id="controller">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <button @click.prevent="addPublisher" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Publisher</button>
     </div>
 
     @if ($publishers->isNotEmpty())
-        <div class="table-responsive">
-            <table class="table text-left" id="dataTable">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th scope="col" width="5%">#</th>
-                        <th scope="col">Publisher Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone Number</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Total Books</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($publishers as $key => $publisher)
-                        <tr>
-                            <th scope="row">{{ $key+1 }}</th>
-                            <td>{{ $publisher->name }}</td>
-                            <td>{{ $publisher->email }}</td>
-                            <td>{{ $publisher->phone_number }}</td>
-                            <td>{{ $publisher->address }}</td>
-                            <td>{{ $publisher->books->count() }}</td>
-                            <td><button @click.prevent="editPublisher({{ $publisher }})" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></button></td>
-                            <td><button @click.prevent="deletePublisher({{ $publisher }})" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-trash fa-sm text-white-50"></i></button></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <table class="table text-left" id="dataTable" style="width:100%">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th scope="col" width="5%">#</th>
+                    <th scope="col">Publisher Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+        </table>
     @else
         <div class="alert alert-primary" role="alert">
             There is no publisher.
@@ -59,7 +42,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form :action="actionUrl" method="post">
+        <form @submit.prevent="handleSubmit($event, publisher.id)" :action="actionUrl" method="post">
         <div class="modal-body">
             @csrf
             <template v-if="editing">
@@ -98,40 +81,81 @@
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
-    // Call the dataTables jQuery plugin
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
-</script>
-<script>
-    var app = new Vue({
-        el: '#publisher',
+    const columns = [
+        {data: 'DT_RowIndex', orderable: true},
+        {data: 'name', orderable: true},
+        {data: 'email', orderable: false},
+        {data: 'phone_number', orderable: false},
+        {data: 'address', orderable: false},
+        {render: function (index, row, data, meta) {
+            return `
+                <button onclick="controller.editPublisher(event, ${meta.row})" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></button>
+            `
+        }, orderable: false},
+        {render: function (index, row, data, meta) {
+            return `
+                <button onclick="controller.deletePublisher(event, ${meta.row}, ${data.id})" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-trash fa-sm text-white-50"></i></button>
+            `
+        }, orderable: false, class: 'text-center'}
+    ]
+
+    var controller = new Vue({
+        el: '#controller',
         data: {
+            publishers: [],
             publisher: {},
-            actionUrl: '{{ route('publishers.store') }}',
+            actionUrl: '{{ url('publishers') }}',
+            apiUrl: '{{ url('api/publishers') }}',
             editing: false
         },
+        mounted() {
+            this.getResults()
+        },
         methods: {
+            getResults() {
+                const _this = this
+                _this.table = $('#dataTable').DataTable({
+                    "scrollX": true,
+                    processing: true,
+                    serverSide: true,
+                    destroy: true,
+                    ajax: {
+                        url: _this.apiUrl,
+                        type: 'get'
+                    },
+                    columns
+                }).on('xhr', function () {
+                    _this.publishers = _this.table.ajax.json().data
+                })
+            },
             addPublisher() {
                 this.publisher = {}
                 this.editing = false
                 $('#publisherModal').modal('show')
             },
-            editPublisher(publisher) {
+            editPublisher(event, row) {
                 this.editing = true
-                this.publisher = publisher
-                this.actionUrl = '{{ url('publishers') }}' + '/' + publisher.id
+                this.publisher = this.publishers[row]
                 $('#publisherModal').modal('show')
             },
-            deletePublisher(publisher) {
-                this.actionUrl = '{{ url('publishers') }}' + '/' + publisher.id
-                const publisherName = publisher.name
+            deletePublisher(event, row, id) {
+                this.actionUrl = '{{ url('publishers') }}' + '/' + id
+                const publisherName = this.publishers[row].name
                 if (confirm(`Are you sure want to delete this publisher with name ${publisherName}`)) {
                     axios.post(this.actionUrl, {_method: "delete"})
-                        .then(response => location.reload())
+                        .then(response => this.getResults())
                 }
+            },
+            handleSubmit(event, id) {
+                const _this = this
+                this.actionUrl = !this.editing ? '{{ url('publishers') }}' : '{{ url('publishers') }}' + '/' + id
+                axios.post(this.actionUrl, new FormData($(event.target)[0]))
+                    .then(response => {
+                        $('#publisherModal').modal('hide')
+                        _this.table.ajax.reload()
+                    })
             }
-        }
+        },
     })
 </script>
 @endsection
