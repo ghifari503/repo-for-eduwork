@@ -16,6 +16,7 @@ class Member extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Models\Transaction','id');
+        return $this->hasMany('App\Models\Transaction','member_id');
     }
+
 }
