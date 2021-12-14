@@ -25,7 +25,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/publishers', [PublisherController::class, 'index']);
 Route::get('/books', [BookController::class, 'index']);
 
 Route::get('/catalogs', [CatalogController::class, 'index']);
