@@ -18,15 +18,6 @@
   <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
 </head>
 <body>
-  <div class="row" id="proBanner">
-    <div class="col-12">
-      <span class="d-flex align-items-center purchase-popup">
-        <p>Welcome home! Get some amazing article for blog go here.</p>
-        <a href="https://bootstrapdash.com/demo/polluxui/template/index.html?utm_source=organic&utm_medium=banner&utm_campaign=free-preview" target="_blank" class="btn download-button purchase-button ml-auto">Go to Page</a>
-        <i class="typcn typcn-delete-outline" id="bannerClose"></i>
-      </span>
-    </div>
-  </div>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     @include('partials.navbar')
@@ -49,13 +40,13 @@
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item ml-0">
-            <h4 class="mb-0">Dashboard</h4>
+            <h4 class="mb-0">@yield('header')</h4>
           </li>
           <li class="nav-item">
             <div class="d-flex align-items-baseline">
-              <p class="mb-0">Home</p>
+              <p class="mb-0">@yield('header')</p>
               <i class="typcn typcn-chevron-right"></i>
-              <p class="mb-0">Main Dahboard</p>
+              <p class="mb-0">@yield('subheader')</p>
             </div>
           </li>
         </ul>

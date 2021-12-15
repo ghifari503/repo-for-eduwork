@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('header','Dashboard')
+@section('subheader','Index')
+
 
 @section('content')
 <div class="card">
