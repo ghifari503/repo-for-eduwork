@@ -176,14 +176,6 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-newspaper"></i>
-              <p>
-                Catalog
-              </p>
-            </a>
-          </li>
-          <li class="nav-item menu-open">
             <a href="{{ url('publishers') }}" class="nav-link {{ request()->is('publishers') ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
@@ -196,6 +188,14 @@
               <i class="nav-icon fas fa-address-card"></i>
               <p>
                 Author
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-newspaper"></i>
+              <p>
+                Catalog
               </p>
             </a>
           </li>
