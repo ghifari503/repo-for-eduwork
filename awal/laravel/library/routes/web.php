@@ -25,7 +25,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/books', [BookController::class, 'index']);
 
 Route::get('/catalogs', [CatalogController::class, 'index']);
 Route::get('/catalogs/create', [CatalogController::class, 'create']);
@@ -33,6 +32,9 @@ Route::post('/catalogs', [CatalogController::class, 'store']);
 Route::get('/catalogs/{catalog}/edit', [CatalogController::class, 'edit']);
 Route::put('/catalogs/{catalog}', [CatalogController::class, 'update']);
 Route::delete('/catalogs/{catalog}', [CatalogController::class, 'destroy']);
+
+Route::resource('books', BookController::class);
+Route::get('/api/books', [BookController::class, 'api']);
 
 Route::resource('members', MemberController::class);
 Route::get('/api/members', [MemberController::class, 'api']);

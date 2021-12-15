@@ -24,7 +24,12 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('admin.book.index');
+        return view('admin.book.book');
+    }
+
+    public function api()
+    {
+        return Book::all();
     }
 
     /**
