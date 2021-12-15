@@ -14,7 +14,8 @@ class DetailTransactionController extends Controller
      */
     public function index()
     {
-        //
+        $detail_transactions = DetailTransaction::with('transaction', 'book')->get();
+        return $detail_transactions;
     }
 
     /**

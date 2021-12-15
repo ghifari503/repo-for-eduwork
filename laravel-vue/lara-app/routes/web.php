@@ -25,4 +25,6 @@ Route::get('/book', [App\Http\Controllers\BookController::class, 'index'])->name
 Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
 Route::get('/publisher', [App\Http\Controllers\PublisherController::class, 'index'])->name('publisher');
 Route::get('/member', [App\Http\Controllers\MemberController::class, 'index'])->name('member');
+Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction');
+Route::get('/detail_transaction', [App\Http\Controllers\DetailTransactionController::class, 'index'])->name('detail_transaction');
 

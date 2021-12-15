@@ -14,7 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transaction = Transaction::with('detail_transaction', 'member')->get();
+        return $transaction;
     }
 
     /**
