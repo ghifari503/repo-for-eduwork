@@ -15,8 +15,7 @@ class CatalogController extends Controller
     public function index()
     {
         $catalogs = Catalog::with('books')->get();
-
-        // return $catalogs;
+        
         return view('admin.catalog.index', compact('catalogs'));
     }
 
@@ -39,7 +38,7 @@ class CatalogController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required'],
+            'name' => ['required', 'max:32'],
         ]);
 
         // $catalog = new Catalog;
@@ -83,7 +82,7 @@ class CatalogController extends Controller
     public function update(Request $request, Catalog $catalog)
     {
         $this->validate($request, [
-            'name'      => ['required'],
+            'name' => ['required', 'max:32'],
         ]);
 
         $catalog->update($request->all());
