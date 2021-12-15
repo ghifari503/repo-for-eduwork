@@ -186,7 +186,7 @@ class HomeController extends Controller
 
         $data20 = Member::whereMonth('created_at', 12)->get();
 
-        return $data20;
+        // return $data20;
         return view('home');
     }
 }
