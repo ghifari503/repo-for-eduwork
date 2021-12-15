@@ -11,6 +11,8 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     /**
      * Get the publisher that owns the Book
      *

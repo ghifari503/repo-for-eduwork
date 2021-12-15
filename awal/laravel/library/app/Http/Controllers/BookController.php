@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Catalog;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -24,7 +27,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('admin.book.book');
+        return view('admin.book.book', [
+            'publishers' => Publisher::select('id', 'name')->get(),
+            'authors' => Author::select('id', 'name')->get(),
+            'catalogs' => Catalog::select('id', 'name')->get()
+        ]);
     }
 
     public function api()
@@ -50,7 +57,20 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'isbn' => 'required|integer',
+            'title' => 'required|max:64',
+            'year' => 'required|digits:4|integer|min:1900|max:'.(date('Y')+1),
+            'publisher_id' => 'required|exists:App\Models\Publisher,id',
+            'author_id' => 'required|exists:App\Models\Author,id',
+            'catalog_id' => 'required|exists:App\Models\Catalog,id',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        Book::create($attributes);
+
+        return redirect()->route('books.index');
     }
 
     /**
@@ -84,7 +104,20 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $attributes = $request->validate([
+            'isbn' => 'required|integer',
+            'title' => 'required|max:64',
+            'year' => 'required|digits:4|integer|min:1900|max:'.(date('Y')+1),
+            'publisher_id' => 'required|exists:App\Models\Publisher,id',
+            'author_id' => 'required|exists:App\Models\Author,id',
+            'catalog_id' => 'required|exists:App\Models\Catalog,id',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        $book->update($attributes);
+
+        return redirect()->route('books.index');
     }
 
     /**
@@ -95,6 +128,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect()->route('books.index');
     }
 }
