@@ -195,7 +195,6 @@
                 }
             },
             handleSubmit(event, id) {
-                const _this = this
                 this.actionUrl = !this.editing ? '{{ url('books') }}' : '{{ url('books') }}' + '/' + id
                 axios.post(this.actionUrl, new FormData($(event.target)[0]))
                     .then(response => {
