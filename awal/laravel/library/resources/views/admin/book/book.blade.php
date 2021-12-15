@@ -26,7 +26,7 @@
 @section('content')
 <div id="controller">
     <div class="d-sm-flex align-items-center justify-content-around mb-4">
-        <button @click.prevent="addAuthor" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Book</button>
+        <button class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Book</button>
         <div class="form-group has-search" v-if="books.length">
             <span class="fas fa-search form-control-feedback"></span>
             <input v-model="search" type="text" class="form-control" placeholder="Search">
@@ -42,14 +42,14 @@
             </div>
         </div>
         <div v-else class="row d-flex justify-content-center mt-50 mb-50">
-            <div class="col-md-4 mt-2" v-for="book in filteredBooks" :key="book.id">
+            <div class="col-md-4 mt-2" v-for="(book, index) in filteredBooks" :key="book.id">
                 <div class="card">
                     <div class="card-body text-left">
                         <div class="mb-2">
                             <p class="font-weight-semibold mb-2">Title: @{{ book.title }}</p>
                         </div>
                         <p class="mb-0 font-weight-semibold">Stock: @{{ book.qty }}</p>
-                        <p class="mb-0 font-weight-semibold">Price: @{{ bookPriceWithFormatRupiah }}</p>
+                        <p class="mb-0 font-weight-semibold">Price: @{{ bookPriceWithFormatRupiah[index] }}</p>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,9 @@
         },
         computed: {
             bookPriceWithFormatRupiah() {
-                return `Rp. ${this.numberWithSpaces(this.books[0].price)} ,-`
+                return this.books.map(book => {
+                    return`Rp. ${this.numberWithSpaces(book.price)} ,-`
+                })
             },
             filteredBooks() {
                 return this.books.filter(book => {
