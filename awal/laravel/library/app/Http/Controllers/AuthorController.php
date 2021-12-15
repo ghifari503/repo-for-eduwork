@@ -20,7 +20,11 @@ class AuthorController extends Controller
 
     public function api()
     {
-        return datatables()->of(Author::all())->addIndexColumn()->make(true);
+        return datatables()->of(Author::all())
+            ->addIndexColumn()
+            ->addColumn('date_added', function($data) {
+                return convert_date($data->created_at);
+            })->make(true);
     }
 
     /**

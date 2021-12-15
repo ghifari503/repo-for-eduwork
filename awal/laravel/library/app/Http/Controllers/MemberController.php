@@ -37,6 +37,8 @@ class MemberController extends Controller
                 }else{
                     return 'Female';
                 }
+            })->addColumn('date_added', function($data) {
+                return convert_date($data->created_at);
             })->make(true);
     }
 

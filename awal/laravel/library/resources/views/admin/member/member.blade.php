@@ -24,6 +24,7 @@
                     <th scope="col">Phone Number</th>
                     <th scope="col">Address</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Created at</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -102,6 +103,7 @@
         {data: 'phone_number', orderable: false},
         {data: 'address', orderable: false},
         {data: 'email', orderable: false},
+        {data: 'date_added', orderable: false},
         {render: function (index, row, data, meta) {
             return `
                 <button onclick="controller.editMember(event, ${meta.row})" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></button>

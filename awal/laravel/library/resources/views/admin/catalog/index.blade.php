@@ -26,7 +26,7 @@
                         <th scope="row">{{ $key+1 }}</th>
                         <td class="text-left">{{ $catalog->name }}</td>
                         <td>{{ $catalog->books->count() }}</td>
-                        <td>{{ $catalog->created_at->format('d M Y - H:i:s') }}</td>
+                        <td>{{ convert_date($catalog->created_at) }}</td>
                         <td><a href="{{ url("catalogs/$catalog->id/edit") }}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></a></td>
                         <td>
                             <form action="{{ url("catalogs/$catalog->id") }}" method="post" onSubmit="return confirm('Are you sure want to delete this catalog with name {{ $catalog->name }}?')">
