@@ -14,7 +14,8 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        return view('admin.publisher.index');
+        $publishers = Publisher::with('books')->get();
+        return view('admin.publisher.index', compact('publishers'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.publisher.create');
     }
 
     /**
@@ -35,7 +36,23 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|',
+            'email' => 'required|unique:publishers,email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Publisher Name field is required',
+            'email.required' => 'The Email field is required',
+            'email.unique' => 'The Email has already been taken',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+            'address.required' => 'The Address field is required',
+        ]);
+
+        Publisher::create($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -57,7 +74,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -69,7 +86,23 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $request->validate([
+            'name' => 'required|',
+            'email' => 'required|unique:publishers,email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Publisher Name field is required',
+            'email.required' => 'The Email field is required',
+            'email.unique' => 'The Email has already been taken',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+            'address.required' => 'The Address field is required',
+        ]);
+
+        $publisher->update($request->all());
+
+        return redirect('publishers');
     }
 
     /**
@@ -80,6 +113,8 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+
+        return redirect('publishers');
     }
 }
