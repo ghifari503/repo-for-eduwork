@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class AuthorController extends Controller
     {
         $authors = Author::with('books')->get();
 
-        return view('admin.author.index', compact('authors'));
+        return view('admin.author', compact('authors'));
     }
 
     /**
@@ -37,7 +41,22 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|',
+            'email' => 'required|unique:authors,email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Author Name field is required',
+            'email.required' => 'The Email field is required',
+            'email.unique' => 'The Email has already been taken',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+        ]);
+
+        Author::create($request->all());
+
+        return redirect('authors');
     }
 
     /**
@@ -59,7 +78,6 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
     }
 
     /**
@@ -71,7 +89,22 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $request->validate([
+            'name' => 'required|',
+            'email' => 'required|unique:authors,email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Author Name field is required',
+            'email.required' => 'The Email field is required',
+            'email.unique' => 'The Email has already been taken',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+        ]);
+
+        $author->update($request->all());
+
+        return redirect('authors');
     }
 
     /**
@@ -82,6 +115,6 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
     }
 }

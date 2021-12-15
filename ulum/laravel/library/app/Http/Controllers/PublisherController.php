@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class PublisherController extends Controller
     public function index()
     {
         $publishers = Publisher::with('books')->get();
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher', compact('publishers'));
     }
 
     /**
@@ -25,7 +29,6 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
     }
 
     /**
@@ -47,7 +50,6 @@ class PublisherController extends Controller
             'email.unique' => 'The Email has already been taken',
             'phone_number.required' => 'The Phone Number field is required',
             'phone_number.max' => 'The Phone Number field max 15',
-            'address.required' => 'The Address field is required',
         ]);
 
         Publisher::create($request->all());
@@ -74,7 +76,6 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -97,7 +98,6 @@ class PublisherController extends Controller
             'email.unique' => 'The Email has already been taken',
             'phone_number.required' => 'The Phone Number field is required',
             'phone_number.max' => 'The Phone Number field max 15',
-            'address.required' => 'The Address field is required',
         ]);
 
         $publisher->update($request->all());
@@ -114,7 +114,5 @@ class PublisherController extends Controller
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();
-
-        return redirect('publishers');
     }
 }
