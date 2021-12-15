@@ -47,15 +47,16 @@
                                 {{ date('d M Y - H:i:s', strtotime($publisher->created_at)) }}
                             </td>
                             <td>
-                                <div>
-                                    <a href="{{ url('publishers/'.$publisher->id.'/edit') }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
-                                        <input type="submit" class="btn btn-danger btn-sm" value="Delete"
-                                            onclick="return confirm('masa iya?')">
-                                        @method('delete')
-                                        @csrf
-                                    </form>
+                              <div class="row">
+                                <a href="{{ url('publishers/'.$publisher->id.'/edit') }}"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                    &nbsp;
+                                <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
+                                    <input type="submit" class="btn btn-danger btn-sm" value="Delete"
+                                        onclick="return confirm('masa iya?')">
+                                    @method('delete')
+                                    @csrf
+                                </form>
                                 </div>
                             </td>
                         </tr>

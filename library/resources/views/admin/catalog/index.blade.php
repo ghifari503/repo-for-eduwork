@@ -41,16 +41,18 @@
                             <td>
                                 {{ date('d M Y - H:i:s', strtotime($catalog->created_at)) }}
                             </td>
-                            <td>
+                            <td> 
+                              <div class="row">
                                 <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}"
                                     class="btn btn-warning btn-sm">Edit</a>
-
+                                    &nbsp;
                                 <form action="{{ url('catalogs', ['id' => $catalog->id]) }}" method="post">
                                     <input type="submit" class="btn btn-danger btn-sm" value="Delete"
                                         onclick="return confirm('Are you sure?')">
                                     @method('delete')
                                     @csrf
                                 </form>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
