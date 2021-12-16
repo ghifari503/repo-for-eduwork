@@ -2,18 +2,21 @@
 @section('header', 'Author')
 
 @section('css')
-
+<!-- Datatables -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 
 @section('content')
 <div id="controller">
 	<div class="row">
-		<div class="col-10">
+		<div class="col-12">
 			<div class="card">
 				<div class="card-header">
 					<a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Author</a>
 
-                	<div class="card-tools">
+                	<!-- <div class="card-tools">
                   		<div class="input-group input-group-sm" style="width: 150px;">
                     		<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
@@ -23,11 +26,11 @@
                       			</button>
                     		</div>
                   		</div>
-                	</div>
+                	</div> -->
           		</div>
           		<!-- /.card-header -->
-	          	<div class="card-body table-responsive p-0">
-	                <table class="table table-hover">
+	          	<div class="card-body table-responsive">
+	                <table id="datatable" class="table table-hover table-bordered">
 		                <thead>
 		                    <tr>
 		                    	<th width="5%">#</th>
@@ -35,18 +38,18 @@
 		                    	<th class="text-center">Email</th>
 		                    	<th class="text-center">Phone Number</th>
 		                    	<th class="text-center">Address</th>
-		                    	<th class="text-right">Action</th>
+		                    	<th class="text-center">Action</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
 		                	@foreach($authors as $key => $author)
 		                	<tr>
-		                		<td>{{ $key + 1}}</td>
+		                		<td class="text-center">{{ $key + 1}}</td>
 		                		<td>{{ $author->name }}</td>
 		                		<td>{{ $author->email }}</td>
 		                		<td class="text-center">{{ $author->phone_number }}</td>
 		                		<td>{{ $author->address }}</td>
-		                		<td class="text-right">
+		                		<td class="text-center">
 		                			<a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
 		                			<a href="#" @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
 		                		</td>
@@ -105,39 +108,58 @@
 @endsection
 
 @section('js')
-	<script type="text/javascript">
-		var controller = new Vue ({
-			el: '#controller',
-			data: {
-				data : {},
-				actionUrl : '{{ url('authors') }}',
-				editStatus : false
-			},
-			mounted: function() {
+<!-- Datatables & Plugins -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script>
+  $(function () {
+    $('#datatable').DataTable();
+  });
+</script>
+<!-- CRUD Vue js -->
+<script type="text/javascript">
+	var controller = new Vue ({
+		el: '#controller',
+		data: {
+			data : {},
+			actionUrl : '{{ url('authors') }}',
+			editStatus : false
+		},
+		mounted: function() {
 
+		},
+		methods: {
+			addData() {
+				this.data = {};
+				this.actionUrl = '{{ url('authors') }}';
+				this.editStatus = false;
+				$('#modal-default').modal();
 			},
-			methods: {
-				addData() {
-					this.data = {};
-					this.actionUrl = '{{ url('authors') }}';
-					this.editStatus = false;
-					$('#modal-default').modal();
-				},
-				editData(data) {
-					this.data = data;
-					this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
-					this.editStatus = true;
-					$('#modal-default').modal();
-				},
-				deleteData(id) {
-					this.actionUrl = '{{ url('authors') }}'+'/'+id;
-					if (confirm("Are you sure?")) {
-						axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
-							location.reload();
-						});
-					}
+			editData(data) {
+				this.data = data;
+				this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
+				this.editStatus = true;
+				$('#modal-default').modal();
+			},
+			deleteData(id) {
+				this.actionUrl = '{{ url('authors') }}'+'/'+id;
+				if (confirm("Are you sure?")) {
+					axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
+						location.reload();
+					});
 				}
 			}
-		});
-	</script>
+		}
+	});
+</script>
 @endsection
