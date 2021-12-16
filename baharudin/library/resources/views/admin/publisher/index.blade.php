@@ -7,7 +7,7 @@
     	<div class="col-10">
            	<div class="card">
               	<div class="card-header">
-                	<a href="{{ url('publishers/create') }}" class="btn btn-sm btn-primary pull-right">Create New Publisher Data</a>
+                	<a href="{{ url('publishers/create') }}" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
 
 	                <div class="card-tools">
 	                  	<div class="input-group input-group-sm" style="width: 150px;">
