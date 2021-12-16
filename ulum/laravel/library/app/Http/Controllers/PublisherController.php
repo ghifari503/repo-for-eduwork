@@ -18,8 +18,15 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::with('books')->get();
-        return view('admin.publisher', compact('publishers'));
+        return view('admin.publisher');
+    }
+
+    public function api()
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -40,7 +47,7 @@ class PublisherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|',
+            'name' => 'required',
             'email' => 'required|unique:publishers,email',
             'phone_number' => 'required|max:15',
             'address' => 'required',
@@ -88,14 +95,13 @@ class PublisherController extends Controller
     public function update(Request $request, Publisher $publisher)
     {
         $request->validate([
-            'name' => 'required|',
-            'email' => 'required|unique:publishers,email',
+            'name' => 'required',
+            'email' => 'required',
             'phone_number' => 'required|max:15',
             'address' => 'required',
         ], [
             'name.required' => 'The Publisher Name field is required',
             'email.required' => 'The Email field is required',
-            'email.unique' => 'The Email has already been taken',
             'phone_number.required' => 'The Phone Number field is required',
             'phone_number.max' => 'The Phone Number field max 15',
         ]);

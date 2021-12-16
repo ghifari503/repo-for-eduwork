@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Publisher')
+@section('header', 'Aember')
 @section('css')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -11,15 +11,16 @@
         <div class="card">
             <div class="card-header">
                 <button @click="addData()" class="btn btn-primary pull-right">Create New
-                    Publisher</button>
+                    Member</button>
             </div>
             <div class="card-body">
-                <table class="table table-striped table-bordered" id="publisherTable">
+                <table class="table table-striped table-bordered" id="memberTable">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Gender</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Action</th>
@@ -36,7 +37,7 @@
                 <form :action="actionUrl" method="POST" @submit="submitForm($event, data.id)">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" v-text="info + ' publisher'"></h5>
+                            <h5 class="modal-title" v-text="info + ' Member'"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -46,7 +47,7 @@
 
                             <input type="hidden" name="_method" value="PUT" v-if="editStatus" />
 
-                            <label for="name">Publisher Name : </label>
+                            <label for="name">Member Name : </label>
                             <input type="text" name="name" id="name"
                                 class="form-control @error('name') is-invalid @enderror" :value="data.name" required />
                             @error('name')
@@ -63,6 +64,19 @@
                                     <small>{{ $message }}</small>
                                 </div>
                             @enderror
+
+                            <label for="gender" class="mt-3">Gender : </label>
+                            <select name="gender" id="gender" class="form-control">
+                                <template v-if="editStatus">
+                                    <option value="M" :selected="data.gender === 'M'">Male</option>
+                                    <option value="F" :selected="data.gender === 'F'">Female</option>
+                                </template>
+                                <template v-else>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </template>
+
+                            </select>
 
                             <label for="phone_number" class="mt-3">Phone Number : </label>
                             <input type="number" name="phone_number" id="phone_number"
@@ -110,8 +124,8 @@
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        var actionUrl = '{{ url('publishers') }}'
-        var apiUrl = '{{ route('publishers.api') }}'
+        var actionUrl = '{{ url('members') }}'
+        var apiUrl = '{{ route('members.api') }}'
 
         var columns = [{
                 data: 'DT_RowIndex',
@@ -125,6 +139,11 @@
             },
             {
                 data: 'email',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'gender',
                 class: 'text-center',
                 orderable: true
             },
@@ -172,7 +191,7 @@
             methods: {
                 datatable() {
                     const _this = this
-                    _this.table = $('#publisherTable').DataTable({
+                    _this.table = $('#memberTable').DataTable({
                         ajax: {
                             url: _this.apiUrl,
                             type: 'GET'
@@ -208,6 +227,7 @@
                     event.preventDefault()
                     const _this = this
                     var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id
+                    console.log(actionUrl)
                     axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
                         $('#modal-default').modal('hide')
                         _this.table.ajax.reload()

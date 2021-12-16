@@ -18,7 +18,15 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
+        return view('admin.member');
+    }
+
+    public function api()
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -39,7 +47,24 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'email' => 'required|unique:publishers,email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Member Name field is required',
+            'gender.required' => 'The Gender field is required',
+            'email.required' => 'The Email field is required',
+            'email.unique' => 'The Email has already been taken',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+        ]);
+
+        Member::create($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -73,7 +98,23 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+        ], [
+            'name.required' => 'The Member Name field is required',
+            'gender.required' => 'The Gender field is required',
+            'email.required' => 'The Email field is required',
+            'phone_number.required' => 'The Phone Number field is required',
+            'phone_number.max' => 'The Phone Number field max 15',
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -84,6 +125,6 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
     }
 }

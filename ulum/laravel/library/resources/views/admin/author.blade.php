@@ -22,26 +22,9 @@
                             <th>Email</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
-                            <th class="text-center">Total books</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($authors as $key => $author)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $author->name }}</td>
-                                <td>{{ $author->email }}</td>
-                                <td>{{ $author->phone_number }}</td>
-                                <td>{{ $author->address }}</td>
-                                <td class="text-center">{{ count($author->books) }}</td>
-                                <td>
-                                    <a href="#" @click="editData({{ $author }})" class="btn btn-info">Edit</a>
-                                    <a href="#" @click="deleteData({{ $author->id }})" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
@@ -50,7 +33,7 @@
         <!-- Modal -->
         <div class="modal fade" id="modal-default" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
-                <form :action="actionUrl" method="POST">
+                <form :action="actionUrl" method="POST" @submit="submitForm($event, data.id)">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" v-text="info + ' Author'"></h5>
@@ -125,49 +108,114 @@
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script>
-        $(function() {
-            $("#authorTable").DataTable();
-        });
-    </script>
 
-
-    <!-- Vue -->
     <script>
+        var actionUrl = '{{ url('authors') }}'
+        var apiUrl = '{{ route('authors.api') }}'
+
+        var columns = [{
+                data: 'DT_RowIndex',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'name',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'email',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'phone_number',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'address',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                render: function(index, row, data, meta) {
+                    return `
+                        <a href="#" class="btn btn-info" onclick="controller.editData(event, ${meta.row})">
+                            Edit
+                        </a>
+                        <a href="#" class="btn btn-danger" onclick="controller.deleteData(event, ${data.id})">
+                            Delete
+                        </a>
+                `
+                },
+                orderable: false,
+                width: '200px',
+                class: 'text-center'
+            }
+        ]
+
         var controller = new Vue({
             el: '#controller',
             data: {
+                datas: [],
                 data: {},
-                actionUrl: '',
+                anggota: {},
+                actionUrl,
+                apiUrl,
+                info: '',
                 editStatus: false,
-                info: ''
+            },
+            mounted: function() {
+                this.datatable()
             },
             methods: {
+                datatable() {
+                    const _this = this
+                    _this.table = $('#authorTable').DataTable({
+                        ajax: {
+                            url: _this.apiUrl,
+                            type: 'GET'
+                        },
+                        columns
+                    }).on('xhr', function() {
+                        _this.datas = _this.table.ajax.json().data;
+                    })
+                },
                 addData() {
-                    this.actionUrl = '{{ route('authors.store') }}';
                     this.editStatus = false;
                     this.info = 'Create';
                     this.data = {};
                     $('#modal-default').modal();
                 },
-                editData(data) {
-                    this.data = data;
+                editData(event, row) {
+                    this.data = this.datas[row];
                     this.editStatus = true;
                     this.info = 'Update';
-                    this.actionUrl = '{{ route('authors.update', '') }}/' + data.id;
                     $('#modal-default').modal();
                 },
-                deleteData(id) {
-                    this.actionUrl = '{{ route('authors.destroy', '') }}/' + id;
+                deleteData(event, id) {
                     if (confirm("Are You Sure ?")) {
-                        axios.post(this.actionUrl, {
+                        $(event.target).parents('tr').remove();
+                        axios.post(this.actionUrl + '/' + id, {
                             _method: 'DELETE'
                         }).then(response => {
-                            location.reload();
+                            alert('Data has been removed')
                         });
                     }
+                },
+                submitForm(event, id) {
+                    event.preventDefault()
+                    const _this = this
+                    var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id
+                    axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                        $('#modal-default').modal('hide')
+                        _this.table.ajax.reload()
+                    })
                 }
             }
         })
     </script>
+
+
 @endsection

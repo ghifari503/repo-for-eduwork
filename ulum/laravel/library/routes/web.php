@@ -29,8 +29,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books');
-Route::get('/members', [MemberController::class, 'index'])->name('members');
-
 
 Route::get('/catalogs', [CatalogController::class, 'index'])->name('catalogs');
 Route::get('/catalogs/create', [CatalogController::class, 'create'])->name('createCatalogs');
@@ -39,10 +37,17 @@ Route::get('/catalogs/{catalog}/edit', [CatalogController::class, 'edit'])->name
 Route::put('/catalogs/{catalog}', [CatalogController::class, 'update'])->name('updateCatalogs');
 Route::delete('/catalogs/{catalog}', [CatalogController::class, 'destroy'])->name('deleteCatalogs');
 
-Route::resource('publishers', PublisherController::class, [
-    'except' => 'show'
+Route::resource('/publishers', PublisherController::class, [
+    'except' => ['show', 'edit', 'create']
 ]);
+Route::get('/api/publishers', [PublisherController::class, 'api'])->name('publishers.api');
 
-Route::resource('authors', AuthorController::class, [
-    'except' => 'show'
+Route::resource('/authors', AuthorController::class, [
+    'except' => ['show', 'edit', 'create']
 ]);
+Route::get('/api/authors', [AuthorController::class, 'api'])->name('authors.api');
+
+Route::resource('/members', MemberController::class, [
+    'except' => ['show', 'edit', 'create']
+]);
+Route::get('/api/members', [MemberController::class, 'api'])->name('members.api');

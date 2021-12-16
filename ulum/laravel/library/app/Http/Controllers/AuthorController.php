@@ -18,9 +18,15 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::with('books')->get();
+        return view('admin.author');
+    }
 
-        return view('admin.author', compact('authors'));
+    public function api()
+    {
+        $authors = Author::all();
+        $datatables = datatables()->of($authors)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -42,7 +48,7 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|',
+            'name' => 'required',
             'email' => 'required|unique:authors,email',
             'phone_number' => 'required|max:15',
             'address' => 'required',
@@ -90,14 +96,13 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author)
     {
         $request->validate([
-            'name' => 'required|',
-            'email' => 'required|unique:authors,email',
+            'name' => 'required',
+            'email' => 'required',
             'phone_number' => 'required|max:15',
             'address' => 'required',
         ], [
             'name.required' => 'The Author Name field is required',
             'email.required' => 'The Email field is required',
-            'email.unique' => 'The Email has already been taken',
             'phone_number.required' => 'The Phone Number field is required',
             'phone_number.max' => 'The Phone Number field max 15',
         ]);
