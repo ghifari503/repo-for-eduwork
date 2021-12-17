@@ -28,26 +28,40 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/books', [BookController::class, 'index'])->name('books');
 
+// ------------------ Route Catalog -------------------------------
 Route::get('/catalogs', [CatalogController::class, 'index'])->name('catalogs');
 Route::get('/catalogs/create', [CatalogController::class, 'create'])->name('createCatalogs');
 Route::post('/catalogs', [CatalogController::class, 'store'])->name('storeCatalogs');
 Route::get('/catalogs/{catalog}/edit', [CatalogController::class, 'edit'])->name('editCatalogs');
 Route::put('/catalogs/{catalog}', [CatalogController::class, 'update'])->name('updateCatalogs');
 Route::delete('/catalogs/{catalog}', [CatalogController::class, 'destroy'])->name('deleteCatalogs');
+// ------------------ End Route Catalog -------------------------------
 
+// ------------------ Route Publisher -------------------------------
 Route::resource('/publishers', PublisherController::class, [
     'except' => ['show', 'edit', 'create']
 ]);
 Route::get('/api/publishers', [PublisherController::class, 'api'])->name('publishers.api');
+// ------------------ End Route Publisher -------------------------------
 
+// ------------------ Route Author -------------------------------
 Route::resource('/authors', AuthorController::class, [
     'except' => ['show', 'edit', 'create']
 ]);
 Route::get('/api/authors', [AuthorController::class, 'api'])->name('authors.api');
+// ------------------ End Route Author -------------------------------
 
+// ------------------ Route Member -------------------------------
 Route::resource('/members', MemberController::class, [
     'except' => ['show', 'edit', 'create']
 ]);
 Route::get('/api/members', [MemberController::class, 'api'])->name('members.api');
+// ------------------ End Route Member -------------------------------
+
+// ------------------ Route Book -------------------------------
+Route::resource('/books', BookController::class, [
+    'except' => ['show', 'edit', 'create']
+]);
+Route::get('/api/books', [BookController::class, 'api'])->name('books.api');
+// ------------------ End Route Book -------------------------------
