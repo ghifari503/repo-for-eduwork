@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +18,19 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
+        return view('admin.member');
 
         // $members = Member::with('user', 'transactions')->get();
 
         // return $members;
+    }
+
+    public function api()
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -39,7 +51,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required', 'max:64'],
+            'gender' => ['required'],
+            'phone_number' => ['required', 'max:15'],
+            'address' => ['required'],
+            'email' => ['required', 'email', 'max:64'],
+        ]);
+
+        Member::create($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -73,7 +95,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required', 'max:64'],
+            'gender' => ['required'],
+            'phone_number' => ['required', 'max:15'],
+            'address' => ['required'],
+            'email' => ['required', 'email', 'max:64'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -84,6 +116,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect('members');
     }
 }
