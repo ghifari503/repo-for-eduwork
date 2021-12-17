@@ -20,11 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
-Route::get('/book', [App\Http\Controllers\BookController::class, 'index'])->name('book');
-Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
-Route::get('/publisher', [App\Http\Controllers\PublisherController::class, 'index'])->name('publisher');
-Route::get('/member', [App\Http\Controllers\MemberController::class, 'index'])->name('member');
-Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction');
-Route::get('/detail_transaction', [App\Http\Controllers\DetailTransactionController::class, 'index'])->name('detail_transaction');
+Route::get('/authors', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
+Route::get('/books', [App\Http\Controllers\BookController::class, 'index'])->name('book');
+Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
+Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index'])->name('publisher');
+Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])->name('member');
+Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction');
+Route::get('/detail_transactions', [App\Http\Controllers\DetailTransactionController::class, 'index'])->name('detail_transaction');
 

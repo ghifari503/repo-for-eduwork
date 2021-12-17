@@ -32,6 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /**
         //soal no.1
         $data = Member::select('*')
                         ->join('users', 'users.member_id', '=', 'members.id')
@@ -165,7 +166,7 @@ class HomeController extends Controller
         $data19 = Member::select('*')
                         ->whereMonth('created_at', '6')
                         ->get();
-        return $data19;
-        //return view('home');
+        return $data19; */
+        return view('home');
     }
 }

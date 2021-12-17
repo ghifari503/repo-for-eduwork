@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
   <!-- endinject -->
   <!-- plugin css for this page -->
+  @stack('style')
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('assets/css/vertical-layout-light/style.css')}}">
@@ -107,5 +108,8 @@
   <!-- Custom js for this page-->
   <script src="{{asset('assets/js/dashboard.js')}}"></script>
   <!-- End custom js for this page-->
+  <!--other Script -->
+  @stack('script')
+  <!-- End other Script -->
 </body>
 </html>
