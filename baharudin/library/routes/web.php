@@ -23,9 +23,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);
-Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
 
 // Routing Recourse
 Route::resource('/authors', App\Http\Controllers\AuthorController::class);
 Route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 Route::resource('/catalogs', App\Http\Controllers\CatalogController::class);
+
+// Routing api
+Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
