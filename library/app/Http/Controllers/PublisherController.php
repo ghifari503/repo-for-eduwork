@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +33,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        // return view('admin.publisher.create');
     }
 
     /**
@@ -70,7 +76,7 @@ class PublisherController extends Controller
     public function edit(Publisher $publisher)
     {
         // return $publisher;
-        return view('admin.publisher.edit',compact('publisher'));
+        // return view('admin.publisher.edit',compact('publisher'));
     }
 
     /**
@@ -104,6 +110,5 @@ class PublisherController extends Controller
     {
         $publisher->delete();
 
-        return redirect('publishers')->with('delete','Publisher has been deleted');
     }
 }

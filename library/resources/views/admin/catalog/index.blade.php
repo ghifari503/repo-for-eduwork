@@ -24,25 +24,25 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
-                        <tr class="text-center">
+                        <tr>
                             <th style="width: 10px">#</th>
-                            <th class="text-left">Name</th>
+                            <th>Name</th>
                             <th>Total Book</th>
                             <th>Created At</th>
-                            <th>Action</th>
+                            <th class="text-center" style="width: 150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($catalogs as $key => $catalog)
-                        <tr class="text-center">
+                        <tr>
                             <td>{{$key+1}}</td>
-                            <td class="text-left">{{$catalog->name}}</td>
+                            <td>{{$catalog->name}}</td>
                             <td>{{ count($catalog->books)}}</td>
                             <td>
                                 {{ date('d M Y - H:i:s', strtotime($catalog->created_at)) }}
                             </td>
                             <td> 
-                              <div class="row">
+                              <div class="row justify-content-center">
                                 <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}"
                                     class="btn btn-warning btn-sm">Edit</a>
                                     &nbsp;
