@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalog;
 use Illuminate\Http\Request;
+use DB;
 
 class CatalogController extends Controller
 {
@@ -26,7 +27,7 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.catalog.create');
     }
 
     /**
@@ -37,7 +38,15 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        //DB::table('catalogs')->insert(['name' => $request['name']]);
+
+        Catalog::create($request->all());
+
+        return redirect('/catalogs');
     }
 
     /**
@@ -59,7 +68,7 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
-        //
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -71,7 +80,13 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $catalog->update($request->all());
+
+        return redirect('/catalogs');
     }
 
     /**
@@ -82,6 +97,7 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        $catalog->delete();
+        return redirect('/catalogs');
     }
 }

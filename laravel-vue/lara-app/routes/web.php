@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\MemberController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +28,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/** 
 Route::get('/authors', [App\Http\Controllers\AuthorController::class, 'index'])->name('author');
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index'])->name('book');
 Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
@@ -27,4 +37,10 @@ Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'ind
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])->name('member');
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction');
 Route::get('/detail_transactions', [App\Http\Controllers\DetailTransactionController::class, 'index'])->name('detail_transaction');
+*/
+Route::resource('catalogs', CatalogController::class);
+Route::resource('books', BookController::class);
+Route::resource('authors', AuthorController::class);
+Route::resource('publishers', PublisherController::class);
+Route::resource('members', MemberController::class);
 

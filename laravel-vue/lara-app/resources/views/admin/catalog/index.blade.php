@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('header','Catalog')
+@section('header','Catalogs')
 @section('subheader','Index')
 
 @push('style')
@@ -17,13 +17,16 @@
 @endpush
 
 @section('content')
-<div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
+        <h3 class="card-title text-muted">Data Catalog</h3>
         <div class="card">
-            <!-- /.card-header -->
+          <!-- /.card-header -->
             <div class="card-body">
-                <h4 class="card-title">Data Catalog</h4>
+                <a href="{{url('catalogs/create')}}" class="btn btn-outline-info btn-icon-text mb-3">
+                  <i class="typcn typcn-document-add btn-icon-append"></i>
+                  Tambah Catalog
+                </a> 
               <table id="example" class="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -31,6 +34,7 @@
                     <th>Name</th>
                     <th class="text-center">Total Book</th>
                     <th class="text-center">Created At</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,6 +44,17 @@
                     <td>{{$items->name}}</td>
                     <td class="text-right">{{count($items->books)}}</td>
                     <td class="text-center">{{date('j F Y', strtotime($items->created_at))}}</td>
+                    <td>
+                      <form action="/catalogs/{{$items->id}}" method="POST">
+                      <a href="/catalogs/{{$items->id}}/edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
+                        Edit
+                        <i class="typcn typcn-document btn-icon-append"></i>                          
+                      </a>
+                      @method('DELETE')
+                      @csrf
+                      <input type="submit" class="btn btn-sm btn-outline-danger btn-icon-text" value="Delete">
+                      </form>
+                    </td>
                   </tr> 
                   @empty
                   <tr>
@@ -53,5 +68,5 @@
         </div>
       </div>
     </div>
-</div> 
+ 
 @endsection

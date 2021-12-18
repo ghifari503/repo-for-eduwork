@@ -18,7 +18,8 @@ class PublisherController extends Controller
         $publisher = Publisher::with('books')->get();
         return $publisher;
         */
-        return view('admin.publisher.index');
+        $publishers = Publisher::all();
+        return view('admin.publisher.index', compact('publishers'));
     }
 
     /**
@@ -28,7 +29,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.publisher.create');
     }
 
     /**
@@ -39,7 +40,20 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        Publisher::create($request->all());
+        return redirect('/publishers');
     }
 
     /**
@@ -61,7 +75,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -73,7 +87,20 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        $publisher->update($request->all());
+        return redirect('/publishers');
     }
 
     /**
@@ -84,6 +111,7 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+        return redirect('/publishers');
     }
 }

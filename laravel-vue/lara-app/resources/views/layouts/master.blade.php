@@ -74,20 +74,17 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12">
-              @yield('content')
-            </div>
-          </div>
-
-        </div>
+        @yield('content')
         <!-- content-wrapper ends -->
+        </div>
         <!-- partial:partials/_footer.html -->
         @include('partials.footer')
         <!-- partial -->
       </div>
+      
       <!-- main-panel ends -->
     </div>
+    
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
