@@ -18,7 +18,7 @@ class AuthorController extends Controller
         return $author;*/
 
         $author = Author::all();
-        return view('admin.author.index', compact('author'));
+        return view('admin.author', compact('author'));
     }
 
     /**
@@ -39,7 +39,20 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        Author::create($request->all());
+        return redirect('/authors');
     }
 
     /**
@@ -73,7 +86,20 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        $author->update($request->all());
+        return redirect('/authors');
     }
 
     /**
@@ -84,6 +110,6 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
     }
 }

@@ -104,6 +104,8 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{asset('assets/js/dashboard.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- End custom js for this page-->
   <!--other Script -->
   @stack('script')
