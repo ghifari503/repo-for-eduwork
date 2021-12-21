@@ -1,14 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +67,16 @@ Route::resource('/books', BookController::class, [
 ]);
 Route::get('/api/books', [BookController::class, 'api'])->name('books.api');
 // ------------------ End Route Book -------------------------------
+
+// ------------------ Route Loan -------------------------------
+Route::resource('/loans', TransactionController::class, [
+    'except' => ['destroy']
+]);
+Route::get('/api/loans', [TransactionController::class, 'api'])->name('loans.api');
+Route::get('/loans/delete/{id}', [TransactionController::class, 'destroy']);
+// ------------------ End Route Loan -------------------------------
+
+// ------------------ Route Loan Detail -------------------------------
+Route::get('/loan_details', [TransactionDetailController::class, 'store'])->name('loan_details.store');
+Route::get('/loan_details/update', [TransactionDetailController::class, 'update'])->name('loan_details.update');
+// ------------------ End Route Loan Detail-------------------------------

@@ -24,7 +24,7 @@
                     <p>Total Members</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-book"></i>
+                    <i class="fa fa-users"></i>
                 </div>
                 <a href="{{ route('members.index') }}" class="small-box-footer">More Info <i
                         class="fas fa-arrow-circle-right"></i></a>
@@ -38,7 +38,7 @@
                     <p>Total Publishers</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-book"></i>
+                    <i class="fa fa-user"></i>
                 </div>
                 <a href="{{ route('publishers.index') }}" class="small-box-footer">More Info <i
                         class="fas fa-arrow-circle-right"></i></a>
@@ -52,7 +52,7 @@
                     <p>Total Authors</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-book"></i>
+                    <i class="fa fa-user-edit"></i>
                 </div>
                 <a href="{{ route('authors.index') }}" class="small-box-footer">More Info <i
                         class="fas fa-arrow-circle-right"></i></a>

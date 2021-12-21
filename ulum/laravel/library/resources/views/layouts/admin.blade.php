@@ -1,3 +1,10 @@
+@php
+$dateNow = date('Y-m-d');
+$notifications = \App\Models\Transaction::select('members.name', 'transactions.date_end')
+    ->join('members', 'members.id', 'transactions.member_id')
+    ->where('transactions.date_end', '<', $dateNow)
+    ->get();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +50,25 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="far fa-bell"></i>
+                        <span
+                            class="badge badge-danger navbar-badge font-weight-bold">{{ count($notifications) == 0 ? '' : count($notifications) }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">{{ count($notifications) }} Notifications</span>
+                        @foreach ($notifications as $notification)
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-envelope mr-2"></i>
+                                <b>{{ $notification->name }}</b> is <span class="text-danger">
+                                    {{ late_date($notification->date_end) }} days late</span>
+                            </a>
+                        @endforeach
 
-
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -60,7 +84,7 @@
             <a href="{{ url('home') }}" class="brand-link">
                 <img src="{{ asset('assets') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Library</span>
             </a>
 
             <!-- Sidebar -->
@@ -87,6 +111,15 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('loans') }}"
+                                class="nav-link {{ request()->is('loans') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-chart-bar"></i>
+                                <p>
+                                    Loans
                                 </p>
                             </a>
                         </li>

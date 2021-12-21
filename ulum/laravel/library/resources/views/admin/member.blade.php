@@ -10,8 +10,19 @@
     <div id="controller">
         <div class="card">
             <div class="card-header">
-                <button @click="addData()" class="btn btn-primary pull-right">Create New
-                    Member</button>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <button @click="addData()" class="btn btn-primary pull-right">Create New Member</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <select name="gender" class="form-control">
+                            <option value="0">All Gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
             <div class="card-body">
                 <table class="table table-striped table-bordered" id="memberTable">
@@ -233,6 +244,17 @@
                         _this.table.ajax.reload()
                     })
                 }
+            }
+        })
+    </script>
+    <script>
+        $('select[name=gender]').on('change', function() {
+            gender = $('select[name=gender]').val()
+
+            if (gender == 0) {
+                controller.table.ajax.url(apiUrl).load()
+            } else {
+                controller.table.ajax.url(apiUrl + '?gender=' + gender).load()
             }
         })
     </script>

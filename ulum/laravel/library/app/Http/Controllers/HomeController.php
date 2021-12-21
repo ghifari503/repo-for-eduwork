@@ -171,7 +171,7 @@ class HomeController extends Controller
             ->groupBy('publishers.name')
             ->pluck('publishers.name');
 
-        $label_bar = ['Borrowing', 'Return'];
+        $label_bar = ['Loans', 'Return'];
         $data_bar = [];
 
         foreach ($label_bar as $key => $value) {
