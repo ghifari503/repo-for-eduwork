@@ -51,7 +51,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required'],
+            'gender' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'email' => ['required'],
+        ]);
+
+        Member::create($request->all());
+
+        return redirect('members')->with('success','Success create new Member');
     }
 
     /**
@@ -62,7 +72,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        //
+        
     }
 
     /**
@@ -85,7 +95,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required'],
+            'gender' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'email' => ['required'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members')->with('success','Member updated');
     }
 
     /**
@@ -96,6 +116,7 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
     }
 }

@@ -34,11 +34,12 @@ var controller = new Vue({
             $('#modal-default').modal();
         },
         deleteData(event,id){
+            const _this = this;
+            $(event.target).parents('tr').remove();
             if(confirm("Are you sure?")) {
                 axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
                     _this.table.ajax.reload();
-                    $(event.target).parents('tr').remove();
-                    alert('Data has been removed');
+                    // alert('Data has been removed');
                 });
             }
         },
