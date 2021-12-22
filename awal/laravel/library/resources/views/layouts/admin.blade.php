@@ -54,6 +54,16 @@
                     <span>Home</span></a>
             </li>
 
+             <!-- Divider -->
+             <hr class="sidebar-divider">
+
+             <!-- Nav Item - Transaction -->
+             <li class="nav-item {{ request()->is('transactions') ? 'active' : '' }}">
+                 <a class="nav-link" href="{{ url('transactions') }}">
+                     <i class="fas fa-fw fa-address-book"></i>
+                     <span>Transaction</span></a>
+             </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

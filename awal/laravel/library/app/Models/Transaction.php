@@ -11,6 +11,18 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['member_id', 'date_start', 'date_end', 'status'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_start' => 'date',
+        'date_end' => 'date',
+    ];
+
     /**
      * Get the member that owns the Transaction
      *
