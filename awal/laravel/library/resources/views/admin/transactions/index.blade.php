@@ -17,9 +17,12 @@
         <thead class="bg-primary text-white">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Borrower Name (Member)</th>
                 <th scope="col">Borrow Date</th>
                 <th scope="col">Return Date</th>
+                <th scope="col">Borrower Name</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Total Books</th>
+                <th scope="col">Total Cost</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -40,9 +43,12 @@ $(document).ready(function() {
         ajax: "{{ url('/api/transactions') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'member.name', name: 'member.name'},
             {data: 'borrow_date', name: 'borrow_date'},
             {data: 'return_date', name: 'return_date'},
+            {data: 'member.name', name: 'member.name'},
+            {data: 'duration', name: 'duration'},
+            {data: 'total_books', name: 'total_books'},
+            {data: 'total_cost_rupiah', name: 'total_cost_rupiah'},
             {data: 'transaction_status', name: 'transaction_status', orderable: false, searchable: false},
         ]
     });
