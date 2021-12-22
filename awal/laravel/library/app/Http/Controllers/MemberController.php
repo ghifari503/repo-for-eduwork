@@ -30,7 +30,13 @@ class MemberController extends Controller
 
     public function api()
     {
-        return datatables()->of(Member::all())->addIndexColumn()
+        if (request('gender')) {
+            $members = Member::whereGender(request('gender'))->get();
+        } else {
+            $members = Member::all();
+        }
+
+        return datatables()->of($members)->addIndexColumn()
             ->addColumn('showGenderName', function($data) {
                 if($data->gender == 'M'){
                     return 'Male';

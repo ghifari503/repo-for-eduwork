@@ -12,6 +12,11 @@
 <div id="controller">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <button @click.prevent="addMember" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Member</button>
+        <select name="gender" class="filter-select-gender">
+            <option value="0">All Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
     </div>
 
     @if ($members->isNotEmpty())
@@ -143,6 +148,16 @@
                     columns
                 }).on('xhr', function () {
                     _this.members = _this.table.ajax.json().data
+                })
+
+                $('.filter-select-gender').change(function() {
+                    const gender = $('.filter-select-gender').val()
+
+                    if (gender == 0) {
+                        controller.table.ajax.url(_this.apiUrl).load()
+                    } else {
+                        controller.table.ajax.url(`${_this.apiUrl}?gender=${gender}`).load()
+                    }
                 })
             },
             addMember() {
