@@ -39,20 +39,19 @@ class DatabaseSeeder extends Seeder
         $transaction1->member_id = mt_rand(2, 20);
         $transaction1->date_start = Carbon::now()->format('Y-m-d');
         $transaction1->date_end = Carbon::tomorrow()->format('Y-m-d');
+        $transaction1->status = true;
         $transaction1->save();
 
         // Create transaction Detail (1st book)
         $transactionDetail = new TransactionDetail();
         $transactionDetail->transaction_id = $transaction1->id;
         $transactionDetail->book_id = mt_rand(1, 20);
-        $transactionDetail->qty = mt_rand(1, 2);
         $transactionDetail->save();
 
         // Create transaction Detail (2nd book)
         $transactionDetail2 = new TransactionDetail();
         $transactionDetail2->transaction_id = $transaction1->id;
         $transactionDetail2->book_id = mt_rand(1, 20);
-        $transactionDetail2->qty = mt_rand(1, 2);
         $transactionDetail2->save();
 
         // Create new transaction 2
@@ -60,20 +59,19 @@ class DatabaseSeeder extends Seeder
         $transaction2->member_id = mt_rand(2, 20);
         $transaction2->date_start = Carbon::now()->format('Y-m-d');
         $transaction2->date_end = Carbon::tomorrow()->format('Y-m-d');
+        $transaction1->status = false;
         $transaction2->save();
 
         // Create transaction Detail (1st book)
         $transactionDetail = new TransactionDetail();
         $transactionDetail->transaction_id = $transaction2->id;
         $transactionDetail->book_id = mt_rand(1, 20);
-        $transactionDetail->qty = mt_rand(2, 4);
         $transactionDetail->save();
 
         // Create transaction Detail (2nd book)
         $transactionDetail2 = new TransactionDetail();
         $transactionDetail2->transaction_id = $transaction2->id;
         $transactionDetail2->book_id = mt_rand(1, 20);
-        $transactionDetail2->qty = mt_rand(2, 3);
         $transactionDetail2->save();
     }
 }
