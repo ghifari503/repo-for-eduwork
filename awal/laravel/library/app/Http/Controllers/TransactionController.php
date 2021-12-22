@@ -47,4 +47,11 @@ class TransactionController extends Controller
                 ->make(true);
         }
     }
+
+    public function show(Transaction $transaction)
+    {
+        return view('admin.transactions.show', [
+            'transaction' => $transaction
+        ]);
+    }
 }

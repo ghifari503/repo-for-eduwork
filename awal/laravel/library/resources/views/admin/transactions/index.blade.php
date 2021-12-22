@@ -24,6 +24,7 @@
                 <th scope="col">Total Books</th>
                 <th scope="col">Total Cost</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -50,6 +51,11 @@ $(document).ready(function() {
             {data: 'total_books', name: 'total_books'},
             {data: 'total_cost_rupiah', name: 'total_cost_rupiah'},
             {data: 'transaction_status', name: 'transaction_status', orderable: false, searchable: false},
+            {render: function (index, row, data, meta) {
+                return `
+                    <a href="/transactions/${data.id}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i></a>
+                `
+            }, orderable: false, searchable: false},
         ]
     });
 });
