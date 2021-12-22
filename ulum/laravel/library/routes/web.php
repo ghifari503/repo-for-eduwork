@@ -59,6 +59,7 @@ Route::resource('/members', MemberController::class, [
     'except' => ['show', 'edit', 'create']
 ]);
 Route::get('/api/members', [MemberController::class, 'api'])->name('members.api');
+Route::get('/test_spatie', [MemberController::class, 'test_spatie']);
 // ------------------ End Route Member -------------------------------
 
 // ------------------ Route Book -------------------------------

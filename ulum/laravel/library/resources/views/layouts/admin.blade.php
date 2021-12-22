@@ -159,15 +159,17 @@ $notifications = \App\Models\Transaction::select('members.name', 'transactions.d
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('members') }}"
-                                class="nav-link {{ request()->is('members') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Member
-                                </p>
-                            </a>
-                        </li>
+                        @role('admin')
+                            <li class="nav-item">
+                                <a href="{{ url('members') }}"
+                                    class="nav-link {{ request()->is('members') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Member
+                                    </p>
+                                </a>
+                            </li>
+                        @endrole
                         <li class="nav-item">
                             <a href="=" {{ route('logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();" class="nav-link">

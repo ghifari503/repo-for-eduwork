@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class MemberController extends Controller
 {
@@ -130,5 +132,18 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $member->delete();
+    }
+
+    public function test_spatie()
+    {
+        // $role = Role::create(['name' => 'admin']);
+        // $permission = Permission::create(['name' => 'member page']);
+
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+
+        // $user = auth()->user();
+        // $user->assignRole('admin');
+        // return $user;
     }
 }
