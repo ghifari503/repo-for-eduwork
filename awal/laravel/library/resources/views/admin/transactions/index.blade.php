@@ -15,6 +15,12 @@
         <option value="Borrowed">Borrowed</option>
         <option value="Returned">Returned</option>
     </select>
+    <select data-column="1" class="filter-select-date">
+        <option value="">Choose Borrowed Date</option>
+        @foreach ($listOfBorrowedDate as $date)
+            <option value="{{ $date->date_start->format('d F Y') }}">{{ $date->date_start->format('d F Y') }}</option>
+        @endforeach
+    </select>
 @endsection
 
 @section('content')
@@ -63,6 +69,12 @@ $(document).ready(function() {
             }, orderable: false, searchable: false},
         ]
     });
+
+   $('.filter-select-date').change(function() {
+        table.column($(this).data('column'))
+            .search($(this).val())
+            .draw()
+   })
 
    $('.filter-select-status').change(function() {
         table.column($(this).data('column'))

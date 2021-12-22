@@ -10,7 +10,9 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        return view('admin.transactions.index');
+        return view('admin.transactions.index', [
+            'listOfBorrowedDate' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
+        ]);
     }
 
     public function api()
