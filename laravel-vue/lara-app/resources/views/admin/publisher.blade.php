@@ -2,6 +2,7 @@
 @section('header','Publishers')
 @section('subheader','Index')
 
+<!--data table here-->
 @push('style')
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
@@ -14,6 +15,7 @@
         $('#example').DataTable();
     } );
 </script>
+<!--end data table-->
 
 <script type="text/javascript">
   var controller = new Vue({
