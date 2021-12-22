@@ -27,7 +27,18 @@ class AuthorController extends Controller
     public function api()
     {
         $authors = Author::all();
-        $datatables = datatables()->of($authors)->addIndexColumn();
+
+        //menambahkan index di API
+        // foreach ($authors as $author) {
+        //     $author->date = convertDate($author->created_at);
+        // }
+
+        //menambhakan index di Yajra Datatables
+        $datatables = datatables()->of($authors)
+        ->addColumn('date', function($author){
+            return convertDate($author->created_at);
+        })                       
+        ->addIndexColumn();
 
         return $datatables->make(true);
 
@@ -54,7 +65,7 @@ class AuthorController extends Controller
         $this->validate($request,[
             'name' => ['required'],
             'email' => ['required'],
-            'phone_number' => ['required'],
+            'phone_number' => ['required','integer'],
             'address' => ['required'],
         ]);
 

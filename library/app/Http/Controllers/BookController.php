@@ -100,13 +100,13 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $this->validate($request,[
-            'isbn' => ['required'],
+            'isbn' => ['required','integer'],
             'title' => ['required'],
-            'year' => ['required'],
+            'year' => ['required','integer'],
             'publisher_id' => ['required'],
             'author_id' => ['required'],
             'catalog_id' => ['required'],
-            'qty' => ['required'],
+            'qty' => ['required','integer'],
             'price' => ['required'],
         ]);
 

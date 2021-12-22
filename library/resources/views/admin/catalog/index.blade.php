@@ -39,7 +39,7 @@
                             <td>{{$catalog->name}}</td>
                             <td>{{ count($catalog->books)}}</td>
                             <td>
-                                {{ date('d M Y - H:i:s', strtotime($catalog->created_at)) }}
+                            {{ convertDate($catalog->created_at)}}
                             </td>
                             <td> 
                               <div class="row justify-content-center">
