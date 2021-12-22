@@ -10,6 +10,11 @@
 
 @section('create-button')
     <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Transaction</a>
+    <select data-column="7" class="filter-select-status">
+        <option value="">Choose Status</option>
+        <option value="Borrowed">Borrowed</option>
+        <option value="Returned">Returned</option>
+    </select>
 @endsection
 
 @section('content')
@@ -37,7 +42,7 @@
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
 $(document).ready(function() {
-    $('#transactions-table').DataTable({
+    var table = $('#transactions-table').DataTable({
         "scrollX": true,
         processing: true,
         serverSide: true,
@@ -50,7 +55,7 @@ $(document).ready(function() {
             {data: 'duration', name: 'duration'},
             {data: 'total_books', name: 'total_books'},
             {data: 'total_cost_rupiah', name: 'total_cost_rupiah'},
-            {data: 'transaction_status', name: 'transaction_status', orderable: false, searchable: false},
+            {data: 'transaction_status', name: 'transaction_status'},
             {render: function (index, row, data, meta) {
                 return `
                     <a href="/transactions/${data.id}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i></a>
@@ -58,6 +63,12 @@ $(document).ready(function() {
             }, orderable: false, searchable: false},
         ]
     });
+
+   $('.filter-select-status').change(function() {
+        table.column($(this).data('column'))
+            .search($(this).val())
+            .draw()
+   })
 });
 </script>
 @endsection
