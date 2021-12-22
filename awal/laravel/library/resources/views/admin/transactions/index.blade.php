@@ -9,7 +9,7 @@
 @endsection
 
 @section('create-button')
-    <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Transaction</a>
+    <a href="{{ route('transactions.create') }}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Transaction</a>
     <select data-column="7" class="filter-select-status">
         <option value="">Choose Status</option>
         <option value="Borrowed">Borrowed</option>

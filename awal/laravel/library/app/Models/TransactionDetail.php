@@ -10,6 +10,8 @@ class TransactionDetail extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['transaction_id', 'book_id'];
+
     /**
      * Get the transaction that owns the TransactionDetail
      *
