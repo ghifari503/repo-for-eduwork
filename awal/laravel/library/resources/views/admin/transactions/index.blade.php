@@ -66,7 +66,12 @@ $(document).ready(function() {
                 return `
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <a href="/transactions/${data.id}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2"><i class="fas fa-eye fa-sm text-white-50"></i></a>
-                    <a href="/transactions/${data.id}/edit" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></a>
+                    <a href="/transactions/${data.id}/edit" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-edit fa-sm text-white-50"></i></a>
+                    <form action="/transactions/${data.id}" method="post">
+                    @csrf
+                    @method('delete')
+                        <button onclick="return confirm('Are you sure?');" type="submit" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-trash fa-sm text-white-50"></i></button>
+                    </form>
                 <div>
                 `
             }, orderable: false, searchable: false},

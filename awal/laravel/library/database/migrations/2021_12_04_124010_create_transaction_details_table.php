@@ -20,7 +20,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->integer('qty')->default(1);
             $table->timestamps();
 
-            $table->foreign('transaction_id')->references('id')->on('transactions');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books');
         });
     }
