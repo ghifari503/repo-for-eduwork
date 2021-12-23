@@ -98,4 +98,70 @@ class TransactionController extends Controller
             'transaction' => $transaction
         ]);
     }
+
+    public function edit(Transaction $transaction)
+    {
+        return view('admin.transactions.edit', [
+            'transaction' => $transaction,
+            'members' => Member::select('id', 'name')->orderBy('name', 'asc')->get(),
+            'books' => Book::select('id', 'title')->where('qty', '>', '0')->orderBy('title', 'asc')->get()
+        ]);
+    }
+
+    public function update(Transaction $transaction)
+    {
+        $oldTransactionDetails = TransactionDetail::select('id', 'book_id')
+                                    ->where('transaction_id', $transaction->id)
+                                    ->get();
+
+        $attributes = request()->validate([
+            'member_id' => 'required',
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after:date_start',
+            'book_id' => 'required',
+            'status' => 'required',
+        ],[
+            'member_id.required' => 'The member field is required.',
+            'book_id.required' => 'The book field is required.',
+        ]);
+
+        $transaction->update([
+            'member_id' => $attributes['member_id'],
+            'date_start' => $attributes['date_start'],
+            'date_end' => $attributes['date_end'],
+            'status' => $attributes['status']
+        ]);
+
+        if ($attributes['status'] == 1) {
+            foreach ($attributes['book_id'] as $book_id) {
+                Book::where('id', $book_id)
+                    ->increment('qty', 1);
+            }
+        } else {
+            foreach ($attributes['book_id'] as $book_id) {
+                $transactionDetail = TransactionDetail::updateOrCreate([
+                    'book_id' => $book_id,
+                    'transaction_id' => $transaction->id
+                ]);
+
+                if ($transactionDetail->wasRecentlyCreated) {
+                    Book::where('id', $transactionDetail->book_id)
+                        ->decrement('qty', 1);
+                }
+
+                if (!$transactionDetail->wasRecentlyCreated && !$transactionDetail->wasChanged()) {
+                    foreach ($oldTransactionDetails as $oldTransactionDetail) {
+                        if ($transactionDetail->id != $oldTransactionDetail->id) {
+                            TransactionDetail::where('id', $oldTransactionDetail->id)->delete();
+
+                            Book::where('id', $oldTransactionDetail->book_id)
+                                ->increment('qty', 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        return redirect()->route('transactions.index');
+    }
 }

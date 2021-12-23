@@ -64,7 +64,10 @@ $(document).ready(function() {
             {data: 'transaction_status', name: 'transaction_status'},
             {render: function (index, row, data, meta) {
                 return `
-                    <a href="/transactions/${data.id}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i></a>
+                <div class="d-sm-flex align-items-center justify-content-between">
+                    <a href="/transactions/${data.id}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2"><i class="fas fa-eye fa-sm text-white-50"></i></a>
+                    <a href="/transactions/${data.id}/edit" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i></a>
+                <div>
                 `
             }, orderable: false, searchable: false},
         ]
