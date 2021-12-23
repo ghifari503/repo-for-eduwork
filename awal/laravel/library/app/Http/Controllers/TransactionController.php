@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('admin.transactions.index', [
@@ -134,8 +139,26 @@ class TransactionController extends Controller
 
         if ($attributes['status'] == 1) {
             foreach ($attributes['book_id'] as $book_id) {
-                Book::where('id', $book_id)
-                    ->increment('qty', 1);
+                $transactionDetail = TransactionDetail::updateOrCreate([
+                    'book_id' => $book_id,
+                    'transaction_id' => $transaction->id
+                ]);
+
+                if ($transactionDetail->wasRecentlyCreated) {
+                    Book::where('id', $transactionDetail->book_id)
+                        ->increment('qty', 1);
+                }
+
+                if (!$transactionDetail->wasRecentlyCreated && !$transactionDetail->wasChanged()) {
+                    foreach ($oldTransactionDetails as $oldTransactionDetail) {
+                        if ($transactionDetail->id != $oldTransactionDetail->id) {
+                            TransactionDetail::where('id', $oldTransactionDetail->id)->delete();
+
+                            Book::where('id', $oldTransactionDetail->book_id)
+                                ->decrement('qty', 1);
+                        }
+                    }
+                }
             }
         } else {
             foreach ($attributes['book_id'] as $book_id) {
