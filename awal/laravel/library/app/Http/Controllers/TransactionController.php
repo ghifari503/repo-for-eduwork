@@ -18,9 +18,20 @@ class TransactionController extends Controller
 
     public function index()
     {
-        return view('admin.transactions.index', [
-            'listOfBorrowedDate' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
-        ]);
+        if (auth()->user()->hasRole('admin')) {
+            return view('admin.transactions.index', [
+                'listOfBorrowedDate' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
+            ]);
+        } else {
+            abort(403);
+        }
+        // if (auth()->user()->hasPermissionTo('view transactions')) {
+        //     return view('admin.transactions.index', [
+        //         'listOfBorrowedDate' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
+        //     ]);
+        // } else {
+        //     abort(403);
+        // }
     }
 
     public function api()

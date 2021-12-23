@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\CatalogController;
+use Spatie\Permission\Models\Permission;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\TransactionController;
-use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +51,20 @@ Route::get('/api/publishers', [PublisherController::class, 'api']);
 
 Route::resource('transactions', TransactionController::class);
 Route::get('/api/transactions', [TransactionController::class, 'api']);
+
+Route::get('/test-spatie', function () {
+    // $role = Role::create(['name' => 'admin']);
+    // $permission = Permission::create(['name' => 'view transactions']);
+
+    // $role->givePermissionTo($permission);
+    // $permission->assignRole($role);
+
+    // $user = auth()->user();
+    // $user->assignRole('admin');
+
+    // $user = User::with('roles')->get();
+    // return $user;
+
+     // $user = auth()->user();
+    // $user->removeRole('admin');
+});

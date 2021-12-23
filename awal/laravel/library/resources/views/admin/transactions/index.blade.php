@@ -1,3 +1,4 @@
+{{-- @hasrole('admin') --}}
 @extends('layouts.admin')
 
 @section('title', 'Transaction')
@@ -7,7 +8,6 @@
 <!-- Custom styles for this page -->
 <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
-
 @section('create-button')
     <a href="{{ route('transactions.create') }}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add New Transaction</a>
     <select data-column="7" class="filter-select-status">
@@ -92,3 +92,4 @@ $(document).ready(function() {
 });
 </script>
 @endsection
+{{-- @endrole --}}
