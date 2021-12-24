@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('header','Authors')
+@section('header','Members')
 @section('subheader','Index')
 
 <!--data table here-->
@@ -12,12 +12,13 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
 
 <script type="text/javascript">
-  var actionUrl = '{{url('authors')}}';
-  var apiUrl = '{{url('api/authors')}}';
+  var actionUrl = '{{url('members')}}';
+  var apiUrl = '{{url('api/members')}}';
 
   var colums = [
     {data : 'DT_RowIndex', class : 'text-center', orderable: true},
     {data : 'name',orderable: true},
+    {data : 'gender',orderable: true},
     {data : 'email', orderable: true},
     {data : 'phone_number', class : 'text-right', orderable: true},
     {data : 'address', orderable: true},
@@ -31,65 +32,26 @@
 </script>
 
 <script type="text/javascript" src="{{asset('js/controller.js')}}"></script>
-
-{{--<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-</script>
-<!--end data table-->
-
-<script type="text/javascript">
-  var controller = new Vue({
-  el: '#controller',
-  data: {
-    data: {},
-    actionUrl: '{{url('authors')}}',
-    editStatus: false
-  },
-  methods: {
-      addData() {
-          this.data = {};
-          this.actionUrl='{{url('authors')}}';
-          this.editStatus=false;
-          $('#createModal').modal();
-      },
-      editData(data) {
-          this.data = data;
-          this.actionUrl='{{url('authors')}}'+'/'+data.id;
-          this.editStatus=true;
-          $('#createModal').modal(); 
-      },
-      deleteData(id) {
-          this.actionUrl = '{{url('authors')}}'+'/'+id;
-          if (confirm("are you sure?")) {
-            axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
-              location.reload();
-            });
-          }
-      } 
-  }
-  });
-</script>--}}
 @endpush
 
 @section('content')
 <div id="controller">
     <div class="row">
         <div class="col-sm-12">
-          <h3 class="card-title text-muted">Data Author</h3>
+          <h3 class="card-title text-muted">Data Member</h3>
           <div class="card">
             <!-- /.card-header -->
               <div class="card-body">
                   <a href="#" class="btn btn-outline-info btn-icon-text mb-3" @click="addData()">
                     <i class="typcn typcn-document-add btn-icon-append"></i>
-                    Add Author
+                    Add Member
                   </a> 
                 <table id="example" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th class="text-center">Name</th>
+                      <th class="text-center">Gender</th>
                       <th class="text-center">Email</th>
                       <th class="text-center">Phone Number</th>
                       <th class="text-center">Address</th>
@@ -107,7 +69,7 @@
             <div class="modal-content">
                 <form class="forms-sample" :action="actionUrl" method="POST" @submit="submitForm($event, data.id)">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Author</h5>
+                      <h5 class="modal-title" id="exampleModalLongTitle">Member</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
@@ -124,6 +86,14 @@
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control" name="gender" :value="data.gender" type="text" aria-label="Default select example">
+                                    <option selected>Select your gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                  </select>
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" class="form-control" name="email" :value="data.email" placeholder="Email">

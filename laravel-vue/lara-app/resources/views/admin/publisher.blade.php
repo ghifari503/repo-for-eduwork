@@ -10,7 +10,29 @@
 
 @push('script')
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
-<script>
+
+<script type="text/javascript">
+  var actionUrl = '{{url('publishers')}}';
+  var apiUrl = '{{url('api/publishers')}}';
+
+  var colums = [
+    {data : 'DT_RowIndex', class : 'text-center', orderable: true},
+    {data : 'name',orderable: true},
+    {data : 'email', orderable: true},
+    {data : 'phone_number', class : 'text-right', orderable: true},
+    {data : 'address', orderable: true},
+    {render: function (index, row, data, meta) {
+      return `
+      <a href="#" class="btn btn-sm btn-outline-secondary btn-icon-text" onclick="controller.editData(event, ${meta.row})">Edit</a>
+      <a href="#" class="btn btn-sm btn-outline-danger btn-icon-text" onclick="controller.deleteData(event, ${data.id})">Delete</a>
+      `;
+    }, orderable:false, class: 'text-center'},
+  ];
+</script>
+
+<script type="text/javascript" src="{{asset('js/controller.js')}}"></script>
+
+{{--<script>
     $(document).ready(function() {
         $('#example').DataTable();
     } );
@@ -48,7 +70,7 @@
       } 
   }
   });
-</script>
+</script>--}}
 @endpush
 
 @section('content')
@@ -63,7 +85,7 @@
                     <i class="typcn typcn-document-add btn-icon-append"></i>
                     Add Publisher
                   </a> 
-                <table id="example" class="table table-striped table-bordered table-responsive">
+                <table id="example" class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
@@ -74,28 +96,6 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    @forelse($publishers as $key => $items)
-                    <tr>
-                      <td class="text-center">{{$key + 1}}</td>
-                      <td>{{$items->name}}</td>
-                      <td>{{$items->email}}</td>
-                      <td class="text-center">{{$items->phone_number}}</td>
-                      <td>{{$items->address}}</td>
-                      <td>
-                          <a href="#" @click="editData({{$items}})" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                            Edit
-                            <i class="typcn typcn-document btn-icon-append"></i>                          
-                          </a>
-                          <a href="#" @click="deleteData({{$items->id}})" class="btn btn-sm btn-outline-danger btn-icon-text">Delete</a>
-                      </td>
-                    </tr> 
-                    @empty
-                    <tr>
-                      <td>Data Kosong</td>
-                    </tr> 
-                    @endforelse 
-                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -105,7 +105,7 @@
       <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form class="forms-sample" :action="actionUrl" method="POST">
+                <form class="forms-sample" :action="actionUrl" method="POST" @submit="submitForm($event, data.id)">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLongTitle">Publisher</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">

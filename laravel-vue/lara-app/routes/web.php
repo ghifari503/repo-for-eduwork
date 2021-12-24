@@ -38,9 +38,12 @@ Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])-
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index'])->name('transaction');
 Route::get('/detail_transactions', [App\Http\Controllers\DetailTransactionController::class, 'index'])->name('detail_transaction');
 */
-Route::resource('catalogs', CatalogController::class);
-Route::resource('books', BookController::class);
-Route::resource('authors', AuthorController::class);
-Route::resource('publishers', PublisherController::class);
-Route::resource('members', MemberController::class);
+Route::resource('/catalogs', CatalogController::class);
+Route::resource('/books', BookController::class);
+Route::resource('/authors', AuthorController::class);
+Route::resource('/publishers', PublisherController::class);
+Route::resource('/members', MemberController::class);
 
+Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
+Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);

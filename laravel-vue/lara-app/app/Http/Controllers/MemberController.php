@@ -18,9 +18,16 @@ class MemberController extends Controller
         $members = Member::with('user')->get();
         return $members;
         */
-        return view('admin.member.index');
+        return view('admin.member');
     }
 
+    public function api()
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+        
+        return $datatables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +46,22 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'gender.required' => 'Gender must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        Member::create($request->all());
+        return redirect('/members');
     }
 
     /**
@@ -73,7 +95,22 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Name must filled!',
+            'gender.required' => 'Gender must filled!',
+            'email.required' => 'Email must filled!',
+            'phone_number.required' => 'Phone Number must filled with number',
+            'address.required' => 'Address must filled!',
+        ]);
+
+        $member->update($request->all());
+        return redirect('/members');
     }
 
     /**
@@ -84,6 +121,6 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member-> delete();
     }
 }
