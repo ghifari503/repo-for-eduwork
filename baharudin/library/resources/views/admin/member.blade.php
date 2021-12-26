@@ -16,17 +16,13 @@
 				<div class="card-header">
 					<a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Member</a>
 
-                	<!-- <div class="card-tools">
-                  		<div class="input-group input-group-sm" style="width: 150px;">
-                    		<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    		<div class="input-group-append">
-                      			<button type="submit" class="btn btn-default">
-                      				<i class="fas fa-search"></i>
-                      			</button>
-                    		</div>
-                  		</div>
-                	</div> -->
+                	<div class="card-tools">
+                        <select class="form-control float-right" name="gender">
+                          <option value="0">All Gender</option>
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
+                        </select>
+                	</div>
           		</div>
           		<!-- /.card-header -->
 	          	<div class="card-body table-responsive">
@@ -35,12 +31,11 @@
 		                    <tr>
 		                    	<th width="5%">#</th>
 		                    	<th class="text-center">Name</th>
-                          <th class="text-center">Gender</th>
+                          		<th class="text-center">Gender</th>
 		                    	<th class="text-center">Email</th>
 		                    	<th class="text-center">Phone Number</th>
 		                    	<th class="text-center">Address</th>
-		                    	<th class="text-center">Created At</th>
-                          <th class="text-center">Action</th>
+                          		<th class="text-center">Action</th>
 		                    </tr>
 		                </thead>
 	                </table>
@@ -70,13 +65,13 @@
   							<label>Name</label>
   							<input type="text" class="form-control" name="name" :value="data.name" required="">
   						</div>
-              <div class="form-group">
-                <label>Gender</label>
-                <select class="form-select form-control" name="gender" :value="data.gender">
-                  <option value="m">Male</option>
-                  <option value="f">Female</option>
-                </select>
-              </div>
+			            <div class="form-group">
+			                <label>Gender</label>
+			                <select class="form-select form-control" name="gender" :value="data.gender">
+				                <option value="M">Male</option>
+				                <option value="F">Female</option>
+			                </select>
+			            </div>
   						<div class="form-group">
   							<label>Phone Number</label>
   							<input type="text" class="form-control" name="phone_number" :value="data.phone_number" required="">
@@ -121,12 +116,11 @@
 
 	var columns = [
 		{data: 'DT_RowIndex', class: 'text-center', orderable: true},
-		{data: 'name', class: 'text-center', orderable: true},
-    {data: 'gender', class: 'text-center', orderable: false},
+		{data: 'name', class: 'text-left', orderable: true},
+    	{data: 'gender', class: 'text-center', orderable: false},
 		{data: 'phone_number', class: 'text-center', orderable: false},
 		{data: 'address', class: 'text-center', orderable: false},
 		{data: 'email', class: 'text-center', orderable: false},
-    {data: 'date', class: 'text-center', orderable: false},
 		{render: function(index, row, data, meta) {
 			return `
 			<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">Edit</a>
@@ -136,4 +130,15 @@
 	];
 </script>
 <script src="{{ asset('js/data.js') }}"></script>
+<script type="text/javascript">
+	$('select[name=gender]').on('change', function() {
+        gender = $('select[name=gender]').val()
+
+        if (gender == 0) {
+            controller.table.ajax.url(apiUrl).load()
+        } else {
+            controller.table.ajax.url(apiUrl + '?gender=' + gender).load()
+        }
+    });
+</script>
 @endsection
