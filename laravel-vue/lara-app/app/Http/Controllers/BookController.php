@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publisher;
+use App\Models\Author;
+use App\Models\Catalog;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -18,7 +21,17 @@ class BookController extends Controller
         $books = Book::with('publisher', 'author', 'catalog')->get();
         return $books;
         */
-        return view('admin.book.index');
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $catalogs = Catalog::all();
+        return view('admin.book', compact('publishers', 'authors', 'catalogs'));
+    }
+
+    public function api()
+    {
+        $book = Book::all();
+        
+        return json_encode($book);
     }
 
     /**
@@ -39,7 +52,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'isbn' => 'required',
+            'title' => 'required',
+            'year' => 'required|numeric',
+            'publisher_id' => 'required',
+            'author_id' => 'required',
+            'catalog_id' => 'required',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric'
+        ], [
+            'isbn.required' => 'ISBN must filled!',
+            'title.required' => 'Title must filled!',
+            'year.required' => 'Year must filled!',
+            'publisher_id.required' => 'Choose one!',
+            'author_id.required' => 'Choose one!',
+            'catalog_id.required' => 'Choose one!',
+            'qty.required' => 'Qty must filled!',
+            'price.required' => 'Price must filled!'
+        ]);
+
+        Book::create($request->all());
+        return redirect('/books');
     }
 
     /**
@@ -73,7 +107,28 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'isbn' => 'required',
+            'title' => 'required',
+            'year' => 'required|numeric',
+            'publisher_id' => 'required',
+            'author_id' => 'required',
+            'catalog_id' => 'required',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric'
+        ], [
+            'isbn.required' => 'ISBN must filled!',
+            'title.required' => 'Title must filled!',
+            'year.required' => 'Year must filled!',
+            'publisher_id.required' => 'Choose one!',
+            'author_id.required' => 'Choose one!',
+            'catalog_id.required' => 'Choose one!',
+            'qty.required' => 'Qty must filled!',
+            'price.required' => 'Price must filled!'
+        ]);
+
+        $book->update($request->all());
+        return redirect('/books');
     }
 
     /**
@@ -84,6 +139,6 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
     }
 }
