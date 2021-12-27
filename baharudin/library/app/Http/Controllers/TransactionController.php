@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+
 use Illuminate\Http\Request;
+use DB;
 
 class TransactionController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +27,29 @@ class TransactionController extends Controller
     public function index()
     {
         return view('admin.transaction');
+    }
 
-        // $transactions = Transaction::with('member')->get();
+    public function api(Request $request)
+    {
+        // $transactions = Transaction::with('transactionDetail', 'member')->get();
+        $transactions = Transaction::select('transactions.id', 'name', 'date_start', 'date_end',
+             DB::raw('DATEDIFF(date_end, date_start) as duration'),
+             DB::raw('COUNT(transaction_details.transaction_id) as total_transactions'),
+             DB::raw('SUM(books.price) as total_costs'),
+             'status')
+             ->join('members', 'members.id', 'transactions.member_id')
+             ->join('transaction_details', 'transaction_details.transaction_id', 'transactions.id')
+             ->join('books', 'books.id', 'transaction_details.id')
+             ->groupBy('transactions.id', 'transactions.date_start', 'transactions.date_end', 'members.name', 'transaction_details.transaction_id', 'transactions.status')
+             ->get();
 
-        // return $transactions;
+        foreach ($transactions as $key => $transaction) {
+            $transaction->total_costs = "Rp. " . number_format($transaction->total_costs, 0, ",", ".");
+        }
+
+        $datatables = datatables()->of($transactions)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**

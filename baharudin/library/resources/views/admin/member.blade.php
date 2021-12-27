@@ -29,7 +29,7 @@
 	                <table id="datatable" class="table table-hover table-bordered">
 		                <thead>
 		                    <tr>
-		                    	<th width="5%">#</th>
+		                    	<th class="text-center" width="5%">#</th>
 		                    	<th class="text-center">Name</th>
                           		<th class="text-center">Gender</th>
 		                    	<th class="text-center">Email</th>

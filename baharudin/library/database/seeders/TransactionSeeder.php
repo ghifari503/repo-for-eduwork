@@ -21,8 +21,9 @@ class TransactionSeeder extends Seeder
         	$transaction = new Transaction;
 
         	$transaction->member_id = rand(1, 20);
-        	$transaction->date_start = $faker->date();
-        	$transaction->date_end = $faker->date();
+        	$transaction->date_start = $faker->dateTimeBetween('-3 days', 'now');
+        	$transaction->date_end = $faker->dateTimeBetween('+3 days', '+6 days');
+            $transaction->status = $faker->boolean(false);
 
         	$transaction->save();
         }
