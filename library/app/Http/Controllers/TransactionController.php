@@ -30,42 +30,35 @@ class TransactionController extends Controller
 
     public function api(Request $request)
     {
-        if ($request->status == 0) {
-            // $transaction = Transaction::where('status', $request->status)->get();
-            $data = Member::select('transactions.date_start', 'transactions.date_end', 'members.name', DB::raw('DATEDIFF(date_end, date_start) as lama_pinjam') ,DB::raw('SUM(transaction_details.qty) as total_buku'), DB::raw('SUM(transaction_details.qty * books.price) as total_price'),'status' )
-            ->join('transactions', 'members.id', 'transactions.member_id')
-            ->join('transaction_details', 'transactions.id', 'transaction_details.transaction_id')
-            ->join('books', 'books.id', 'transaction_details.book_id')
-            ->groupBy('transactions.date_start', 'transactions.date_end', 'members.name', 'transactions.status')
-            ->where('status', $request->status)
-            ->get();
-        } elseif ($request->status == 1) {
-            $data = Member::select('transactions.date_start', 'transactions.date_end', 'members.name', DB::raw('DATEDIFF(date_end, date_start) as lama_pinjam') ,DB::raw('SUM(transaction_details.qty) as total_buku'), DB::raw('SUM(transaction_details.qty * books.price) as total_price'),'status' )
-            ->join('transactions', 'members.id', 'transactions.member_id')
-            ->join('transaction_details', 'transactions.id', 'transaction_details.transaction_id')
-            ->join('books', 'books.id', 'transaction_details.book_id')
-            ->groupBy('transactions.date_start', 'transactions.date_end', 'members.name', 'transactions.status')
-            ->where('status', $request->status)
-            ->get();
-        } else  {
-            $data = Member::select('transactions.date_start', 'transactions.date_end', 'members.name', DB::raw('DATEDIFF(date_end, date_start) as lama_pinjam') ,DB::raw('SUM(transaction_details.qty) as total_buku'), DB::raw('SUM(transaction_details.qty * books.price) as total_price'),'status' )
-            ->join('transactions', 'members.id', 'transactions.member_id')
-            ->join('transaction_details', 'transactions.id', 'transaction_details.transaction_id')
-            ->join('books', 'books.id', 'transaction_details.book_id')
-            ->groupBy('transactions.date_start', 'transactions.date_end', 'members.name', 'transactions.status')
-            ->get();
-        };
         
-        $datatables = datatables()->of($data)->addColumn('status', function($data){
-            if($data->status == 1){
+        if ($request->status){
+            $transactions = Transaction::select('transactions.*','members.name', DB::raw('DATEDIFF(date_end, date_start) as lama_pinjam'))
+                ->join('members','members.id', '=' , 'transactions.member_id')
+                ->where('status', $request->status)
+                ->get();
+        } else {
+            $transactions = Transaction::select('transactions.*','members.name', DB::raw('DATEDIFF(date_end, date_start) as lama_pinjam'))
+                ->join('members','members.id', '=' , 'transactions.member_id')
+                ->get();
+        }
+        foreach ($transactions as $key => $transaction) {
+            $transaction->total_buku = TransactionDetail::where('transaction_id', $transaction->id)->count();
+
+            $transaction->total_bayar = TransactionDetail::select(DB::raw('SUM(transaction_details.qty*books.price) as total_bayar'))
+                                        ->join('books','books.id','=','transaction_details.book_id')
+                                        ->where('transaction_id', $transaction->id)
+                                        ->first()
+                                        ->total_bayar;
+        }
+
+        $datatables = datatables()->of($transactions)->addColumn('status', function($transaction){
+            if($transaction->status == 1){
                 return 'Selesai';
             } else {
                 return 'Belum Kembali';
             }
         })->addIndexColumn();
-
         return $datatables->make(true);
-        
     }
 
     /**

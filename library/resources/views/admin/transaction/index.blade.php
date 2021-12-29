@@ -102,7 +102,7 @@
         {data:'name',class:'text-center',orderable:true},
         {data:'lama_pinjam',class:'text-center',orderable:true},
         {data:'total_buku',class:'text-center',orderable:true},
-        {data:'total_price',class:'text-center',orderable:true},
+        {data:'total_bayar',class:'text-center',orderable:true},
         {data:'status',class:'text-center',orderable:true},
         {render: function(index,row,data,meta) {
             return `<a href="/transactions/${data.id}/edit" class="btn btn-warning btn-sm">
