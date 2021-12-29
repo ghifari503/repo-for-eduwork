@@ -1,37 +1,130 @@
 @extends('layouts.admin')
 @section('header','Transaction')
 
-@section('content')
-<section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Title</h3>
+@section('css')
+    <!-- dataTables -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+@endsection
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                Ini Page Transaction
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                Footer
-              </div>
-              <!-- /.card-footer-->
+@section('content')
+<div id="controller">
+    <div class="row">
+        <div class="col-lg-12">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
             </div>
-            <!-- /.card -->
-          </div>
+            @endif
+            @if ($message = Session::get('delete'))
+            <div class="alert alert-primary alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                        <a href="{{url('transactions/create')}}"
+                        class="btn btn-sm btn-primary pull-right">Create New Transaction</a>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="status" class="form-control">
+                                <option value="99">Status</option>
+                                <option value="1">Selesai</option>
+                                <option value="0">Belum Kembali</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="tgl_pinjam" class="form-control">
+                                <option value="0">Tanggal Pinjam</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table  id="example" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tgl Pinjam</th>
+                                <th>Tgl Kembali</th>
+                                <th>Nama</th>
+                                <th>Lama Peminjaman</th>
+                                <th>Total Buku</th>
+                                <th>Total Bayar</th>
+                                <th>Status</th>
+                                <th style="width: 150px" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+
+</div>
+@endsection
+
+@section('js')
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<script type="text/javascript">
+    
+    var actionUrl = '{{ url('transactions') }}';
+    var apiUrl  = '{{url('api/transactions')}}';
+
+    var columns = [
+        {data:'DT_RowIndex',class:'text-center',orderable:true},
+        {data:'date_start',class:'text-center',orderable:true},
+        {data:'date_end',class:'text-center',orderable:true},
+        {data:'name',class:'text-center',orderable:true},
+        {data:'lama_pinjam',class:'text-center',orderable:true},
+        {data:'total_buku',class:'text-center',orderable:true},
+        {data:'total_price',class:'text-center',orderable:true},
+        {data:'status',class:'text-center',orderable:true},
+        {render: function(index,row,data,meta) {
+            return `<a href="/transactions/${data.id}/edit" class="btn btn-warning btn-sm">
+                Edit</a> 
+                <a href="/transactions/${data.id}" class="btn btn-info btn-sm">
+                Detail</a>
+                <a href="#" class="btn btn-danger btn-sm">
+                Delete</a>`;
+        }, orderable:false, width:'200px', class:'text-center'},
+    ];
+</script>
+<script src="{{asset('js/data.js')}}"></script>
+<script type="text/javascript">
+
+$('select[name=status]').on('change', function() {
+    status = $('select[name=status]').val()
+    if (status == 99) {
+        controller.table.ajax.url(apiUrl).load()
+    } else {
+        controller.table.ajax.url(apiUrl + '?status=' + status).load()
+    }
+})
+</script>
+
 @endsection

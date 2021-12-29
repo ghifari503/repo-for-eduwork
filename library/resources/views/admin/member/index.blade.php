@@ -26,9 +26,22 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <a href="#" @click="addData()"
+                    <div class="row">
+                        <div class="col-md-10">
+                        <a href="#" @click="addData()"
                         class="btn btn-sm btn-primary pull-right">Create New Member</a>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="sex" id="sex" class="form-control">
+                                <option value="0">All Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+                
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table  id="example" class="table table-bordered table-striped">
@@ -71,8 +84,8 @@
 						<div class="form-group">
 							<label>Gender</label>
 							<select class="form-select form-control" name="gender" :value="data.gender">
-							<option value="m">Male</option>
-							<option value="f">Female</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
 							</select>
 						</div>
                         <div class="form-group">
@@ -137,4 +150,15 @@
     ];
 </script>
 <script src="{{asset('js/data.js')}}"></script>
+<script type="text/javascript">
+
+$('select[name=sex]').on('change', function() {
+            sex = $('select[name=sex]').val()
+            if (sex == 0) {
+                controller.table.ajax.url(apiUrl).load()
+            } else {
+                controller.table.ajax.url(apiUrl + '?sex=' + sex).load()
+            }
+        })
+</script>
 @endsection
