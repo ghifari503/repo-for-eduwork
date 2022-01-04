@@ -39,11 +39,12 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select name="tgl_pinjam" class="form-control">
-                                <option value="0">Tanggal Pinjam</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type='date' class="form-control" name="date">
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,12 +106,15 @@
         {data:'total_bayar',class:'text-center',orderable:true},
         {data:'status',class:'text-center',orderable:true},
         {render: function(index,row,data,meta) {
-            return `<a href="/transactions/${data.id}/edit" class="btn btn-warning btn-sm">
+            return `<a href="./transactions/${data.id}/edit" class="btn btn-warning btn-sm">
                 Edit</a> 
-                <a href="/transactions/${data.id}" class="btn btn-info btn-sm">
+                <a href="./transactions/${data.id}" class="btn btn-info btn-sm">
                 Detail</a>
-                <a href="#" class="btn btn-danger btn-sm">
-                Delete</a>`;
+                <form action="./transactions/${data.id}" method="post">
+                @csrf
+                @method('delete')
+                    <button onclick="return confirm('Are you sure?');" type="submit" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm">Delete</button>
+                </form>`;
         }, orderable:false, width:'200px', class:'text-center'},
     ];
 </script>
@@ -125,6 +129,16 @@ $('select[name=status]').on('change', function() {
         controller.table.ajax.url(apiUrl + '?status=' + status).load()
     }
 })
+
+$('input[name=date]').on('change', function() {
+    date_start = $('input[name=date]').val()
+    if (date_start == 99) {
+        controller.table.ajax.url(apiUrl).load()
+    } else {
+        controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
+    }
+})
+
 </script>
 
 @endsection

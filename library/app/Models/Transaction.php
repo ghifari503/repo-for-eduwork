@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Hasmany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -12,14 +14,23 @@ class Transaction extends Model
     protected $fillable = ['member_id', 'date_start', 'date_end', 'status'];
 
 
-
-    public function transactionDetail()
+    public function member(): BelongsTo
     {
-        return $this->hasMany('App\Models\TransactionDetail','id');
+        return $this->belongsTo(Member::class);
     }
 
-    public function member()
+    public function transactionDetails(): HasMany
     {
-        return $this->belongsTo('App\Models\Member', 'member_id');
+        return $this->hasMany(TransactionDetail::class);
     }
+
+    // public function transactionDetail()
+    // {
+    //     return $this->hasMany('App\Models\TransactionDetail','id');
+    // }
+
+    // public function member()
+    // {
+    //     return $this->belongsTo('App\Models\Member', 'member_id');
+    // }
 }
