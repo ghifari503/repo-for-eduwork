@@ -43,7 +43,7 @@
                     <td class="text-center">{{$key + 1}}</td>
                     <td>{{$items->name}}</td>
                     <td class="text-right">{{count($items->books)}}</td>
-                    <td class="text-center">{{date('j F Y', strtotime($items->created_at))}}</td>
+                    <td class="text-center">{{convert_date($items->created_at)}}</td>
                     <td>
                       <form action="/catalogs/{{$items->id}}" method="POST">
                       <a href="/catalogs/{{$items->id}}/edit" class="btn btn-sm btn-outline-secondary btn-icon-text">

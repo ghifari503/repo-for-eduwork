@@ -24,7 +24,16 @@ class AuthorController extends Controller
     public function api()
     {
         $author = Author::all();
-        $datatables = datatables()->of($author)->addIndexColumn();
+
+        //foreach ($author as $key => $item) {
+        //    $item->date = convert_date($item->created_at);
+        //}
+
+        $datatables = datatables()->of($author)
+                    ->addColumn('date', function($author){
+                        return convert_date($author->created_at);
+                    })
+                    ->addIndexColumn();
         
         return $datatables->make(true);
     }

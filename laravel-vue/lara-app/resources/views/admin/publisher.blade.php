@@ -21,6 +21,7 @@
     {data : 'email', orderable: true},
     {data : 'phone_number', class : 'text-right', orderable: true},
     {data : 'address', orderable: true},
+    {data : 'date', orderable: true},
     {render: function (index, row, data, meta) {
       return `
       <a href="#" class="btn btn-sm btn-outline-secondary btn-icon-text" onclick="controller.editData(event, ${meta.row})">Edit</a>
@@ -93,6 +94,7 @@
                       <th class="text-center">Email</th>
                       <th class="text-center">Phone Number</th>
                       <th class="text-center">Address</th>
+                      <th>Created at</th>
                       <th>Action</th>
                     </tr>
                   </thead>
