@@ -27,7 +27,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->can('view transactionsss')) {
+        if (auth()->user()->can('view transactions')) {
             return view('admin.transaction.index', [
                 'tanggalPinjam' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
             ]);
