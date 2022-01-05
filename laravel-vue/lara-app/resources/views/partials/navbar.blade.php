@@ -32,13 +32,13 @@
           </div>
         </li>
         <li class="nav-item nav-user-status dropdown">
-            <p class="mb-0">Last login was 23 hours ago.</p>
+            <p class="mb-0">Last login was an hours ago.</p>
         </li>
       </ul>
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item nav-date dropdown">
           <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
-            <h6 class="date mb-0">Today : Mar 23</h6>
+            <h6 class="date mb-0">Today : <span id='datenow'></span></h6>
             <i class="typcn typcn-calendar"></i>
           </a>
         </li>
@@ -51,7 +51,7 @@
             <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
             <a class="dropdown-item preview-item">
               <div class="preview-thumbnail">
-                  <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                  <img src="{{asset('assets/images/faces/face4.jpg')}}" alt="image" class="profile-pic">
               </div>
               <div class="preview-item-content flex-grow">
                 <h6 class="preview-subject ellipsis font-weight-normal">David Grey
@@ -63,7 +63,7 @@
             </a>
             <a class="dropdown-item preview-item">
               <div class="preview-thumbnail">
-                  <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                  <img src="{{asset('assets/images/faces/face2.jpg')}}" alt="image" class="profile-pic">
               </div>
               <div class="preview-item-content flex-grow">
                 <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
@@ -75,7 +75,7 @@
             </a>
             <a class="dropdown-item preview-item">
               <div class="preview-thumbnail">
-                  <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                  <img src="{{asset('assets/images/faces/face3.jpg')}}" alt="image" class="profile-pic">
               </div>
               <div class="preview-item-content flex-grow">
                 <h6 class="preview-subject ellipsis font-weight-normal"> Johnson

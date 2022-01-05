@@ -167,6 +167,55 @@ class HomeController extends Controller
                         ->whereMonth('created_at', '6')
                         ->get();
         return $data19; */
-        return view('home');
+        //return view('home');
+    }
+    public function dashboard() 
+    {
+        $total_book = Book::count();
+        $total_publisher = Publisher::count();
+        $total_author = Author::count();
+
+        $data_donut = Book::select(DB::raw("COUNT(publisher_id) as total"))->groupBy('publisher_id')->orderBy('publisher_id', 'asc')->pluck('total');
+        $label_donut = Publisher::orderBy('publishers.id', 'asc')->join('books', 'books.publisher_id', '=', 'publishers.id')->groupBy('publishers.name')->pluck('publishers.name');
+
+        $label_bar = ['Start', 'End'];
+        $data_bar = [];
+
+        foreach ($label_bar as $key => $value) {
+            $data_bar[$key]['label'] = $label_bar[$key];
+            $data_bar[$key]['backgroundColor'] = $key == 0 ? 'rgba(60, 141, 138, 0.9)' : 'rgba(204, 153, 204, 0.5)';
+            $data_month = [];
+
+            foreach (range(1, 12) as $month) {
+                if ($key == 0) {
+                    $data_month[] = Transaction::select(DB::raw("COUNT(*) as total"))->whereMonth('date_start', $month)->first()->total;
+                }else {
+                    $data_month[] = Transaction::select(DB::raw("COUNT(*) as total"))->whereMonth('date_end', $month)->first()->total;
+                }  
+            }
+
+            $data_bar[$key]['data'] = $data_month;
+        }
+
+        $label_line = ['Member Register'];
+        $data_line = [];
+
+        foreach ($label_line as $key => $value) {
+            $data_line[$key]['label'] = $label_line[$key];
+            $data_line[$key]['backgroundColor'] = 'rgba(55, 178, 77, 0.9)';
+            $data_month = [];
+
+            foreach (range(1, 12) as $month) {
+                
+                $data_month[] = Member::select(DB::raw("COUNT(members.created_at) as total"))->whereMonth('created_at', $month)->first()->total;
+            }
+
+            $data_line[$key]['data'] = $data_month;
+        }
+
+        $label_pie = ['Female', 'Male'];
+        $data_pie = Member::select(DB::raw("COUNT(gender) as total"))->groupBy('gender')->orderBy('gender', 'asc')->pluck('total');
+        
+        return view('home', compact('total_book', 'total_publisher', 'total_author', 'data_donut', 'label_donut', 'data_bar', 'data_line', 'label_pie', 'data_pie'));
     }
 }
