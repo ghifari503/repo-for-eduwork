@@ -217,16 +217,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{url('transactionDetails')}}" class="nav-link {{request()->is('transactionDetails') ? 'active' : ''}}">
-                            &nbsp;&nbsp;<i class="fas fa-receipt"></i>
-                            &nbsp;
-                            &nbsp;
-                                <p>
-                                    Detail Transaction
-                                </p>
-                            </a>
-                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

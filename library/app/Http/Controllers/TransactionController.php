@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +27,41 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('admin.transaction.index', [
-            'tanggalPinjam' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
-        ]);
+        if (auth()->user()->can('view transactionsss')) {
+            return view('admin.transaction.index', [
+                'tanggalPinjam' => Transaction::select('date_start')->orderBy('date_start', 'desc')->distinct()->get()
+            ]);
+        } else {
+            return view('admin.error');
+        }
 
 
+
+    }
+
+    public function test_spatie()
+    {
+        // $role = Role::create(['name' => 'suadmin']);
+        // $permission = Permission::create(['name' => 'view transactions']);
+
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+
+        //memberikan role berdasarkan user yg login
+        // $user = auth()->user();
+        // $user->assignRole('suadmin');
+        // return $user;
+        
+        //memberikan role melalui where id
+        // $user = User::where('id', 2)->first();
+        // $user->assignRole('suadmin');
+        // return $user;
+
+        $user = User::with('roles')->get();
+        return $user;
+
+        // $user = User::where('id', 2)->first();
+        // $user->removeRole('suadmin');
     }
 
 

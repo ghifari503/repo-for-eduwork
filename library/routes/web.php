@@ -54,6 +54,7 @@ Route::get('/api/books', [App\Http\Controllers\BookController::class, 'api']);
 
 Route::resource('/transactions', App\Http\Controllers\TransactionController::class); 
 Route::get('/api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
+Route::get('/test_spatie', [App\Http\Controllers\TransactionController::class, 'test_spatie']);
 
 
 Route::get('/transactionDetails', [App\Http\Controllers\TransactionDetailController::class, 'index']);

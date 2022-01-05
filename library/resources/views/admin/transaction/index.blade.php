@@ -9,6 +9,8 @@
 @endsection
 
 @section('content')
+
+@can('view transactions')
 <div id="controller">
     <div class="row">
         <div class="col-lg-12">
@@ -74,6 +76,8 @@
     </div>
 
 </div>
+@endcan
+
 @endsection
 
 @section('js')
@@ -132,11 +136,7 @@ $('select[name=status]').on('change', function() {
 
 $('input[name=date]').on('change', function() {
     date_start = $('input[name=date]').val()
-    if (date_start == 99) {
-        controller.table.ajax.url(apiUrl).load()
-    } else {
-        controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
-    }
+    controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
 })
 
 </script>
