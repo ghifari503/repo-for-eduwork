@@ -9,19 +9,24 @@ class TransactionDetail extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'transaction_id', 
         'book_id', 
         'qty'
     ];
 
-    public function transactions()
+    public function transaction()
     {
-        return $this->belongsTo('App\Models\Transactions', 'transaction_id');
+        return $this->belongsTo('App\Models\Transaction', 'transaction_id');
     }
 
-    public function books()
+    public function book()
     {
-    	return $this->belongsTo('App\Models\Books', 'book_id');
+        return $this->belongsTo('App\Models\Book', 'book_id');
     }
 }

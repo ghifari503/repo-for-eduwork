@@ -28,6 +28,7 @@ Route::resource('/books', App\Http\Controllers\BookController::class);
 Route::resource('/members', App\Http\Controllers\MemberController::class);
 Route::resource('/catalogs', App\Http\Controllers\CatalogController::class);
 Route::resource('/transactions', App\Http\Controllers\TransactionController::class);
+Route::resource('/transaction_details', App\Http\Controllers\TransactionDetailController::class);
 
 // Routing apis
 Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);

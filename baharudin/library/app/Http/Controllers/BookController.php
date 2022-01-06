@@ -31,11 +31,8 @@ class BookController extends Controller
         $publishers = Publisher::all();
         $authors = Author::all();
         $catalogs = Catalog::all();
+        
         return view('admin.book', compact('publishers', 'authors', 'catalogs'));
-
-        // $books = Book::with('publisher', 'transactionDetails')->get();
-
-        // return $books;
     }
 
     public function api()

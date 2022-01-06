@@ -9,6 +9,11 @@ class Member extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'gender',
@@ -19,11 +24,11 @@ class Member extends Model
 
     public function user()
     {
-    	return $this->hasOne('App\Models\User', 'member_id');
+        return $this->hasOne('App\Models\User', 'member_id');
     }
 
     public function transactions()
     {
-    	return $this->hasMany('App\Models\Transaction', 'member_id');
+        return $this->hasMany('App\Models\Transaction', 'member_id');
     }
 }

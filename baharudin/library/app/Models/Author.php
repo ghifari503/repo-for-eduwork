@@ -9,15 +9,20 @@ class Author extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'email',
         'phone_number',
-        'address'
+        'address',
     ];
 
     public function books()
     {
-    	return $this->hasMany('App\Models\Book', 'author_id');
+        return $this->hasMany('App\Models\Book', 'author_id');
     }
 }

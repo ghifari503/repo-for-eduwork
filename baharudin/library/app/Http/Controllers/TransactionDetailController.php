@@ -24,7 +24,7 @@ class TransactionDetailController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.transaction.transaction_detail');
     }
 
     public function api(Request $request)

@@ -33,8 +33,15 @@ class HomeController extends Controller
         $total_transactions = Transaction::count();
         $total_publishers = Publisher::count();
 
-        $label_donut = Publisher::orderBy('publisher_id')->join('books', 'books.publisher_id', 'publishers.id')->groupBy('publishers.name')->pluck('publishers.name');
-        $data_donut = Book::select(DB::raw("COUNT(publisher_id) as total"))->groupBy('publisher_id')->orderBy('publisher_id')->pluck('total');
+        $label_donut = Publisher::orderBy('publisher_id')
+                            ->join('books', 'books.publisher_id', 'publishers.id')
+                            ->groupBy('publishers.name')
+                            ->pluck('publishers.name');
+
+        $data_donut = Book::select(DB::raw("COUNT(publisher_id) as total"))
+                            ->groupBy('publisher_id')
+                            ->orderBy('publisher_id')
+                            ->pluck('total');
 
         $label_bar = ['Transactions'];
         $data_bar = [];

@@ -24,8 +24,6 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //$authors = Author::all();
-
         return view('admin.author');
     }
 
@@ -33,15 +31,11 @@ class AuthorController extends Controller
     {
         $authors = Author::all();
 
-        // foreach ($authors as $key => $author) {
-        //     $author->date = dateFormat($author->created_at);
-        // }
-
-        $datatables = datatables()  ->of($authors)
-                                    ->addColumn('date', function($author) {
-                                        return dateFormat($author->created_at);
-                                    })
-                                    ->addIndexColumn();
+        $datatables = datatables()->of($authors)
+                                ->addColumn('date', function($author) {
+                                                return dateFormat($author->created_at);
+                                            })
+                                ->addIndexColumn();
 
         return $datatables->make(true);
     }

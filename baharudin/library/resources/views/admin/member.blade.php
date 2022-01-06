@@ -117,7 +117,7 @@
 	var columns = [
 		{data: 'DT_RowIndex', class: 'text-center', orderable: true},
 		{data: 'name', class: 'text-left', orderable: true},
-    	{data: 'gender', class: 'text-center', orderable: false},
+    	{data: 'gender', class: 'text-center', orderable: true},
 		{data: 'phone_number', class: 'text-center', orderable: false},
 		{data: 'address', class: 'text-center', orderable: false},
 		{data: 'email', class: 'text-center', orderable: false},

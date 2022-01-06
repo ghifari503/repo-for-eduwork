@@ -9,15 +9,20 @@ class Publisher extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'name', 
-        'email', 
-        'phone_number', 
-        'address'
+        'name',
+        'email',
+        'phone_number',
+        'address',
     ];
 
     public function books()
     {
-    	return $this->hasMany('App\Models\Book', 'publisher_id');
+        return $this->hasMany('App\Models\Book', 'publisher_id');
     }
 }

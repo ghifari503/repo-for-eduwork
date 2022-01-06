@@ -9,6 +9,11 @@ class Book extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'isbn',
         'title',
@@ -17,26 +22,21 @@ class Book extends Model
         'author_id',
         'catalog_id',
         'qty',
-        'price'
+        'price',
     ];
 
     public function publisher()
     {
-    	return $this->belongsTo('App\Models\Publisher', 'publisher_id');
+        return $this->belongsTo('App\Models\Publisher', 'publisher_id');
     }
 
     public function author()
     {
-    	return $this->belongsTo('App\Models\Author', 'author_id');
+        return $this->belongsTo('App\Models\Author', 'author_id');
     }
 
     public function catalog()
     {
-    	return $this->belongsTo('App\Models\Catalog', 'catalog_id');
-    }
-
-    public function transactionDetails()
-    {
-    	return $this->hasMany('App\Models\TransactionDetail', 'book_id');
+        return $this->belongsTo('App\Models\Catalog', 'catalog_id');
     }
 }
