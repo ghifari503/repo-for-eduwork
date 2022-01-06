@@ -40,27 +40,17 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge"></span>
+          <span class="badge badge-warning navbar-badge">{{ count(notifications()) }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">Notifications</span>
+          <span class="dropdown-item dropdown-header">{{ count(notifications()) }} Notifications</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i>Judge Kautzer III
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> Dr. Stone Dickinson
-            <span class="float-right text-muted text-sm">1 day</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> Sandford Aufderhar
-            <span class="float-right text-muted text-sm">1 day</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          @foreach(notifications() as $notification)
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-users"></i>
+              <span class="font-weight">{{ $notification->member->name }} late {{ abs($notification->late) }} days</span>
+            </a>
+          @endforeach
         </div>
       </li>
       <!-- Log Out Menu -->
