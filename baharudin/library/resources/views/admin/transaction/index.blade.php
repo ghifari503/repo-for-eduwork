@@ -17,10 +17,12 @@
 					<a href="#" class="btn btn-sm btn-primary pull-right">Create New Transaction</a>
 					<!-- Loan Date Filter -->
                 	<div class="card-tools">
-                        <select class="form-control" name="loan_date">
-                            <option value="all">Loan Date Filter</option>
-                            
-                        </select>
+                        <div class='input-group date' id='datetimepicker'>
+                            <input type='date' class="form-control" name="loan_date">
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                 	</div>
                 	<!-- Status Filter -->
                 	<div class="card-tools mr-3">
@@ -146,5 +148,10 @@
             controller.table.ajax.url(apiUrl + '?status=' + status).load()
         }
     });
+
+    $('input[name=loan_date]').on('change', function() {
+    date_start = $('input[name=loan_date]').val()
+    controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
+	});
 </script>
 @endsection

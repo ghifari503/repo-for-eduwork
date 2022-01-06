@@ -28,8 +28,9 @@ class TransactionController extends Controller
     public function index()
     {
         $transactionStatuses = Transaction::select('status')->distinct()->orderBy('status')->get();
+        $loanDates = Transaction::select('date_start')->distinct()->orderBy('date_start', 'desc')->get();
 
-        return view('admin.transaction.index', compact('transactionStatuses'));
+        return view('admin.transaction.index', compact('transactionStatuses', 'loanDates'));
     }
 
     public function api(Request $request)
@@ -39,6 +40,10 @@ class TransactionController extends Controller
 
         if ($request->status == '0' || $request->status == '1') {
             $transactions = $transactions->where('status', $request->status);
+        }
+
+        if ($request->date_start) {
+            $transactions = $transactions->where('date_start', $request->date_start);
         }
 
         $transactions = $transactions->get();
