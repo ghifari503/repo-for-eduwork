@@ -118,7 +118,7 @@
 		{
 			render: function(index, row, data, meta) {
 			return `
-			<a href="#" class="btn btn-success btn-sm" onclick="controller.editData()">
+			<a href="{{ url('/transactions') }}/${data.id}" class="btn btn-success btn-sm">
 				Detail
 			</a>
 			<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
@@ -150,8 +150,8 @@
     });
 
     $('input[name=loan_date]').on('change', function() {
-    date_start = $('input[name=loan_date]').val()
-    controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
+	    date_start = $('input[name=loan_date]').val()
+	    controller.table.ajax.url(apiUrl + '?date_start=' + date_start).load()
 	});
 </script>
 @endsection

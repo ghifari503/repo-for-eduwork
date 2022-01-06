@@ -99,7 +99,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('admin.transaction.detail', ['transaction' => $transaction]);
     }
 
     /**
