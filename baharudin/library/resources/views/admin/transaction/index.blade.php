@@ -127,9 +127,9 @@
 					</a>
 				</div>
 				<div class="col">
-					<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
-						Edit
-					</a>
+					<a href="./transactions/${data.id}/edit" class="btn btn-warning btn-sm">
+                		Edit
+                	</a>
 				</div>
 				<div class="col">
 					<form action="{{ url('/transactions') }}/${data.id}" method="post">
