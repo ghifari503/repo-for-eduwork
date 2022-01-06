@@ -3,7 +3,7 @@ use App\Models\Transaction;
 
 function dateFormat($value)
 {
-	return date('H:i:s - d M y', strtotime($value));
+	return date('d-m-Y', strtotime($value));
 }
 
 function notifications()
