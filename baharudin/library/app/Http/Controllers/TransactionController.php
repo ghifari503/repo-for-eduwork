@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Member;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 
@@ -77,7 +79,10 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $members = Member::select('id', 'name')->orderBy('name', 'asc')->get();
+        $books = Book::select('id', 'title')->where('qty', '>', '0')->orderBy('title', 'asc')->get();
+
+        return view('admin.transaction.create',compact('members', 'books'));
     }
 
     /**
@@ -88,7 +93,39 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $attributes = request()->validate(
+            [
+            'member_id' => 'required',
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after:date_start',
+            'book_id' => 'required'],
+            [
+            'member_id.required' => 'The member field is required.',
+            'book_id.required' => 'The book field is required.',
+            ]
+        );
+
+        $transaction = Transaction::create([
+            'member_id' => $attributes['member_id'],
+            'date_start' => $attributes['date_start'],
+            'date_end' => $attributes['date_end'],
+        ]);
+
+        foreach ($attributes['book_id'] as $book_id) {
+            TransactionDetail::create([
+                'transaction_id' => $transaction->id,
+                'book_id' => $book_id,
+                'qty'  => 1
+            ]);
+
+            Book::where('id', $book_id)
+                ->decrement('qty', 1);
+        }
+
+        // return $request;
+
+        return redirect('transactions')->with('success','Success create new transactions');
     }
 
     /**

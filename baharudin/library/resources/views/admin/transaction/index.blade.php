@@ -14,7 +14,9 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-header">
-					<a href="#" class="btn btn-sm btn-primary pull-right">Create New Transaction</a>
+					<a href="{{ url('transactions/create') }}" class="btn btn-sm btn-primary pull-right">
+						Create New Transaction
+					</a>
 					<!-- Loan Date Filter -->
                 	<div class="card-tools">
                         <div class='input-group date' id='datetimepicker'>
