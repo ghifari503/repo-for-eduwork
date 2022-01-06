@@ -18,16 +18,17 @@
 					<!-- Loan Date Filter -->
                 	<div class="card-tools">
                         <select class="form-control" name="loan_date">
-                          <option value="">Loan Date Filter</option>
-                          <option value="">Date</option>
+                            <option value="all">Loan Date Filter</option>
+                            
                         </select>
                 	</div>
                 	<!-- Status Filter -->
                 	<div class="card-tools mr-3">
                         <select class="form-control" name="status">
-                          <option value="">Status Filter</option>
-                          <option value="">On Loan</option>
-                          <option value="">Returned</option>
+                        	<option value="2">Status Filter</option>
+                        	@foreach($transactionStatuses as $transactionStatus)
+                                <option value="{{ $transactionStatus->status }}">{{ $transactionStatus->status }}</option>
+                            @endforeach
                         </select>
                 	</div>
 				</div>
@@ -92,7 +93,7 @@
 			orderable: true
 		},
 		{
-			data: 'name',
+			data: 'member.name',
 			class: 'text-left',
 			orderable: true
 		},
@@ -137,4 +138,15 @@
 	];
 </script>
 <script src="{{ asset('js/data.js') }}"></script>
+<script type="text/javascript">
+	$('select[name=status]').on('change', function() {
+        status = $('select[name=status]').val()
+
+        if (status == 2) {
+            controller.table.ajax.url(apiUrl).load()
+        } else {
+            controller.table.ajax.url(apiUrl + '?status=' + status).load()
+        }
+    });
+</script>
 @endsection

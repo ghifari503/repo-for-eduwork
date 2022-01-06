@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -26,28 +27,40 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('admin.transaction');
+        $transactionStatuses = Transaction::select('status')->distinct()->orderBy('status')->get();
+
+        return view('admin.transaction.index', compact('transactionStatuses'));
     }
 
     public function api(Request $request)
     {
-        // $transactions = Transaction::with('transactionDetail', 'member')->get();
-        $transactions = Transaction::select('transactions.id', 'name', 'date_start', 'date_end',
-             DB::raw('DATEDIFF(date_end, date_start) as duration'),
-             DB::raw('COUNT(transaction_details.transaction_id) as total_transactions'),
-             DB::raw('SUM(books.price) as total_costs'),
-             'status')
-             ->join('members', 'members.id', 'transactions.member_id')
-             ->join('transaction_details', 'transaction_details.transaction_id', 'transactions.id')
-             ->join('books', 'books.id', 'transaction_details.id')
-             ->groupBy('transactions.id', 'transactions.date_start', 'transactions.date_end', 'members.name', 'transaction_details.transaction_id', 'transactions.status')
-             ->get();
+        $transactions = Transaction::select('transactions.*', 'members.name', DB::raw('DATEDIFF(date_end, date_start) as duration'))
+                                    ->join('members', 'members.id', 'transactions.member_id');
 
-        foreach ($transactions as $key => $transaction) {
-            $transaction->total_costs = "Rp. " . number_format($transaction->total_costs, 0, ",", ".");
+        if ($request->status == '0' || $request->status == '1') {
+            $transactions = $transactions->where('status', $request->status);
         }
 
-        $datatables = datatables()->of($transactions)->addIndexColumn();
+        $transactions = $transactions->get();
+
+        foreach ($transactions as $key => $transaction) {
+            $transaction->total_transactions = TransactionDetail::where('transaction_id', $transaction->id)->count();
+            $transaction->total_costs = TransactionDetail::select(DB::raw('SUM(transaction_details.qty * books.price) as total_costs'))
+                                        ->join('books', 'books.id', 'transaction_details.book_id')
+                                        ->where('transaction_id', $transaction->id)
+                                        ->first()
+                                        ->total_costs;
+        }
+
+        $datatables = datatables()->of($transactions)
+                        ->addColumn('status', function ($transactions) {
+                            if ($transactions->status == 1) {
+                                return 'Returned';
+                            } else {
+                                return 'On Loan';
+                            }
+                        })
+                        ->addIndexColumn();
 
         return $datatables->make(true);
     }
