@@ -125,7 +125,7 @@ class TransactionController extends Controller
 
         // return $request;
 
-        return redirect('transactions')->with('success','Success create new transactions');
+        return redirect('transactions');
     }
 
     /**
@@ -170,6 +170,24 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transactionDetails = TransactionDetail::where('transaction_id', $transaction->id)->get();
+
+        if ($transaction->status == 1) {
+            $transaction->delete();
+
+            foreach ($transactionDetails as $transactionDetail) {
+                TransactionDetail::where('id', $transactionDetail->id)->delete();
+            }
+        } else {
+            $transaction->delete();
+
+            foreach ($transactionDetails as $transactionDetail) {
+                TransactionDetail::where('id', $transactionDetail->id)->delete();
+                Book::where('id', $transactionDetail->book_id)
+                    ->increment('qty', 1);
+            }
+        }
+
+        return redirect('transactions');
     }
 }

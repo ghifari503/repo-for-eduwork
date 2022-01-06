@@ -120,15 +120,26 @@
 		{
 			render: function(index, row, data, meta) {
 			return `
-			<a href="{{ url('/transactions') }}/${data.id}" class="btn btn-success btn-sm">
-				Detail
-			</a>
-			<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
-				Edit
-			</a>
-			<a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
-				Delete
-			</a>
+			<div class="row">
+				<div class="col">
+					<a href="{{ url('/transactions') }}/${data.id}" class="btn btn-success btn-sm">
+						Detail
+					</a>
+				</div>
+				<div class="col">
+					<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+						Edit
+					</a>
+				</div>
+				<div class="col">
+					<form action="{{ url('/transactions') }}/${data.id}" method="post">
+		                @csrf
+
+		                @method('delete')
+		                <button onclick="return confirm('Are you sure?');" type="submit"class="d-sm-inline-block btn btn-sm btn-danger shadow-sm">Delete</button>
+		            </form>
+				</div>
+			</div>
 			`
 			},
 			orderable: false,
