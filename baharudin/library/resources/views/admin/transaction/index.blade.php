@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 
+@can('view content')
 @section('content')
 <div id="controller">
 	<div class="row">
@@ -57,6 +58,7 @@
 	</div>
 </div>
 @endsection
+@endcan
 
 @section('js')
 <!-- Datatables & Plugins -->

@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Member;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,10 +30,14 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactionStatuses = Transaction::select('status')->distinct()->orderBy('status')->get();
-        $loanDates = Transaction::select('date_start')->distinct()->orderBy('date_start', 'desc')->get();
+        if (auth()->user()->can('view content')) {
+            $transactionStatuses = Transaction::select('status')->distinct()->orderBy('status')->get();
+            $loanDates = Transaction::select('date_start')->distinct()->orderBy('date_start', 'desc')->get();
 
-        return view('admin.transaction.index', compact('transactionStatuses', 'loanDates'));
+            return view('admin.transaction.index', compact('transactionStatuses', 'loanDates'));
+        } else {
+            return abort(403);
+        }
     }
 
     public function api(Request $request)
@@ -257,5 +262,45 @@ class TransactionController extends Controller
         }
 
         return redirect('transactions');
+    }
+
+    public function learnSpatiePermission()
+    {
+        $currentUser = auth()->user();
+
+        /**
+         * Define role and permission
+         */
+        // $role = Role::create(['name' => 'librarian']);
+        // $permission = Permission::create(['name' => 'view content']);
+
+        /**
+         * Assign permission to a role
+         */
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+
+        /**
+         * Assign or remove role to current user
+         */
+        $currentUser->assignRole('librarian');
+        // $currentUser->removeRole('librarian');
+        
+        /**
+         * Return current user data
+         */
+        // return $currentUser;
+
+        /**
+         * Assign or remove role from user based on its id
+         */
+        // $user = User::where('id', 1)->first();
+        // $user->assignRole('librarian');
+        // $user->removeRole('librarian');
+
+        /**
+         * View users data with their role
+         */
+        return User::with('roles')->get();
     }
 }
