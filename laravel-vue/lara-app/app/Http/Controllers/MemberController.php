@@ -21,9 +21,14 @@ class MemberController extends Controller
         return view('admin.member');
     }
 
-    public function api()
+    public function api(Request $request)
     {
-        $members = Member::all();
+        if ($request->gender) {
+            $members = Member::where('gender', $request->gender)->get();
+        } else {
+            $members = Member::all();
+        };
+
         $datatables = datatables()->of($members)
                     ->addColumn('date', function($members){
                         return convert_date($members->created_at);

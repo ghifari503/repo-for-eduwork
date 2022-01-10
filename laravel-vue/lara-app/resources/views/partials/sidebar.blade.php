@@ -38,6 +38,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{url('transactions')}}">
+          <i class="typcn typcn-clipboard menu-icon"></i>
+          <span class="menu-title">Transaction</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="https://bootstrapdash.com/demo/polluxui-free/docs/documentation.html">
           <i class="typcn typcn-mortar-board menu-icon"></i>
           <span class="menu-title">Documentation</span>

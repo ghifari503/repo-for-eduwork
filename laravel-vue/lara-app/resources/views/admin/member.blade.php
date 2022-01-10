@@ -33,6 +33,17 @@
 </script>
 
 <script type="text/javascript" src="{{asset('js/controller.js')}}"></script>
+
+<script type="text/javascript">
+  $('select[name=gender]').on('change', function() {
+              gender = $('select[name=gender]').val();
+              if (gender == 0) {
+                  controller.table.ajax.url(apiUrl).load();
+              } else {
+                  controller.table.ajax.url(apiUrl + '?gender=' + gender).load();
+              }
+          });
+</script>
 @endpush
 
 @section('content')
@@ -43,10 +54,21 @@
           <div class="card">
             <!-- /.card-header -->
               <div class="card-body">
-                  <a href="#" class="btn btn-outline-info btn-icon-text mb-3" @click="addData()">
+                <div class="row justify-content-between">
+                  <div class="col-sm-6">  
+                    <a href="#" class="btn btn-outline-info btn-icon-text mb-3" @click="addData()">
                     <i class="typcn typcn-document-add btn-icon-append"></i>
                     Add Member
-                  </a> 
+                    </a>
+                  </div>
+                  <div class="col-sm-3">
+                    <select name="gender" class="form-control border-warning">
+                        <option value="0">All Gender</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                  </div>
+                </div> 
                 <table id="example" class="table table-striped table-bordered">
                   <thead>
                     <tr>

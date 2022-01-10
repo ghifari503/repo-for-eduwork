@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-    protected $fillable = ['member_id', 'date_start', 'date_end'];
+    protected $fillable = ['member_id', 'date_start', 'date_end', 'status'];
 
     public function member()
     {
@@ -17,6 +17,6 @@ class Transaction extends Model
 
     public function detail_transaction()
     {
-        return $this->hasOne(DetailTransaction::class, 'transaction_id');
+        return $this->hasMany(DetailTransaction::class, 'transaction_id');
     }
 }
