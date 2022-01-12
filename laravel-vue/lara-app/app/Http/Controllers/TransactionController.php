@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\Transaction;
 use App\Models\DetailTransaction;
 use App\Models\Book;
@@ -20,7 +22,34 @@ class TransactionController extends Controller
     public function index()
     {
         
-        return view('admin.transaction.index');
+        //if (auth()->user()->can('manage transactions')) {
+            return view('admin.transaction.index');
+        //} else {
+        //return abort('403');
+        //}
+    }
+
+    public function addspatie()
+    {
+        //$role = Role::create(['name' => 'librarian']);
+        //$permission = Permission::create(['name' => 'manage transactions']);
+
+        //$role->givePermissionTo($permission);
+        //$permission->assignRole($role);
+
+        $user = auth()->user();
+        //$user->assignRole('librarian');
+        //return $user;
+        
+        // $user = User::where('id', 1)->first();
+        // $user->assignRole('librarian');
+        // return $user;
+
+        $user = User::with('roles')->get();
+        return $user;
+
+        // $user = User::where('id', 1)->first();
+        // $user->removeRole('librarian');
     }
 
     public function api(Request $request)

@@ -28,10 +28,12 @@
       return `
       <form action="/transactions/${data.id}" method="POST">
       <a href="/transactions/${data.id}" class="btn btn-sm btn-outline-info btn-icon-text">Detail</a>
+      @can('manage transactions')
       <a href="/transactions/${data.id}/edit" class="btn btn-sm btn-outline-secondary btn-icon-text">Edit</a>
       @method('DELETE')
       @csrf
       <input type="submit" class="btn btn-sm btn-outline-danger btn-icon-text" value="Delete">
+      @endcan
       </form>
       `;
     }, orderable:false, class: 'text-center'},
