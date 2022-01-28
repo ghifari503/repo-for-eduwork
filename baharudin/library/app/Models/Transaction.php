@@ -18,6 +18,7 @@ class Transaction extends Model
         'member_id',
         'date_start',
         'date_end',
+        'status'
      ];
 
     public function member()
