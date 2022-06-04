@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 04:39 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Waktu pembuatan: 04 Jun 2022 pada 13.26
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,21 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_pelanggan`
---
-
-CREATE TABLE `data_pelanggan` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(32) NOT NULL,
-  `jenis_kelamin` varchar(12) NOT NULL,
-  `umur` int(11) NOT NULL,
-  `alamat` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jenis_obat`
+-- Struktur dari tabel `jenis_obat`
 --
 
 CREATE TABLE `jenis_obat` (
@@ -46,10 +32,26 @@ CREATE TABLE `jenis_obat` (
   `nama_satuan` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `jenis_obat`
+--
+
+INSERT INTO `jenis_obat` (`id`, `nama_satuan`) VALUES
+(1, 'Abacavir'),
+(2, 'ACE Inhibitor'),
+(3, 'Acetazolamide'),
+(4, 'Actemra'),
+(5, 'Acitretin'),
+(6, 'Acyclovir Tablet'),
+(7, 'Adalimumab'),
+(8, 'Adenosine'),
+(9, 'Albendazole'),
+(10, 'Alendronate');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `obat`
+-- Struktur dari tabel `obat`
 --
 
 CREATE TABLE `obat` (
@@ -61,56 +63,60 @@ CREATE TABLE `obat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `obat`
+--
+
+INSERT INTO `obat` (`id`, `nama_barang`, `id_jenis_obat`, `hrg_jual`, `hrg_beli`) VALUES
+(1, 'Abacavir', 1, 7500, 6000),
+(2, '', 2, 3000, 2500),
+(3, '', 3, 4500, 4000),
+(4, '', 4, 4500, 4000),
+(5, '', 5, 7500, 6000),
+(6, '', 6, 3500, 3000),
+(7, '', 7, 4500, 4000),
+(8, '', 8, 3500, 3000),
+(9, '', 9, 4500, 4000),
+(10, '', 10, 6500, 6000);
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `data_pelanggan`
---
-ALTER TABLE `data_pelanggan`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `jenis_obat`
+-- Indeks untuk tabel `jenis_obat`
 --
 ALTER TABLE `jenis_obat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `obat`
+-- Indeks untuk tabel `obat`
 --
 ALTER TABLE `obat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_jenis_obat` (`id_jenis_obat`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `data_pelanggan`
---
-ALTER TABLE `data_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `jenis_obat`
+-- AUTO_INCREMENT untuk tabel `jenis_obat`
 --
 ALTER TABLE `jenis_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `obat`
+-- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `obat`
+-- Ketidakleluasaan untuk tabel `obat`
 --
 ALTER TABLE `obat`
   ADD CONSTRAINT `fk_jenis_obat` FOREIGN KEY (`id_jenis_obat`) REFERENCES `jenis_obat` (`id`);
