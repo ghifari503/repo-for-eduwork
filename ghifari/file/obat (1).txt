@@ -1,0 +1,19 @@
+===Basis data apotek
+
+== Struktur dari tabel obat
+
+|------
+|Kolom|Jenis|Tak Ternilai|Bawaan
+|------
+|//**id_obat**//|int(11)|Tidak|
+|id_bentuk|int(11)|Tidak|
+|id_kategori|int(11)|Tidak|
+|stok|int(11)|Tidak|
+|harga|int(11)|Tidak|
+|nama_obat|varchar(64)|Tidak|
+== Dumping data untuk tabel obat
+
+|amoxillin|30
+|vitamin c|32
+|enervon c|40
+|insto|50
