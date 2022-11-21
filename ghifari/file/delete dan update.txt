@@ -1,0 +1,4 @@
+UPDATE `obat` SET `nama_obat`='insto moist' WHERE nama_obat ='insto';
+
+DELETE FROM `kategori_obat` WHERE nama_kategori = 'demam';
+
