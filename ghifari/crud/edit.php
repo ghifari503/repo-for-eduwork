@@ -3,27 +3,7 @@
 	<title>Edit Buku</title>
 </head>
 
-<?php
-	include_once("koneksi.php");
-	$isbn = $_GET['isbn'];
 
-	$buku = mysqli_query($mysqli, "SELECT buku.* FROM buku WHERE isbn='$isbn'");
-    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
-    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
-    $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
-
-    while($buku_data = mysqli_fetch_array($buku))
-    {
-    	$judul = $buku_data['judul'];
-    	$isbn = $buku_data['isbn'];
-    	$tahun = $buku_data['tahun'];
-    	$id_penerbit = $buku_data['id_penerbit'];
-    	$id_pengarang = $buku_data['id_pengarang'];
-    	$id_katalog = $buku_data['id_katalog'];
-    	$qty_stok = $buku_data['qty_stok'];
-    	$harga_pinjam = $buku_data['harga_pinjam'];
-    }
-?>
  
 <body>
 	<a href="index.php">Go to Home</a>

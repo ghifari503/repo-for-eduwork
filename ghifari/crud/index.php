@@ -13,6 +13,12 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <style>
+    body {
+        font-family: Arial;
+        background-color: #cccccc;
+    }
+</style>
 </head>
  
 <body>
@@ -58,52 +64,3 @@
 </body>
 </html>
 
-<!-- <html>
-<head>    
-    <title>Add Penerbit</title>
-</head>
- 
-<body>
-    <a href="index.php">Buku</a><br/><br/>
- 
-    <form action="addpenerbit.php" method="post" name="form1">
-        <table width="25%" border="0">
-            <tr> 
-                <td>Nama Penerbit</td>
-                <td><input type="text" name="nama_penerbit"></td>
-            </tr>
-            <tr> 
-                <td>Alamat</td>
-                <td><input type="text" name="alamat"></td>
-            </tr>
-            <tr> 
-                <td>Telepon</td>
-                <td><input type="text" name="telepon"></td>
-            </tr>
-            <tr> 
-                <td>Email</td>
-                <td><input type="text" name="email"></td>
-            </tr>
-            <tr> 
-                <td></td>
-                <td><input type="submit" name="Submit" value="Add"></td>
-            </tr>
-        </table>
-    </form>
- 
-    <?php 
-    if(isset($_POST['Submit'])) {
-        $nama_penerbit = $_POST['nama_penerbit'];
-        $alamat = $_POST['alamat'];
-        $telepon = $_POST['telepon'];
-        $email = $_POST['email'];
- 
-        include_once("koneksi.php");
-        
-        $result = mysqli_query($mysqli, "INSERT INTO penerbit(nama_penerbit,alamat,telepon,email) VALUES('$nama_penerbit','$alamat','$telepon','$email')");
-        
-        echo "Penerbit sudah ditambahkan. <a href='index.php'>Lihat Penerbit</a>";
-    }
-    ?>
-</body>
-</html> -->
