@@ -1,22 +1,22 @@
+<table border="1">
+  <tr>
+    <th>no</th>
+    <th>nama</th>
+    <th>kelas</th>
+  </tr>
+
 <?php
 
 $no = 1;
 $nama = 1;
 
+for ($no=1, $nama=1, $i=10; $nama<=10, $i>0; $nama++, $i--  ){?>
 
-for ($no = 1; $no <= 10; $no++) {
-   echo " $no <br>";
-}
-for ($nama = 1; $nama <= 10; $nama++) {
-   echo "Nama ke: $nama <br>";
- }  
- for ($i=10; $i >0 ; $i--) { 
-  echo "kelas $i <br>";
- }
- 
-   
+<tr>
+				<th> <?php echo $no; ?></th>
+				<th><?php echo "NAMA ke:".$nama; ?></th>
+				<th><?php echo "Kelas".$i; ?></th>
+			</tr>
+         <?php $no++;}?>
 
-
-
-?>
 
