@@ -14,6 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
+        return view('admin.book.index');
         //
     }
 
@@ -24,6 +25,7 @@ class BookController extends Controller
      */
     public function create()
     {
+        
         //
     }
 
