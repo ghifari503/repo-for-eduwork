@@ -206,70 +206,71 @@
               </p>
             </a>
 
-            <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                  <a href={{ url('catalog' )}} class="nav-link {{request()->is('catalog') ? 'active' : ''}} ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Catalog
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href={{ url('catalog' )}} class="nav-link {{request()->is('catalog') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Catalog
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
-                  <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                      <!-- Add icons to the links using the .nav-icon class
-                           with font-awesome or any other icon font library -->
-                      <li class="nav-item menu-open">
-                        <a href={{ url('publisher' )}} class="nav-link {{request()->is('publisher') ? 'active' : ''}} ">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                            Publisher
-                            <i class="right fas fa-angle-left"></i>
-                          </p>
-                        </a>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href={{ url('publisher' )}} class="nav-link {{request()->is('publisher') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Publisher
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
-                        <nav class="mt-2">
-                          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                                 with font-awesome or any other icon font library -->
-                            <li class="nav-item menu-open">
-                              <a href={{ url('author' )}} class="nav-link {{request()->is('author') ? 'active' : ''}} ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                  Author
-                                  <i class="right fas fa-angle-left"></i>
-                                </p>
-                              </a>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href={{ url('author' )}} class="nav-link {{request()->is('author') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Author
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
-                              <nav class="mt-2">
-                                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                                  <!-- Add icons to the links using the .nav-icon class
-                                       with font-awesome or any other icon font library -->
-                                  <li class="nav-item menu-open">
-                                    <a href={{ url('book' )}} class="nav-link {{request()->is('book') ? 'active' : ''}} ">
-                                      <i class="nav-icon fas fa-tachometer-alt"></i>
-                                      <p>
-                                        Book
-                                        <i class="right fas fa-angle-left"></i>
-                                      </p>
-                                    </a>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href={{ url('book' )}} class="nav-link {{request()->is('book') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Book
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
-                                    <nav class="mt-2">
-                                      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                                        <!-- Add icons to the links using the .nav-icon class
-                                             with font-awesome or any other icon font library -->
-                                        <li class="nav-item menu-open">
-                                          <a href={{ url('member' )}} class="nav-link {{request()->is('member') ? 'active' : ''}} ">
-                                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                                            <p>
-                                              Member
-                                              <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                          </a>
+      
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href={{ url('member' )}} class="nav-link {{request()->is('member') ? 'active' : ''}} ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Member
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
             
     <!-- /.sidebar -->
   </aside>
