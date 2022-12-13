@@ -1,0 +1,111 @@
+Querry Builder from quiz MySql
+use Illuminate\Support\Facades\DB;
+
+
+1.$anggota = Anggota::where('nama', 'administrator')->get();
+2.$anggota = Anggota::select('*')->where('role', 'not like', 'admin')->get();
+3.$anggota = DB::table('anggota')
+             ->select('anggota.id_anggota', 'anggota.nama')
+             ->leftJoin('peminjaman', 'peminjaman.id_anggota', '=', 'anggota.id_anggota')
+             ->orderBy('peminjaman.id_anggota')
+             ->get();
+
+4.$data = DB::table('peminjaman')
+            ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+            ->select('anggota.id_anggota', 'nama', 'telp')
+            ->groupBy('peminjaman.id_anggota')
+            ->get();
+5.$anggota = DB::table('peminjaman')
+             ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+             ->select('anggota.id_anggota', 'nama', 'telp')
+             ->groupBy('peminjaman.id_anggota')
+             ->having('COUNT(peminjaman.id_anggota)', '>', 1)
+             ->get();
+
+6.$data = DB::table('peminjaman')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali')
+    ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->get();
+
+7.$data = DB::table('peminjaman')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali')
+    ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->whereMonth('tgl_kembali', 6)
+    ->get();
+
+8.$peminjaman = DB::table('peminjaman')
+    ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali')
+    ->whereMonth('tgl_pinjam', 5)
+    ->get();
+
+9.$peminjaman = DB::table('peminjaman')
+    ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali')
+    ->whereMonth('tgl_pinjam', 6)
+    ->whereMonth('tgl_kembali', 6)
+    ->get();
+
+10.$peminjaman = DB::table('peminjaman')
+    ->rightJoin('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali')
+    ->where('alamat', 'like', '%Bandung%')
+    ->get();
+
+11.$peminjaman = DB::table('peminjaman')
+    ->rightJoin('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali', 'sex')
+    ->where('alamat', 'like', '%Bandung%')
+    ->where('sex', 'p')
+    ->get();
+
+12.$data = DB::table('detail_peminjaman')
+        ->join('peminjaman', 'peminjaman.id_pinjam', '=', 'detail_peminjaman.id_pinjam')
+        ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+        ->join('buku', 'buku.judul', '=', 'buku.judul')
+        ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali', 'buku.isbn', 'qty_stok')
+        ->where('buku.qty_stok', '>', 1)
+        ->get();
+13.$detailPeminjaman = DB::table('detail_peminjaman')
+    ->join('peminjaman', 'peminjaman.id_pinjam', '=', 'detail_peminjaman.id_pinjam')
+    ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+    ->join('buku', 'buku.judul', '=', 'buku.judul')
+    ->select('nama', 'telp', 'alamat', 'tgl_pinjam', 'tgl_kembali', 'buku.isbn', 'qty', 'judul', 'harga_pinjam', DB::raw('qty*harga_pinjam as total_harga'))
+    ->get();
+14.$data = DB::table('detail_peminjaman')
+            ->join('peminjaman', 'peminjaman.id_pinjam', '=', 'detail_peminjaman.id_pinjam')
+            ->join('anggota', 'anggota.id_anggota', '=', 'peminjaman.id_anggota')
+            ->join('buku', 'buku.id_penerbit', '=', 'buku.id_penerbit')
+            ->join('penerbit', 'penerbit.id_penerbit', '=', 'buku.id_penerbit')
+            ->join('pengarang', 'pengarang.id_pengarang', '=', 'buku.id_pengarang')
+            ->join('katalog', 'katalog.id_katalog', '=', 'buku.id_katalog')
+            ->select('anggota.nama', 'anggota.telp', 'anggota.alamat', 'tgl_pinjam', 'tgl_kembali', 'buku.isbn', 'qty_stok', 'buku.judul', 'nama_penerbit', 'nama_pengarang', 'katalog.nama')
+            ->get();
+15.$data = DB::table('katalog')
+          ->join('buku', 'buku.id_katalog', '=', 'katalog.id_katalog')
+          ->select('katalog.id_katalog', 'katalog.nama', 'buku.judul')
+          ->get();
+
+16.$data = DB::table('buku')
+          ->rightJoin('penerbit', 'penerbit.id_penerbit', '=', 'buku.id_penerbit')
+          ->select('buku.isbn', 'buku.judul', 'buku.tahun', 'buku.id_penerbit', 'buku.id_pengarang', 'buku.id_katalog', 'buku.qty_stok', 'buku.harga_pinjam')
+          ->orderBy('nama_penerbit')
+          ->get();
+
+17.$id_pengarang_PG05 = DB::table('buku')
+                      ->where('buku.id_pengarang', '=', 'PG05')
+                      ->count('id_pengarang');
+
+18.$data = DB::table('buku')
+          ->where('buku.harga_pinjam', '>', 10000)
+          ->select('buku.harga_pinjam')
+          ->get();
+
+19.$data = DB::table('buku')
+          ->where('id_penerbit', '=', 'PN01')
+          ->where('qty_stok', '>', 10)
+          ->get();
+
+20. $data = DB::table('anggota')
+          ->whereMonth('tgl_entry', '=', 6)
+          ->get();
