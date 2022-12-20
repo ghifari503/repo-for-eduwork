@@ -33,7 +33,15 @@ class HomeController extends Controller
         // $book = Book::with('catalog')->get();
         // $book = Book::with('publisher')->get();
 
+        // $data = Member::select('*')->join('users', 'users.member_id', '=', 'members_id');
+
+
+        // return $data;
+
+        // return $members;
         // return $book;
         return view('home');
     }
 }
+
+

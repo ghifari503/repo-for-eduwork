@@ -32,8 +32,8 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
-     
+
+
     </ul>
 
     <!-- Right navbar links -->
@@ -61,7 +61,7 @@
       </li>
 
       <!-- Messages Dropdown Menu -->
-      
+
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
@@ -211,8 +211,8 @@
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href={{ url('catalog' )}} class="nav-link {{request()->is('catalog') ? 'active' : ''}} ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href={{ url('catalogs' )}} class="nav-link {{request()->is('catalogs') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-columns"></i>
               <p>
                 Catalog
                 <i class="right fas fa-angle-left"></i>
@@ -224,8 +224,8 @@
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href={{ url('publisher' )}} class="nav-link {{request()->is('publisher') ? 'active' : ''}} ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href={{ url('publishers' )}} class="nav-link {{request()->is('publishers') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Publisher
                 <i class="right fas fa-angle-left"></i>
@@ -237,8 +237,8 @@
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href={{ url('author' )}} class="nav-link {{request()->is('author') ? 'active' : ''}} ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href={{ url('authors' )}} class="nav-link {{request()->is('authors') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
                 Author
                 <i class="right fas fa-angle-left"></i>
@@ -250,28 +250,42 @@
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href={{ url('book' )}} class="nav-link {{request()->is('book') ? 'active' : ''}} ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href={{ url('books' )}} class="nav-link {{request()->is('books') ? 'active' : ''}} ">
+              <i class="nav-icon fas fa-file"></i>
               <p>
                 Book
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
 
-      
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href={{ url('member' )}} class="nav-link {{request()->is('member') ? 'active' : ''}} ">
+              <a href={{ url('members' )}} class="nav-link {{request()->is('members') ? 'active' : ''}} ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Member
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-            
+
+
+        <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+                <a href={{ url('transactions' )}} class="nav-link {{request()->is('transactions') ? 'active' : ''}} ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Transaction
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+
     <!-- /.sidebar -->
   </aside>
 
@@ -284,7 +298,7 @@
           <div class="col-sm-6">
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
-         
+
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -295,29 +309,29 @@
       <div class="container-fluid">
         @yield('content')
         <!-- Small boxes (Stat box) -->
-        
+
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
             <!-- Custom tabs (Charts with tabs)-->
-            
-             
+
+
             <!-- /.card -->
 
             <!-- DIRECT CHAT -->
-            
-              <!-- /.card-header -->
-              
 
-                
-                    
+              <!-- /.card-header -->
+
+
+
+
               <!-- /.card-body -->
               <div class="card-footer">
                 <form action="#" method="post">
                   <div class="input-group">
-                    
+
                   </div>
                 </form>
               </div>
@@ -326,31 +340,31 @@
             <!--/.direct-chat -->
 
             <!-- TO DO List -->
-            
 
-              
+
+
               </div>
               <!-- /.card-header -->
-              
+
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                
+
               </div>
             </div>
             <!-- /.card -->
-         
+
             <!-- /.card -->
 
             <!-- solid sales graph -->
-            
 
-                
+
+
             <!-- /.card -->
 
             <!-- Calendar -->
-            
+
                 <!-- tools card -->
-                
+
               <!-- /.card-header -->
               <div class="card-body pt-0">
                 <!--The calendar -->
