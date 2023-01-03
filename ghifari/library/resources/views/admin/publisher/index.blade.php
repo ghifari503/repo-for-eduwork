@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-    <h3 class="card-title">Data Publisher</h3>
+    <a href="{{ url('publishers/create') }}" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
     </div>
 
     <div class="card-body p-0">
@@ -39,8 +39,8 @@
                    <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure')">
                    @method('delete')
                    @csrf
-
-
+                </form>
+            </td>
         </tr>
         @endforeach
 

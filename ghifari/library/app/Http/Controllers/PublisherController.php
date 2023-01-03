@@ -38,8 +38,11 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $publisher = new Catalog;
+        $publisher = new Publisher;
         $publisher->name = $request->name;
+        $publisher->phone_number = $request->phone_number;
+        $publisher->address = $request->address;
+        $publisher->email = $request->email;
         $publisher->save();
 
         return redirect('publishers');
@@ -78,6 +81,9 @@ class PublisherController extends Controller
     {
         $this->validate($request,[
             'name'      =>['required'],
+            'phone_number' =>['required'],
+            'address'    =>['required'],
+            'email'      =>['required']
         ]);
 
         $publisher->update($request->all());

@@ -19,18 +19,14 @@
     <label>Name</label>
     <input type="text" name="name" class="form-control"  placeholder="Enter Name" required="" value="{{ $publisher->name }}">
     <label>phone number</label>
-    <input type="number" name="number" class="form-control"  placeholder="Enter number" required="" value="{{ $publisher->phone_number }}">
+    <input type="number" name="phone_number" class="form-control"  placeholder="Enter number" required="" value="{{ $publisher->phone_number }}">
     <label>Address</label>
-    <input type="text" name="name" class="form-control"  placeholder="Enter Name" required="" value="{{ $publisher->address }}">
+    <input type="text" name="address" class="form-control"  placeholder="Enter Name" required="" value="{{ $publisher->address }}">
     <label>Email</label>
-    <input type="text" name="name" class="form-control"  placeholder="Enter email" required="" value="{{ $publisher->email }}">
+    <input type="text" name="email" class="form-control"  placeholder="Enter email" required="" value="{{ $publisher->email }}">
     </div>
 
     </div>
-    </div>
-    </div>
-    </div>
-
     <div class="card-footer">
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
