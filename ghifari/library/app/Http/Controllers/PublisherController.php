@@ -97,7 +97,7 @@ class PublisherController extends Controller
      * @param  \App\Models\Publisher  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publisher $publisher)
+    public function delete(Publisher $publisher)
     {
         $publisher->delete();
 

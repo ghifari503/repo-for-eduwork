@@ -99,12 +99,11 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-{
-    $catalog = Catalog::find($id);
-    $catalog->forceDelete();
+    public function delete(Catalog $catalog)
+    {
+        $catalog->delete();
 
-    return redirect('catalogs');
-}
+        return redirect('catalogs');
+    }
 
 }

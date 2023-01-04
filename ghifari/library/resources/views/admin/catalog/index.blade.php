@@ -32,9 +32,10 @@
                 <a href="{{ url ('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
 
                 <form action="{{ url('catalogs', ['id' => $catalog->id]) }}" method="POST">
-                   <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure')">
-                   @method('delete')
-                   @csrf
+                    <input type="submit" class="btn btn-danger btn-sm" value="Delete"
+                        onclick="return confirm('Are you sure you want to delete this catalog?')">
+                    @method('delete')
+                    @csrf
                </td>
 
 
