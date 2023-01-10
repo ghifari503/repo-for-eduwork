@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,9 +43,7 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        // $catalog = new Catalog;
-        // $catalog->name = $request->name;
-        // $catalog->save();
+   
         $this->validate($request,[
             'name'      =>['required'],
         ]);

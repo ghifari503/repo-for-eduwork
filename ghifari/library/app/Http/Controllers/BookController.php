@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        
+
         //
     }
 

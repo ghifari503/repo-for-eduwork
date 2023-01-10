@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +19,8 @@ class PublisherController extends Controller
     public function index()
     {
         $publishers = publisher::all();
-        // return $publisher;
-        return view('admin.publisher.index', compact('publishers'));
+
+        return view('admin.publisher', compact('publishers'));
 
     }
 
@@ -27,7 +31,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view ('admin.publisher.create');
+        // return view ('admin.publisher.create');
     }
 
     /**
@@ -38,12 +42,14 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $publisher = new Publisher;
-        $publisher->name = $request->name;
-        $publisher->phone_number = $request->phone_number;
-        $publisher->address = $request->address;
-        $publisher->email = $request->email;
-        $publisher->save();
+        $this->validate($request,[
+            'name' => ['required', 'max:64'],
+            'email' => ['required', 'email', 'max:64'],
+            'phone_number' => ['required', 'max:14'],
+            'address' => ['required'],
+        ]);
+
+        publisher::create($request->all());
 
         return redirect('publishers');
     }
@@ -80,10 +86,10 @@ class PublisherController extends Controller
     public function update(Request $request, Publisher $publisher)
     {
         $this->validate($request,[
-            'name'      =>['required'],
-            'phone_number' =>['required'],
-            'address'    =>['required'],
-            'email'      =>['required']
+            'name' => ['required', 'max:64'],
+            'email' => ['required', 'email', 'max:64'],
+            'phone_number' => ['required', 'max:14'],
+            'address' => ['required'],
         ]);
 
         $publisher->update($request->all());

@@ -15,3 +15,5 @@ class Catalog extends Model
         return $this->hasMany(Book::class, 'catalog_id');
     }
 }
+
+
