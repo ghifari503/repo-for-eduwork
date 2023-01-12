@@ -2,7 +2,10 @@
 @section('header', 'Publisher')
 
 @section('css')
-
+ <!-- DataTables -->
+ <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+ <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+ <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 @endsection
 
 @section('content')
@@ -14,7 +17,7 @@
     </div>
 
     <div class="card-body p-0">
-    <table class="table table-striped">
+    <table class="table table-striped" id="publishertable">
     <thead>
     <tr>
     <th style="width: 10px">#</th>
@@ -22,6 +25,7 @@
     <th>Phone Number</th>
     <th>Address</th>
     <th>Email</th>
+    <th>Action</th>
 
 
     </tr>
@@ -80,7 +84,6 @@
             <label>Email</label>
             <input type="text" name="email" class="form-control" :value="data.email" required="">
         </div>
-
         </div>
         <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -88,54 +91,85 @@
         </div>
         </form>
         </div>
-
         </div>
-
         </div>
 </div>
+
+
 
 
 @endsection
 
 @section('js')
-    <script type="text/javascript">
-        var controller = new Vue({
-            el: '#controller',
-            data: {
-                data : {},
-                actionUrl : '{{ url('publishers') }}',
-                editStatus : false
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('assets') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+      $("#publishertable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    //   $('#example2').DataTable({
+    //     "paging": true,
+    //     "lengthChange": false,
+    //     "searching": false,
+    //     "ordering": true,
+    //     "info": true,
+    //     "autoWidth": false,
+    //     "responsive": true,
+    //   });
+    });
+  </script>
+
+<script type="text/javascript">
+    var controller = new Vue({
+        el: '#controller',
+        data: {
+            data : {},
+            actionUrl : '{{ url('publishers') }}',
+            editStatus : false
+
+        },
+        mounted: function () {
+
+        },
+        methods: {
+            addData(){
+                this.data = {};
+                this.editStatus = false;
+                this.actionUrl = '{{ url('publishers') }}';
+                $('#modal-default').modal();
 
             },
-            mounted: function () {
+            editData(data){
+                this.data = data;
+                this.editStatus = true;
+                this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
+                $('#modal-default').modal();
 
             },
-            methods: {
-                addData(){
-                    this.data = {};
-                    this.editStatus = false;
-                    this.actionUrl = '{{ url('publishers') }}';
-                    $('#modal-default').modal();
-
-                },
-                editData(data){
-                    this.data = data;
-                    this.editStatus = true;
-                    this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
-                    $('#modal-default').modal();
-
-                },
-                deleteData(id){
-                    this.actionUrl = '{{ url('publishers') }}'+'/'+id;
-                    if (confirm("Are you sure?")) {
-                        axios.post(this.actionUrl, {__method: 'DELETED'}).then(response=>{
-                            location.reload();
-                        });
-                    }
-
+            deleteData(id){
+                this.actionUrl = '{{ url('publishers') }}'+'/'+id;
+                if (confirm("Are you sure?")) {
+                    axios.post(this.actionUrl, {__method: 'DELETED'}).then(response=>{
+                        location.reload();
+                    });
                 }
 
             }
-        });
+
+        }
+    });
 </script>
 @endsection

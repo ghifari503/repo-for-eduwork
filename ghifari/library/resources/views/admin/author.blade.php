@@ -2,6 +2,11 @@
 @section('header', 'Author')
 
 @section('css')
+<!-- Datatables -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+<!-- Datatables -->
 
 @endsection
 
@@ -9,11 +14,11 @@
 <div id="controller">
 <div class="card">
     <div class="card-header">
-        <a href="#" @click="addData()" class="btn btn-primary">+ New Author</a>
+        <a href="#" @click="addData()" class="btn btn-primary">+ Author</a>
     </div>
 
     <div class="card-body p-0">
-    <table class="table table-striped">
+    <table class="table table-striped" id="authorTable">
     <thead>
     <tr>
     <th style="width: 10px">#</th>
@@ -21,6 +26,7 @@
     <th>Phone Number</th>
     <th>Address</th>
     <th>Email</th>
+    <th>Action</th>
 
     </tr>
     </thead>
@@ -63,21 +69,20 @@
 
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" :value="data.name " required="">
+                <input type="text" name="name" class="form-control" :value="data.name" required>
             </div>
         <div class="form-group">
             <label>Phone Number</label>
-            <input type="text" name="phone_number" class="form-control" :value="data.phone_number" required="">
+            <input type="text" name="phone_number" class="form-control" :value="data.phone_number" required>
         </div>
         <div class="form-group">
             <label>Address</label>
-            <input type="text" name="address" class="form-control" :value="data.address" required="">
+            <input type="text" name="address" class="form-control" :value="data.address" required>
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input type="text" name="email" class="form-control" :value="data.email" required="">
+            <input type="text" name="email" class="form-control" :value="data.email" required>
         </div>
-
         </div>
         <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -85,9 +90,7 @@
         </div>
         </form>
         </div>
-
         </div>
-
         </div>
 </div>
 
@@ -95,6 +98,28 @@
 
 
 @section('js')
+<!-- Datatables -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+      $("#authorTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+  </script>
+<!-- Datatables -->
     <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
