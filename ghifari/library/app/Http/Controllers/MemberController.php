@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,20 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
-        //
+        return view('admin.member');
+
+    }
+    public function api(Request $request)
+    {
+        if ($request->gender) {
+            $members = Member::where('gender', $request->gender)->get();
+        } else {
+            $members = Member::all();
+        }
+
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -36,7 +53,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required', 'max:64'],
+            'gender' => ['required'],
+            'phone_number' => ['required', 'max:15'],
+            'address' => ['required'],
+            'email' => ['required', 'email', 'max:64'],
+        ]);
+
+        Member::create($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -70,7 +97,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required', 'max:64'],
+            'gender' => ['required'],
+            'phone_number' => ['required', 'max:15'],
+            'address' => ['required'],
+            'email' => ['required', 'email', 'max:64'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -81,6 +118,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect('members');
     }
 }

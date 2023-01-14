@@ -18,10 +18,16 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = author::all();
+        return view('admin.author');
+        
+    }
 
-        return view('admin.author', compact('authors'));
-        //
+    public function api()
+    {
+        $authors = Author::all();
+        $datatables = datatables()->of($authors)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -106,5 +112,7 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
        $author->delete;
+
+       return redirect('authors');
     }
 }

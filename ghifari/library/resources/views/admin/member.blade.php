@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Publisher')
+@section('header', 'Member')
 
 @section('css')
 <!-- Datatables -->
@@ -15,7 +15,14 @@
 <div id="controller">
     <div class="card">
         <div class="card-header">
-            <a href="#" @click="addData()" class="btn btn-primary">+ Publisher</a>
+            <a href="#" @click="addData()" class="btn btn-primary">+ Member</a>
+            <div class="card-tools">
+                <select class="form-control float-right" name="gender">
+                  <option value="0">All Gender</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+            </div>
         </div>
 
         <div class="card-body p-0">
@@ -24,6 +31,7 @@
         <tr>
         <th style="width: 10px">#</th>
         <th >Name</th>
+        <th >Gender</th>
         <th>Phone Number</th>
         <th>Address</th>
         <th>Email</th>
@@ -41,7 +49,7 @@
             <div class="modal-content">
             <form :action="actionUrl" method="POST" @submit="submitForm($event, data.id)">
             <div class="modal-header">
-            <h4 class="modal-title">Publisher</h4>
+            <h4 class="modal-title">Member</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
             </button>
@@ -54,6 +62,13 @@
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" class="form-control" :value="data.name" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-select form-control" name="gender" :value="data.gender">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
                 </div>
 
             <div class="form-group">
@@ -104,7 +119,7 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script type="text/javascript">
     $(function () {
-      $("#publisherTable").DataTable({
+      $("#memberTable").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -112,14 +127,14 @@
   </script>
 
 
-    <script type="text/javascript">
-        var actionUrl = '{{ url('publishers') }}';
-	    var apiUrl = '{{ url('api/publishers') }}';
+ <script type="text/javascript">
+        var actionUrl = '{{ url('members') }}';
+	    var apiUrl = '{{ url('api/members') }}';
 
     var columns = [{
             data: 'DT_RowIndex',
             class: 'text-center',
-            orderable: true
+            orderable: false
         },
         {
             data: 'name',
@@ -127,7 +142,7 @@
             orderable: true
         },
         {
-            data: 'email',
+            data: 'gender',
             class: 'text-center',
             orderable: true
         },
@@ -138,6 +153,11 @@
         },
         {
             data: 'address',
+            class: 'text-center',
+            orderable: true
+        },
+        {
+            data: 'email',
             class: 'text-center',
             orderable: true
         },
@@ -218,5 +238,16 @@
         }
     })
 </script>
+<script>
+    $('select[name=gender]').on('change', function() {
+        gender = $('select[name=gender]').val()
+        if (gender == 0) {
+            controller.table.ajax.url(apiUrl).load()
+        } else {
+            controller.table.ajax.url(apiUrl + '?gender=' + gender).load()
+        }
+    })
+</script>
+
 
 @endsection

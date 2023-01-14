@@ -18,10 +18,17 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = publisher::all();
 
-        return view('admin.publisher', compact('publishers'));
+        return view('admin.publisher');
 
+    }
+
+    public function api()
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -73,7 +80,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view ('admin.publisher.edit', compact('publisher'));
+        // return view ('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -103,7 +110,7 @@ class PublisherController extends Controller
      * @param  \App\Models\Publisher  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function delete(Publisher $publisher)
+    public function destroy(Publisher $publisher)
     {
         $publisher->delete();
 
