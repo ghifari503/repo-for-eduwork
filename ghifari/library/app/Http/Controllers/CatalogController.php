@@ -20,9 +20,7 @@ class CatalogController extends Controller
     {
         $catalogs = catalog::with('books')->get();
 
-        // return $catalogs;
         return view ('admin.catalog.index', compact('catalogs'));
-        //
     }
 
     /**
@@ -43,7 +41,7 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-   
+
         $this->validate($request,[
             'name'      =>['required'],
         ]);

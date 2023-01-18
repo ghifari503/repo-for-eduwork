@@ -10,7 +10,7 @@
     <div class="card-body p-0">
     <table class="table table-striped">
     <thead>
-    <tr>
+    <tr class="text-center">
     <th style="width: 10px">#</th>
     <th>Name</th>
     <th>Total Book</th>
@@ -26,8 +26,8 @@
         <tr>
             <td>{{ $key+1 }}</td>
             <td>{{ $catalog -> name }}</td>
-            <td>{{ count($catalog -> books) }}</td>
-            <td>{{ $catalog -> created_at}}</td>
+            <td class="text-center">{{ count($catalog -> books) }}</td>
+            <td class="text-center">{{ convert_date($catalog->created_at)}}</td>
             <td class="text-center">
                 <a href="{{ url ('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
 
