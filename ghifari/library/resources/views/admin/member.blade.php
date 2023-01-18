@@ -19,8 +19,8 @@
             <div class="card-tools">
                 <select class="form-control float-right" name="gender">
                   <option value="0">All Gender</option>
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
+                  <option value="L">Male</option>
+                  <option value="P">Female</option>
                 </select>
             </div>
         </div>
