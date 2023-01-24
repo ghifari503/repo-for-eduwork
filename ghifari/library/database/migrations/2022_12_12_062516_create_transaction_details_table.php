@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->timestamps();
 
-            $table->foreign('transaction_id')->references('id')->on('transactions');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books');
         });
     }

@@ -14,7 +14,16 @@ class TransactionDetailController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.transaction.transaction_detail');
+    }
+
+    public function api(Request $request)
+    {
+        $transactionDetails = TransactionDetail::all();
+
+        $datatables = datatables()->of($transactionDetails)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
