@@ -38,5 +38,7 @@ Route::get('/api/books', [App\Http\Controllers\BookController::class, 'api']);
 Route::get('/api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
 Route::get('/api/transaction_details', [App\Http\Controllers\TransactionDetailController::class, 'api']);
 
+Route::get('/test_spatie', [App\Http\Controllers\catalogController::class, 'test_spatie']);
+
 // Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
 // Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);

@@ -2,6 +2,9 @@
 @section('header', 'catalog')
 
 @section('content')
+@can('index catalog')
+
+
 <div class="card">
     <div class="card-header">
     <a href="{{ url('catalogs/create') }}" class="btn btn-sm btn-primary pull-right">Create New Catalog</a>
@@ -45,9 +48,9 @@
 
 
     </tbody>
-    </table>
-    </div>
+</table>
+</div>
 
-    </div>
-
+</div>
+@endcan
 @endsection
